@@ -1,0 +1,105 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 9, 2018, 8:39:33 PM
+    Author     : Admin
+*/
+#MainPane{
+    -fx-background-image: url("default.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-position: center center;
+}
+#ExitButton, #MinimizeButton{
+    -fx-background-color: #404040;
+}
+#MinimizeButton:hover{
+    -fx-opacity: 0.5;
+}
+#ExitButton:hover{
+    -fx-opacity: 0.5;  
+} 
+#Menubar{
+    -fx-background-color:  #404040;
+}
+#Menubar .label{
+    -fx-font-size: 18 pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: whitesmoke;
+}
+.menu-item{
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 1pt;
+    -fx-text-fill: whitesmoke;
+    -fx-background-color: #404040;
+}
+.menu-item:focused{
+    -fx-opacity: 0.5;
+}
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+.scroll-pane {
+   -fx-background-color: transparent;
+}
+.slider .track {
+    -fx-pref-height:2px;
+    -fx-background-color: whitesmoke;
+}
+.slider .thumb{
+    -fx-pref-height: 12px;
+    -fx-pref-width: 12px;
+}
+
+.table-view {
+    -fx-base: #15141b;
+    -fx-control-inner-background: #15141b;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 0.3 0;
+    -fx-background-color: transparent;
+    -fx-border-color: 
+        transparent
+        transparent
+        derive(#6e6d70, 2%) 
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+    -fx-text-fill: whitesmoke;
+}
+
+.table-view:focused .table-row-cell,
+.table-view:row-selection .table-row-cell {
+    -fx-text-fill: #6e6d70;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-text-fill: white;
+}
+
+.table-view:row-selection .table-row-cell:filled:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-text-fill: #8e8b97;
+}
