@@ -8,8 +8,14 @@ package diveinplayer;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToolBar;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 
 /**
@@ -19,13 +25,45 @@ import javafx.fxml.Initializable;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-
-    }
+    private Button closeButton;
+    @FXML
+    private Button minimizeButton;
+    @FXML
+    private StackPane MainPane;
+    @FXML
+    private ToolBar toolBar;
+    
+    private double posX;
+    private double posY;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                posX = event.getSceneX();
+                posY = event.getSceneY();
+            }
+        });
+        toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                DiveinPlayer.getStage().setX(event.getScreenX() - posX);
+                DiveinPlayer.getStage().setY(event.getScreenY() - posY);
+            }
+        });
+    }
     
+    @FXML
+    public void CloseButtonAction(ActionEvent event){
+        System.exit(0);
+    }
+    
+    @FXML
+    public void MinimizeButtonAction(ActionEvent event){
+        minimizeButton.setOnMouseClicked((MouseEvent event1) -> {
+            Stage stage = (Stage) MainPane.getScene().getWindow();
+            stage.setIconified(true);
+        });
+    } 
 }

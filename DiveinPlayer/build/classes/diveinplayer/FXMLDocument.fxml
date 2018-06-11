@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@MainCss.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@MainCss.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diveinplayer.FXMLDocumentController">
    <children>
       <Pane id="MainPane" prefHeight="555.0" prefWidth="1000.0" stylesheets="@MainCss.css">
          <children>
@@ -99,7 +99,7 @@
                         <Image url="@diveIn%20Final.png" />
                      </image>
                   </ImageView>
-                  <Button id="MinimizeButton" layoutX="905.0" layoutY="-3.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 0px;" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="minimizeButton" layoutX="905.0" layoutY="-3.0" mnemonicParsing="false" onAction="#MinimizeButtonAction" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 0px;" textFill="WHITE">
                      <font>
                         <Font name="Californian FB" size="13.0" />
                      </font>
@@ -110,7 +110,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_CIRCLE_DOWN" size="15.0" />
                      </graphic>
                   </Button>
-                  <Button id="MinimizeButton" layoutX="954.0" layoutY="-3.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="closeButton" layoutX="954.0" layoutY="-3.0" mnemonicParsing="false" onAction="#CloseButtonAction" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
                         <Font name="Californian FB" size="13.0" />
                      </font>
@@ -175,7 +175,7 @@
                         </Button>
                      </children>
                   </Pane>
-                  <ToolBar layoutX="115.0" layoutY="-2.0" prefHeight="31.0" prefWidth="790.0" style="-fx-opacity: 0;" />
+                  <ToolBar fx:id="toolBar" layoutX="115.0" layoutY="-2.0" prefHeight="31.0" prefWidth="790.0" style="-fx-opacity: 0;" />
                </children>
             </Pane>
          </children>
