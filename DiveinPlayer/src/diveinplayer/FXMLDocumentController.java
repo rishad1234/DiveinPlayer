@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package diveinplayer;
 
 import java.net.URL;
@@ -17,11 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
-/**
- *
- * @author Admin
- */
 public class FXMLDocumentController implements Initializable {
     
     @FXML
@@ -38,26 +29,32 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                posX = event.getSceneX();
-                posY = event.getSceneY();
-            }
+        /*
+            the two methods down below lets us to drag the window 
+            anywhere in the screen
+        
+        */
+        toolBar.setOnMousePressed((MouseEvent event) -> {
+            posX = event.getSceneX();
+            posY = event.getSceneY();
         });
-        toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                DiveinPlayer.getStage().setX(event.getScreenX() - posX);
-                DiveinPlayer.getStage().setY(event.getScreenY() - posY);
-            }
+        toolBar.setOnMouseDragged((MouseEvent event) -> {
+            DiveinPlayer.getStage().setX(event.getScreenX() - posX);
+            DiveinPlayer.getStage().setY(event.getScreenY() - posY);
         });
     }
+    
+    /*
+    this method handles the close button on of the mp3 player app
+    */
     
     @FXML
     public void CloseButtonAction(ActionEvent event){
         System.exit(0);
     }
+    /*
+    this method handles the minimize mutton of the mp3 player app
+    */
     
     @FXML
     public void MinimizeButtonAction(ActionEvent event){
