@@ -70,8 +70,7 @@
                     <menus>
                       <Menu mnemonicParsing="false" text="Audio/video">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Audio Player" />
-                              <MenuItem mnemonicParsing="false" text="Video Player" />
+                              <MenuItem fx:id="videoPlayerButton" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="Video Player" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="Theme">
