@@ -24,6 +24,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -42,6 +48,16 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem videoPlayerButton;
     @FXML
     private TableView songTable;
+    @FXML
+    private Pane PhotoPane;
+    @FXML
+    private MenuItem DefaultMenuBarButton;
+    @FXML
+    private MenuItem Theme1MenuBarButton;
+    @FXML
+    private MenuItem Theme2MenuBarButton;
+    @FXML
+    private MenuItem Theme3MenuBarButton;
     
     private double posX;
     private double posY;
@@ -124,5 +140,45 @@ public class FXMLDocumentController implements Initializable {
                 }
             }
         });
-    }    
+    }
+    
+    @FXML
+    public void changeThemeToDefault(ActionEvent event){
+        DefaultMenuBarButton.addEventHandler(EventType.ROOT, new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                PhotoPane.setId("MainPane");
+            }
+        });
+    }
+    
+    @FXML
+    public void changeThemeToTheme1(ActionEvent event){
+        Theme1MenuBarButton.addEventHandler(EventType.ROOT, new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                PhotoPane.setId("MainPane1");
+            }
+        });
+    }
+    
+    @FXML
+    public void changeThemeToTheme2(ActionEvent event){
+        Theme2MenuBarButton.addEventHandler(EventType.ROOT, new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                PhotoPane.setId("MainPane2");
+            }
+        });
+    }
+    
+    @FXML
+    public void changeThemeToTheme3(ActionEvent event){
+        Theme3MenuBarButton.addEventHandler(EventType.ROOT, new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                PhotoPane.setId("MainPane3");
+            }
+        });
+    }
 }
