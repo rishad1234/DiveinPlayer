@@ -133,7 +133,7 @@
                      <children>
                         <Separator layoutX="-4.0" orientation="VERTICAL" prefHeight="440.0" prefWidth="10.0" style="-fx-opacity: 0.5;" />
                         <Separator layoutX="2.0" layoutY="433.0" prefHeight="12.0" prefWidth="943.0" style="-fx-opacity: 0.5;" />
-                        <TableView prefHeight="440.0" prefWidth="923.0">
+                        <TableView fx:id="songTable" prefHeight="440.0" prefWidth="923.0">
                           <columns>
                             <TableColumn prefWidth="472.0" text="Name" />
                             <TableColumn prefWidth="469.0" text="Album" />

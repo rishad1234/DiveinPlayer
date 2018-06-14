@@ -5,6 +5,8 @@
  */
 package diveinplayer;
 
+
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,7 +31,22 @@ public class DiveinPlayer extends Application {
     public void start(Stage stage) throws Exception {
         
         this.stage = stage;
-        
+        AudioPlayerStage(stage);
+//        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+//        Scene scene = new Scene(root);
+//        
+//        stage.setScene(scene);
+//        stage.initStyle(StageStyle.TRANSPARENT);
+//        stage.show();
+//        stage.getIcons().add(new Image(getClass().getResourceAsStream("diveIn Final.png")));
+//        stage.setTitle("Divein");
+    }
+
+    public static Stage getStage() {
+        return stage;
+    }
+    
+    public void AudioPlayerStage(Stage stage) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         Scene scene = new Scene(root);
         
@@ -38,10 +55,6 @@ public class DiveinPlayer extends Application {
         stage.show();
         stage.getIcons().add(new Image(getClass().getResourceAsStream("diveIn Final.png")));
         stage.setTitle("Divein");
-    }
-
-    public static Stage getStage() {
-        return stage;
     }
     
 

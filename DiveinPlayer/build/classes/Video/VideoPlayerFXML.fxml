@@ -2,11 +2,11 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -14,50 +14,59 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #8c9c9e;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <VBox prefHeight="78.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #8c9c9e;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Video.VideoPlayerFXMLController">
+   <center>
+      <StackPane fx:id="videoStackPane" prefHeight="293.0" prefWidth="509.0" BorderPane.alignment="CENTER">
          <children>
-            <Separator prefWidth="200.0" style="-fx-background-color: #404040; -fx-opacity: 0.5;">
+            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" StackPane.alignment="CENTER">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </MediaView>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </StackPane>
+   </center>
+   <bottom>
+      <VBox prefHeight="72.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Slider prefHeight="14.0" prefWidth="574.0" stylesheets="@../diveinplayer/MainCss.css">
                <padding>
-                  <Insets bottom="3.0" />
+                  <Insets left="20.0" right="20.0" />
                </padding>
-            </Separator>
-            <Slider prefHeight="14.0" prefWidth="571.0" stylesheets="@../diveinplayer/MainCss.css">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
-               </VBox.margin>
             </Slider>
-            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="600.0">
+            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="600.0" VBox.vgrow="NEVER">
                <children>
-                  <Button id="MinimizeButton" mnemonicParsing="false" prefHeight="47.0" prefWidth="61.0" style="-fx-background-radius: 0px;" stylesheets="@../diveinplayer/MainCss.css">
+                  <Button id="MinimizeButton" fx:id="PlayVideoButton" mnemonicParsing="false" onAction="#PlayVideo" prefHeight="47.0" prefWidth="61.0" style="-fx-background-radius: 0px;" stylesheets="@../diveinplayer/MainCss.css">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="PLAY" size="29.0" wrappingWidth="28.785715103149414" />
                      </graphic>
                      <HBox.margin>
-                        <Insets bottom="5.0" right="10.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </Button>
-                  <Button id="MinimizeButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="61.0" style="-fx-background-radius: 0px;" stylesheets="@../diveinplayer/MainCss.css">
+                  <Button id="MinimizeButton" fx:id="PauseVideoButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#PauseVideo" prefHeight="47.0" prefWidth="61.0" style="-fx-background-radius: 0px;" stylesheets="@../diveinplayer/MainCss.css">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="PAUSE" size="29.0" wrappingWidth="28.785715103149414" />
                      </graphic>
                      <HBox.margin>
-                        <Insets bottom="5.0" right="10.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
                      <padding>
                         <Insets left="8.0" />
                      </padding>
                   </Button>
-                  <Button id="MinimizeButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="61.0" style="-fx-background-radius: 0px;" stylesheets="@../diveinplayer/MainCss.css">
+                  <Button id="MinimizeButton" fx:id="StopVideoButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#StopVideo" prefHeight="47.0" prefWidth="61.0" style="-fx-background-radius: 0px;" stylesheets="@../diveinplayer/MainCss.css">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="STOP" size="29.0" wrappingWidth="28.785715103149414" />
                      </graphic>
                      <HBox.margin>
-                        <Insets bottom="5.0" right="10.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
                      <padding>
                         <Insets left="6.0" />
@@ -67,35 +76,25 @@
                </children>
             </HBox>
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
       </VBox>
    </bottom>
-   <center>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <MediaView fitHeight="200.0" fitWidth="200.0" />
-         </children>
-      </StackPane>
-   </center>
    <top>
-      <StackPane prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <StackPane prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <MenuBar id="Menubar" stylesheets="@../diveinplayer/MainCss.css">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Choose" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
+               <menus>
+                  <Menu mnemonicParsing="false" text="File">
+                     <items>
+                        <MenuItem fx:id="chooseFileButton" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="Choose" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                     </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Exit" />
-              </menus>
+               </menus>
             </MenuBar>
          </children>
       </StackPane>

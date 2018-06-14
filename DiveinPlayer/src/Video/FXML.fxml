@@ -6,27 +6,43 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #8c9c9e;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Video.VideoPlayerFXMLController">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Video.VideoPlayerFXMLController">
+   <center>
+      <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="chooseFileButton" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="Choose" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
    <bottom>
-      <VBox prefHeight="78.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="72.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Separator prefWidth="200.0">
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Separator>
             <Slider prefHeight="14.0" prefWidth="574.0" stylesheets="@../diveinplayer/MainCss.css">
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
                <padding>
                   <Insets left="20.0" right="20.0" />
                </padding>
@@ -70,38 +86,6 @@
                </children>
             </HBox>
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
       </VBox>
    </bottom>
-   <top>
-      <StackPane prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <MenuBar id="Menubar" stylesheets="@../diveinplayer/MainCss.css">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem fx:id="chooseFileButton" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="Choose" />
-                        <MenuItem mnemonicParsing="false" text="View" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-                  <Menu mnemonicParsing="false" text="Exit" />
-              </menus>
-            </MenuBar>
-         </children>
-      </StackPane>
-   </top>
-   <center>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
-         </children>
-      </StackPane>
-   </center>
 </BorderPane>

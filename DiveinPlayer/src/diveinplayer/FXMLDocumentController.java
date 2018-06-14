@@ -1,6 +1,8 @@
 
 package diveinplayer;
 
+
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -37,6 +40,8 @@ public class FXMLDocumentController implements Initializable {
     private ToolBar toolBar;
     @FXML
     private MenuItem videoPlayerButton;
+    @FXML
+    private TableView songTable;
     
     private double posX;
     private double posY;
@@ -56,6 +61,7 @@ public class FXMLDocumentController implements Initializable {
             DiveinPlayer.getStage().setX(event.getScreenX() - posX);
             DiveinPlayer.getStage().setY(event.getScreenY() - posY);
         });
+
     }
     
     /*
@@ -92,6 +98,7 @@ public class FXMLDocumentController implements Initializable {
             public void handle(Event event) {
                 try {
                     Parent root = FXMLLoader.load(getClass().getResource("/Video/VideoPlayerFXML.fxml"));
+                    //Parent root = FXMLLoader.load(getClass().getResource("/Video/FXML.fxml"));
                     Scene scene = new Scene(root);
 
                     Stage stage = new Stage();
@@ -99,11 +106,23 @@ public class FXMLDocumentController implements Initializable {
                     stage.show();
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("diveIn Final.png")));
                     stage.setTitle("Divein");
+                    
+                    /*
+                        if the video player is closed the whole program will be closed
+                    
+                    */
+                    stage.addEventHandler(EventType.ROOT, new EventHandler(){
+                        @Override
+                        public void handle(Event event) {
+                            if(!stage.isShowing()){
+                                Platform.exit();
+                            }
+                        }
+                    });
                 } catch (IOException ex) {
                     Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-    }
-    
+    }    
 }
