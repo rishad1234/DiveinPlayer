@@ -8,9 +8,13 @@ package Video;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableDoubleValue;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -19,12 +23,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import static javafx.scene.media.MediaPlayer.Status.PLAYING;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import javax.naming.Binding;
 
 /**
@@ -46,6 +53,10 @@ public class VideoPlayerFXMLController implements Initializable {
     private Button PauseVideoButton;
     @FXML
     private Button StopVideoButton;
+    @FXML
+    private Slider VolumeSlider;
+    @FXML
+    private Slider SeekSlider;
     
     private MediaPlayer mediaPlayer;
     private String filePath;
@@ -75,6 +86,40 @@ public class VideoPlayerFXMLController implements Initializable {
                 }
                 check = true;
                 initialPlayControl(filePath);
+                
+                /*
+                    controls the volumeSlider
+                
+                */
+                VolumeSlider.setValue(mediaPlayer.getVolume() * 100);
+                VolumeSlider.valueProperty().addListener(new InvalidationListener() {
+                    @Override
+                    public void invalidated(Observable observable) {
+                        mediaPlayer.setVolume(VolumeSlider.getValue() / 100);
+                    }
+                });
+                
+                /*
+                    controls the seekSlider
+                */
+                mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>(){
+                    @Override
+                    public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+                        SeekSlider.setValue(newValue.toSeconds());
+                    }
+                });
+                
+                /*
+                    controls the volume of the video with the seekSlider
+                */
+                SeekSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
+                    @Override
+                    public void handle(MouseEvent event) {
+                        mediaPlayer.seek(Duration.seconds(SeekSlider.getValue()));
+                    }
+                    
+                });
+                
             }
         });
     }
@@ -114,15 +159,16 @@ public class VideoPlayerFXMLController implements Initializable {
                 break;
         }
     }
-    
+    @FXML
     public void PlayVideo(){
         mediaPlayer.play();
         mediaPlayer.setRate(1);
     }
-    
+    @FXML
     public void PauseVideo(){
         mediaPlayer.pause();
     }
+    @FXML
     public void StopVideo(){
         mediaPlayer.stop();
         

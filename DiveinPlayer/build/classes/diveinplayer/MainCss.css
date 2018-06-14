@@ -52,6 +52,17 @@ and open the template in the editor.
     -fx-pref-height: 12px;
     -fx-pref-width: 12px;
 }
+.Slider .track{
+    -fx-background-color: #404040;
+    -fx-pref-height: 5px;
+}
+.Slider .track:hover{
+    -fx-background-color: #6b6b6b;
+}
+.Slider .thumb{
+    -fx-pref-height: 15px;
+    -fx-pref-width: 15px;
+}
 
 .table-view {
     -fx-base: #15141b;
