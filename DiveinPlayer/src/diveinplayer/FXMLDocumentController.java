@@ -142,6 +142,9 @@ public class FXMLDocumentController implements Initializable {
         });
     }
     
+    /*
+        Change the background pic to default pic
+    */
     @FXML
     public void changeThemeToDefault(ActionEvent event){
         DefaultMenuBarButton.addEventHandler(EventType.ROOT, new EventHandler() {
@@ -151,6 +154,10 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     }
+    
+    /*
+        Change the background pic to default pic
+    */
     
     @FXML
     public void changeThemeToTheme1(ActionEvent event){
@@ -162,6 +169,10 @@ public class FXMLDocumentController implements Initializable {
         });
     }
     
+    /*
+        Change the background pic to default pic
+    */
+    
     @FXML
     public void changeThemeToTheme2(ActionEvent event){
         Theme2MenuBarButton.addEventHandler(EventType.ROOT, new EventHandler() {
@@ -171,6 +182,10 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     }
+    
+    /*
+        Change the background pic to default pic
+    */
     
     @FXML
     public void changeThemeToTheme3(ActionEvent event){
