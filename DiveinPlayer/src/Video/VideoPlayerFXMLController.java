@@ -52,7 +52,7 @@ public class VideoPlayerFXMLController implements Initializable {
     private Media media;
     private MediaPlayer temp;
     private static int status = 0;
-    private String path;
+    private static boolean check = false;
     DoubleProperty height;
     DoubleProperty width;
     @Override
@@ -69,13 +69,17 @@ public class VideoPlayerFXMLController implements Initializable {
                 FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a file ", "*.mp4");
                 fileChooser.getExtensionFilters().add(filter);
                 
-                File file = fileChooser.showOpenDialog(null);
-                filePath = file.toURI().toString();
-                initialPlayControl();
+                if(check == false){
+                    File file = fileChooser.showOpenDialog(null);
+                    filePath = file.toURI().toString();
+                }
+                check = true;
+                initialPlayControl(filePath);
             }
         });
     }
-    public void initialPlayControl(){
+    public void initialPlayControl(String filePath){
+        
         switch(status){
             case 0:
                 media = new Media(filePath);
@@ -88,7 +92,7 @@ public class VideoPlayerFXMLController implements Initializable {
                 width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
                 height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
                 mediaView.setPreserveRatio(true);
-                mediaPlayer.play();
+                //mediaPlayer.play();
                 status = 1;
                 break;
                 
@@ -104,20 +108,23 @@ public class VideoPlayerFXMLController implements Initializable {
                 width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
                 height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
                 mediaView.setPreserveRatio(true);
-                mediaPlayer.play();  
+                //mediaPlayer.play();  
                 status = 1;
+                check = false;
                 break;
         }
     }
     
     public void PlayVideo(){
-        
+        mediaPlayer.play();
+        mediaPlayer.setRate(1);
     }
     
     public void PauseVideo(){
-        
+        mediaPlayer.pause();
     }
     public void StopVideo(){
+        mediaPlayer.stop();
         
     }
     
