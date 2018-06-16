@@ -6,19 +6,20 @@
 package diveinplayer;
 
 
+import allfilesearchexample.search;
+import static allfilesearchexample.search.getDrives;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import search.SearchData;
 
 /**
  *
@@ -62,6 +63,32 @@ public class DiveinPlayer extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        /*
+            this code is to search all the mp3 files in the windows pc
+        
+        */
+        List<String> rootPaths = new ArrayList<>(); 
+        
+        List<search.Drive> drives = getDrives();
+        drives.forEach((drive) -> {
+            if(drive.toString().equals(new String("C:\\"))){
+                rootPaths.add(drive.toString() + "\\Users\\\\");
+                
+            }else{
+                rootPaths.add(drive.toString() + "\\");
+            }
+        });
+        
+        rootPaths.forEach((root) -> {
+            File[] file = new File(root).listFiles();
+            SearchData.getFiles(file, ".mp3");
+        });    
+        /*
+            partition
+        
+        */
+        
+        
         launch(args);
     }
     
