@@ -116,8 +116,10 @@ public class FXMLDocumentController implements Initializable {
         videoPlayerButton.addEventHandler(EventType.ROOT, new EventHandler(){
             @Override
             public void handle(Event event) {
+                //Stage stage = new Stage();
+                Parent root = null;
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/Video/VideoPlayerFXML.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("/Video/VideoPlayerFXML.fxml"));
                     //Parent root = FXMLLoader.load(getClass().getResource("/Video/FXML.fxml"));
                     Scene scene = new Scene(root);
 
@@ -135,10 +137,11 @@ public class FXMLDocumentController implements Initializable {
                         @Override
                         public void handle(Event event) {
                             if(!stage.isShowing()){
-                                if(mediaPlayer.getStatus() == Status.PLAYING){
+                                if(mediaPlayer != null && mediaPlayer.getStatus() == Status.PLAYING){
                                     mediaPlayer.stop();
-                                    stage.close();
                                 }
+                                
+                                Platform.exit();
                             }
                         }
                     });

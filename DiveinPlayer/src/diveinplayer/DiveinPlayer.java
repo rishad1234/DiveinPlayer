@@ -6,8 +6,8 @@
 package diveinplayer;
 
 
-import allfilesearchexample.search;
-import static allfilesearchexample.search.getDrives;
+
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +20,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import search.SearchData;
+import search.search.Drive;
+import static search.search.getDrives;
 
 /**
  *
@@ -69,7 +71,7 @@ public class DiveinPlayer extends Application {
         */
         List<String> rootPaths = new ArrayList<>(); 
         
-        List<search.Drive> drives = getDrives();
+        List<Drive> drives = getDrives();
         drives.forEach((drive) -> {
             if(drive.toString().equals(new String("C:\\"))){
                 rootPaths.add(drive.toString() + "\\Users\\\\");
@@ -81,7 +83,7 @@ public class DiveinPlayer extends Application {
         
         rootPaths.forEach((root) -> {
             File[] file = new File(root).listFiles();
-            //SearchData.getFiles(file, ".mp3");
+            SearchData.getFiles(file, ".mp3");
         });    
         /*
             partition

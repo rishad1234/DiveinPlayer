@@ -30,7 +30,7 @@ public class SearchData {
             }else{
                 if(file.exists() && file.getName().endsWith(extension)){
                     ListOfPath.add(file.getAbsolutePath() + "");
-                    //System.out.println("File: " + file.getAbsolutePath());
+                    System.out.println("File: " + file.getAbsolutePath());
                 }
             }
         }

@@ -1,7 +1,5 @@
-package search;
 
-
-
+package allfilesearchexample;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.EnumVariant;
