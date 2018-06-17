@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" java-vm-args="-Djava.library.path="E:\2.1\project\DiveinPlayer\jacob-1.19" "  href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="DiveinPlayer.jar" size="2320998" download="eager" />
+    <jar href="DiveinPlayer.jar" size="2321926" download="eager" />
     <jar href="lib\fontawesomefx-8.9.jar" size="571068" download="eager" />
     <jar href="lib\jacob.jar" size="49593" download="eager" />
   </resources>

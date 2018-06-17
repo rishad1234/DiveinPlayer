@@ -13,7 +13,6 @@ import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableDoubleValue;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -28,11 +27,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import static javafx.scene.media.MediaPlayer.Status.PLAYING;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
-import javax.naming.Binding;
 
 /**
  * FXML Controller class
@@ -58,7 +55,7 @@ public class VideoPlayerFXMLController implements Initializable {
     @FXML
     private Slider SeekSlider;
     
-    private MediaPlayer mediaPlayer;
+    public static MediaPlayer mediaPlayer;
     private String filePath;
     private Media media;
     private MediaPlayer temp;
@@ -68,7 +65,7 @@ public class VideoPlayerFXMLController implements Initializable {
     DoubleProperty width;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+  
     }  
     
     @FXML
@@ -86,6 +83,14 @@ public class VideoPlayerFXMLController implements Initializable {
                 }
                 check = true;
                 initialPlayControl(filePath);
+                mediaPlayer.setOnReady(new Runnable() {
+                    @Override
+                    public void run() {
+                        SeekSlider.setMin(mediaPlayer.getStartTime().toSeconds());
+                        SeekSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
+                    }
+                });
+                
                 
                 /*
                     controls the volumeSlider
@@ -153,7 +158,6 @@ public class VideoPlayerFXMLController implements Initializable {
                 width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
                 height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
                 mediaView.setPreserveRatio(true);
-                //mediaPlayer.play();  
                 status = 1;
                 check = false;
                 break;

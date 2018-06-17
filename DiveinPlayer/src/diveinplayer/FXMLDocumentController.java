@@ -3,6 +3,7 @@ package diveinplayer;
 
 
 
+import static Video.VideoPlayerFXMLController.mediaPlayer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,6 +32,9 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -131,7 +135,10 @@ public class FXMLDocumentController implements Initializable {
                         @Override
                         public void handle(Event event) {
                             if(!stage.isShowing()){
-                                Platform.exit();
+                                if(mediaPlayer.getStatus() == Status.PLAYING){
+                                    mediaPlayer.stop();
+                                    stage.close();
+                                }
                             }
                         }
                     });

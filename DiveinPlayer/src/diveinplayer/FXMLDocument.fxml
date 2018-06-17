@@ -129,17 +129,21 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE_ALT" size="29.0" />
                      </graphic>
                   </Button>
-                  <Pane layoutX="57.0" layoutY="63.0" prefHeight="433.0" prefWidth="943.0">
+                  <Pane layoutX="58.0" layoutY="63.0" prefHeight="433.0" prefWidth="942.0">
                      <children>
                         <Separator layoutX="-4.0" orientation="VERTICAL" prefHeight="440.0" prefWidth="10.0" style="-fx-opacity: 0.5;" />
                         <Separator layoutX="2.0" layoutY="433.0" prefHeight="12.0" prefWidth="943.0" style="-fx-opacity: 0.5;" />
-                        <TableView fx:id="songTable" prefHeight="440.0" prefWidth="923.0">
-                          <columns>
-                            <TableColumn prefWidth="472.0" text="Name" />
-                            <TableColumn prefWidth="469.0" text="Album" />
-                          </columns>
-                        </TableView>
-                        <ScrollBar layoutX="920.0" layoutY="41.0" orientation="VERTICAL" prefHeight="397.0" prefWidth="23.0" styleClass="ScrollBar" stylesheets="@MainCss.css" />
+                        <Pane prefHeight="433.0" prefWidth="942.0">
+                           <children>
+                              <TableView fx:id="songTable" prefHeight="440.0" prefWidth="923.0">
+                                 <columns>
+                                    <TableColumn prefWidth="472.0" text="Name" />
+                                    <TableColumn prefWidth="469.0" text="Album" />
+                                 </columns>
+                              </TableView>
+                              <ScrollBar layoutX="919.0" layoutY="36.0" orientation="VERTICAL" prefHeight="397.0" prefWidth="23.0" styleClass="ScrollBar" stylesheets="@MainCss.css" />
+                           </children>
+                        </Pane>
                      </children></Pane>
                   <Pane layoutY="502.0" prefHeight="100.0" prefWidth="1000.0">
                      <children>
