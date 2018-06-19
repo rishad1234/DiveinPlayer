@@ -7,6 +7,10 @@ and open the template in the editor.
     Created on : Jun 9, 2018, 8:39:33 PM
     Author     : Rishadul Islam Khan
 */
+
+/*
+    these are for the theme system
+*/
 #MainPane{
     -fx-background-image: url("default.png");
     -fx-background-repeat: no-repeat;   
@@ -27,6 +31,13 @@ and open the template in the editor.
     -fx-background-repeat: no-repeat;   
     -fx-background-position: center center;
 }
+/*
+    to these
+*/
+
+/*
+  these are used to style all the buttons  
+*/
 #ExitButton, #MinimizeButton{
     -fx-background-color: #404040;
 }
@@ -36,6 +47,13 @@ and open the template in the editor.
 #ExitButton:hover{
     -fx-opacity: 0.5;  
 } 
+/*
+    to these
+*/
+
+/*
+    these are used to design the manubar
+*/
 #Menubar{
     -fx-background-color:  #404040;
 }
@@ -53,7 +71,13 @@ and open the template in the editor.
 .menu-item:focused{
     -fx-opacity: 0.5;
 }
+/*
+    to these
+*/
 
+/*
+    to make the scroll pana transparent
+*/
 .scroll-pane > .viewport {
    -fx-background-color: transparent;
 }
@@ -61,7 +85,13 @@ and open the template in the editor.
 .scroll-pane {
    -fx-background-color: transparent;
 }
+/*
+    to these
+*/
 
+/*
+    these are used to design all the sliders
+*/
 .slider .track {
     -fx-pref-height:2px;
     -fx-background-color: whitesmoke;
@@ -85,7 +115,13 @@ and open the template in the editor.
     -fx-pref-height: 15px;
     -fx-pref-width: 15px;
 }
+/*
+    to these
+*/
 
+/*
+    for table views
+*/
 .table-view {
     -fx-base: #15141b;
     -fx-control-inner-background: transparent;
@@ -141,7 +177,9 @@ and open the template in the editor.
     -fx-fill: #cac5ea;
     -fx-font-size: 11pt;
 }
-
+/*
+    to these
+*/
 .scroll-bar{
     -fx-background-color: #404040;
     -fx-opacity: 0.5;
