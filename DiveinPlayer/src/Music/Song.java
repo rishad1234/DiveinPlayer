@@ -5,14 +5,29 @@ package Music;
 public class Song {
     private String name;
     private String path;
+    private String album;
 
-    public Song(String name, String path) {
+    public Song(String name, String album) {
+        this.name = name;
+        this.album = album;
+    }
+
+    public Song(String name, String path, String album) {
         this.name = name;
         this.path = path;
+        this.album = album;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
     }
 
     public void setName(String name) {
@@ -26,5 +41,14 @@ public class Song {
     public void setPath(String path) {
         this.path = path;
     }
+
+    @Override
+    public String toString() {
+        return "Song{" + "name=" + name + ", path=" + path + ", album=" + album + '}';
+    }
+
+
+
+
     
 }

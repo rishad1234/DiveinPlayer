@@ -3,6 +3,7 @@ package diveinplayer;
 
 
 
+import Music.Song;
 import static Video.VideoPlayerFXMLController.mediaPlayer;
 import java.io.IOException;
 import java.net.URL;
@@ -10,6 +11,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -21,22 +24,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class FXMLDocumentController implements Initializable {
     
@@ -53,6 +49,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TableView songTable;
     @FXML
+    private TableColumn NameColumn;
+    @FXML
+    private TableColumn AlbumColumn;
+    @FXML
     private Pane PhotoPane;
     @FXML
     private MenuItem DefaultMenuBarButton;
@@ -62,6 +62,7 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem Theme2MenuBarButton;
     @FXML
     private MenuItem Theme3MenuBarButton;
+    
     
     private double posX;
     private double posY;
@@ -81,6 +82,12 @@ public class FXMLDocumentController implements Initializable {
             DiveinPlayer.getStage().setX(event.getScreenX() - posX);
             DiveinPlayer.getStage().setY(event.getScreenY() - posY);
         });
+        
+//        ObservableList<Song> data = FXCollections.observableArrayList(
+//            for()
+//                
+//        );
+        
 
     }
     

@@ -110,7 +110,7 @@ and open the template in the editor.
     -fx-font-family: "Segoe UI Light";
     -fx-alignment: center-left;
     -fx-opacity: 1;
-    -fx-text-fill: whitesmoke;
+    -fx-text-fill: navy;
 }
 
 .table-view:focused .table-row-cell,

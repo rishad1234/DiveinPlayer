@@ -137,8 +137,8 @@
                            <children>
                               <TableView fx:id="songTable" prefHeight="440.0" prefWidth="923.0">
                                  <columns>
-                                    <TableColumn prefWidth="472.0" text="Name" />
-                                    <TableColumn prefWidth="469.0" text="Album" />
+                                    <TableColumn fx:id="NameColumn" prefWidth="558.0" text="Name" />
+                                    <TableColumn fx:id="AlbumColumn" prefWidth="383.0" text="Album" />
                                  </columns>
                               </TableView>
                               <ScrollBar layoutX="919.0" layoutY="36.0" orientation="VERTICAL" prefHeight="397.0" prefWidth="23.0" styleClass="ScrollBar" stylesheets="@MainCss.css" />

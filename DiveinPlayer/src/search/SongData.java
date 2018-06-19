@@ -1,6 +1,7 @@
 package search;
 
 
+import Music.Song;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,6 +22,10 @@ public class SongData {
 
     public static List<String> songPath = new ArrayList<String>();
     public static List<String> cleanSongPath = new ArrayList<String>();
+    /*
+        this List saves all the song properties
+    */
+    public static List<Song> SongProperties = new ArrayList<Song>();
 
     public SongData() {
         
@@ -30,8 +35,14 @@ public class SongData {
 
         songPath.add(path);
     }
+    
+    /*
+        this method gets all the properties of a song and create song objects and also 
+        save it to SongProperties
+    
+    */
 
-    public void addSongTest() {
+    public static void getProperties() {
 
         for (String path : cleanSongPath) {
             try {
@@ -50,9 +61,11 @@ public class SongData {
                 input.close();
 
                 //System.out.println("Title: " + metadata.get("title"));
-                System.out.println(new File(path).getName());
-                System.out.println("Album: " + metadata.get("xmpDM:album"));
-                System.out.println();
+                SongProperties.add(new Song(new File(path).getName(),path , metadata.get("xmpDM:album")));
+                
+//                System.out.println(new File(path).getName());
+//                System.out.println("Album: " + metadata.get("xmpDM:album"));
+//                System.out.println();
 
             } catch (FileNotFoundException e) {
 
@@ -64,13 +77,15 @@ public class SongData {
             }
         }
     }
-    public static void showName(){
-        SongData songName = new SongData();
-//        for(String path : cleanSongPath){
-//            songName.addSong(path);
-//        }    
-        songName.addSongTest();
-    }
     
+    /*
+        for test purpose only
+    
+    */
+    public static void showProperties(){
+        for(Song song: SongProperties){
+            System.out.println(song.toString());
+        }
+    }
 
 }

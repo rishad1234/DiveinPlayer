@@ -92,7 +92,8 @@ public class DiveinPlayer extends Application {
         
         */
         //SearchData.ShowFiles();
-        SongData.showName();
+        SongData.getProperties();
+        //SongData.showProperties();
         
         launch(args);
     }
