@@ -15,7 +15,15 @@ import java.util.List;
  */
 public class SearchData {
     
-    public static List<String> ListOfPath = new ArrayList<>();
+      
+    /*
+        for test purpose only
+    */
+    public static void ShowFiles(){
+        for(String path : SongData.cleanSongPath){
+            System.out.println(path);
+        }
+    }
     
     /*
         this method is for finding all the files in a single partition
@@ -29,19 +37,13 @@ public class SearchData {
                     getFiles(file.listFiles(), extension);
             }else{
                 if(file.exists() && file.getName().endsWith(extension)){
-                    ListOfPath.add(file.getAbsolutePath() + "");
-                    System.out.println("File: " + file.getAbsolutePath());
+                    String path = file.getAbsolutePath();
+                    SongData.songPath.add(path);
+                    path = path.replace("\\", "\\\\");
+                    SongData.cleanSongPath.add(path);
+                    //System.out.println("File: " + path);
                 }
             }
-        }
-    }
-    
-    /*
-        for test purpose only
-    */
-    public static void ShowFiles(){
-        for(String path : ListOfPath){
-            System.out.println(path);
         }
     }
     

@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import search.SearchData;
+import search.SongData;
 import search.search.Drive;
 import static search.search.getDrives;
 
@@ -30,6 +31,7 @@ import static search.search.getDrives;
 public class DiveinPlayer extends Application {
     
     private static Stage stage;
+    static List<String> paths = new ArrayList<>();
     @Override
     public void start(Stage stage) throws Exception {
         
@@ -89,7 +91,8 @@ public class DiveinPlayer extends Application {
             partition
         
         */
-        
+        //SearchData.ShowFiles();
+        SongData.showName();
         
         launch(args);
     }
