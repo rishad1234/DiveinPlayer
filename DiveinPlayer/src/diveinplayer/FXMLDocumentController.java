@@ -27,12 +27,14 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.Stage;
+import static search.SongData.SongProperties;
 
 public class FXMLDocumentController implements Initializable {
     
@@ -83,11 +85,15 @@ public class FXMLDocumentController implements Initializable {
             DiveinPlayer.getStage().setY(event.getScreenY() - posY);
         });
         
-//        ObservableList<Song> data = FXCollections.observableArrayList(
-//            for()
-//                
-//        );
+        ObservableList<Song> data = FXCollections.observableArrayList();
+        for(Song properties: SongProperties){
+            data.add(properties);
+        }
         
+        NameColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
+        AlbumColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("album"));
+        
+        songTable.setItems(data);
 
     }
     

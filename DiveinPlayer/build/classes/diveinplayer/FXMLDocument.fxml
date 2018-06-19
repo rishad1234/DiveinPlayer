@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
@@ -135,13 +134,12 @@
                         <Separator layoutX="2.0" layoutY="433.0" prefHeight="12.0" prefWidth="943.0" style="-fx-opacity: 0.5;" />
                         <Pane prefHeight="433.0" prefWidth="942.0">
                            <children>
-                              <TableView fx:id="songTable" prefHeight="440.0" prefWidth="923.0">
+                              <TableView fx:id="songTable" prefHeight="440.0" prefWidth="942.0">
                                  <columns>
                                     <TableColumn fx:id="NameColumn" prefWidth="558.0" text="Name" />
                                     <TableColumn fx:id="AlbumColumn" prefWidth="383.0" text="Album" />
                                  </columns>
                               </TableView>
-                              <ScrollBar layoutX="919.0" layoutY="36.0" orientation="VERTICAL" prefHeight="397.0" prefWidth="23.0" styleClass="ScrollBar" stylesheets="@MainCss.css" />
                            </children>
                         </Pane>
                      </children></Pane>
