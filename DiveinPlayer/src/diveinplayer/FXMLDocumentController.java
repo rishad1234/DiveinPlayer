@@ -73,7 +73,8 @@ public class FXMLDocumentController implements Initializable {
     private double posY;
     
     Media media;
-    MediaPlayer mp;
+    MediaPlayer musicPlayer;
+    static int status = 0;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -232,10 +233,32 @@ public class FXMLDocumentController implements Initializable {
         System.out.println(song.getName());
         System.out.println(song.getPath());
         
-        media = new Media(new File(song.getPath()).toURI().toString());
-
-        mp = new MediaPlayer(media);
-        mp.play();
+//        media = new Media(new File(song.getPath()).toURI().toString());
+//
+//        musicPlayer = new MediaPlayer(media);
+//        
+//        musicPlayer.play();
+        initialPlayControl(new File(song.getPath()).toURI().toString());
+    }
+    
+    public void initialPlayControl(String filePath){
+        
+        switch(status){
+            case 0:
+                media = new Media(filePath);
+                musicPlayer = new MediaPlayer(media);
+                musicPlayer.play();
+                status = 1;
+                break;
+                
+            case 1:
+                musicPlayer.stop();
+                media = new Media(filePath);
+                musicPlayer = new MediaPlayer(media);
+                musicPlayer.play();
+                status = 1;
+                break;
+        }
     }
     
 }

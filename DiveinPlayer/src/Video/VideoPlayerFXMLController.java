@@ -142,7 +142,6 @@ public class VideoPlayerFXMLController implements Initializable {
                 width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
                 height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
                 mediaView.setPreserveRatio(true);
-                //mediaPlayer.play();
                 status = 1;
                 break;
                 
