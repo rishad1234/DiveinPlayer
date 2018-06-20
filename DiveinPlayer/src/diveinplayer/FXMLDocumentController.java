@@ -5,6 +5,7 @@ package diveinplayer;
 
 import Music.Song;
 import static Video.VideoPlayerFXMLController.mediaPlayer;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +33,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.Stage;
 import static search.SongData.SongProperties;
@@ -68,6 +71,9 @@ public class FXMLDocumentController implements Initializable {
     
     private double posX;
     private double posY;
+    
+    Media media;
+    MediaPlayer mp;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -219,4 +225,17 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     }
+    
+    @FXML
+    public void getSelectedCellData(MouseEvent event){
+        Song song =(Song) songTable.getSelectionModel().getSelectedItem();
+        System.out.println(song.getName());
+        System.out.println(song.getPath());
+        
+        media = new Media(new File(song.getPath()).toURI().toString());
+
+        mp = new MediaPlayer(media);
+        mp.play();
+    }
+    
 }

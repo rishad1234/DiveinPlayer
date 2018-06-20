@@ -44,7 +44,7 @@ public class SongData {
 
     public static void getProperties() {
 
-        for (String path : cleanSongPath) {
+        for (String path : songPath) {
             try {
 
                 InputStream input = new FileInputStream(new File(path));

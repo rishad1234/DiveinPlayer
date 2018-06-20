@@ -7,6 +7,10 @@ public class Song {
     private String path;
     private String album;
 
+    public Song() {
+        
+    }
+
     public Song(String name, String album) {
         this.name = name;
         this.album = album;
