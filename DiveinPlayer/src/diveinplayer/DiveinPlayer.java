@@ -37,14 +37,6 @@ public class DiveinPlayer extends Application {
         
         this.stage = stage;
         AudioPlayerStage(stage);
-//        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-//        Scene scene = new Scene(root);
-//        
-//        stage.setScene(scene);
-//        stage.initStyle(StageStyle.TRANSPARENT);
-//        stage.show();
-//        stage.getIcons().add(new Image(getClass().getResourceAsStream("diveIn Final.png")));
-//        stage.setTitle("Divein");
     }
 
     public static Stage getStage() {
@@ -71,12 +63,13 @@ public class DiveinPlayer extends Application {
         launch(args);
     }
     
+    
+    /*
+        this code is to search all the mp3 files in the windows pc
+
+    */
     public static void searchAllFiles(){
         
-        /*
-            this code is to search all the mp3 files in the windows pc
-        
-        */
         List<String> rootPaths = new ArrayList<>(); 
         
         List<Drive> drives = getDrives();

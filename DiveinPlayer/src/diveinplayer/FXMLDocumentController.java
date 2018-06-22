@@ -67,10 +67,13 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem Theme2MenuBarButton;
     @FXML
     private MenuItem Theme3MenuBarButton;
+    @FXML
+    private Button MuteButton;
     
     
     private double posX;
     private double posY;
+    private Boolean muteStatus = false;
     
     Media media;
     MediaPlayer musicPlayer;
@@ -227,6 +230,10 @@ public class FXMLDocumentController implements Initializable {
         });
     }
     
+    /*
+        this method handles the mouse event occured on the table cells
+    */
+    
     @FXML
     public void getSelectedCellData(MouseEvent event){
         Song song =(Song) songTable.getSelectionModel().getSelectedItem();
@@ -236,6 +243,11 @@ public class FXMLDocumentController implements Initializable {
         initialPlayControl(new File(song.getPath()).toURI().toString());
     }
     
+    
+    /*
+        this method make decision to play the song and also 
+        prevent double music play
+    */
     public void initialPlayControl(String filePath){
         
         switch(status){
@@ -254,6 +266,29 @@ public class FXMLDocumentController implements Initializable {
                 status = 1;
                 break;
         }
+    }
+    
+    /*
+        MuteButton actions are given.
+        if we clicked 1st time, it will mute
+        if cliked 2nd time, it will unmute.
+        also need some work done here to set the unmute volume to the
+        slider value
+    */
+    
+    public void muteButtonEvent(ActionEvent event){
+        
+        MuteButton.setOnMouseClicked((MouseEvent event1) -> {          
+            
+            if(musicPlayer.getVolume() == 0.0){
+                musicPlayer.setVolume(1.0);
+                return;
+            }
+            if(musicPlayer.getVolume() == 1.0){
+                musicPlayer.setVolume(0.0);
+            }
+            
+        });
     }
     
 }

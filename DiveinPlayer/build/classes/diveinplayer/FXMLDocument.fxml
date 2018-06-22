@@ -171,7 +171,7 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="UNDO" size="25.0" />
                            </graphic>
                         </Button>
-                        <Button id="MinimizeButton" layoutX="680.0" layoutY="24.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css">
+                        <Button id="MinimizeButton" fx:id="MuteButton" layoutX="680.0" layoutY="24.0" mnemonicParsing="false" onAction="#muteButtonEvent" prefHeight="33.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="MICROPHONE_SLASH" size="25.0" />
                            </graphic>
