@@ -65,7 +65,7 @@ public class VideoPlayerFXMLController implements Initializable {
     DoubleProperty width;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  
+
     }  
     
     @FXML

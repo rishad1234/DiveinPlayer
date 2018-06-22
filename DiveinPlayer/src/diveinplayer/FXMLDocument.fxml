@@ -81,6 +81,13 @@
                               <MenuItem fx:id="Theme3MenuBarButton" mnemonicParsing="false" onAction="#changeThemeToTheme3" text="Theme 3" />
                         </items>
                       </Menu>
+                        <Menu mnemonicParsing="false" text="Visualizer">
+                           <items>
+                              <MenuItem fx:id="videoPlayerButton1" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="visualizer1" />
+                              <MenuItem fx:id="videoPlayerButton11" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="visualizer2" />
+                              <MenuItem fx:id="videoPlayerButton12" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="visualizer3" />
+                           </items>
+                        </Menu>
                       <Menu mnemonicParsing="false" text="Help">
                         <items>
                           <MenuItem mnemonicParsing="false" text="About" />

@@ -33,8 +33,10 @@ public class SearchData {
         for(File file : files){
             if(file.isDirectory()){
                 //System.out.println(file.toString());
-                if(file.exists() && file.listFiles() != null)
+                if(file.exists() && file.listFiles() != null){
                     getFiles(file.listFiles(), extension);
+                }
+                    //getFiles(file.listFiles(), extension);
             }else{
                 if(file.exists() && file.getName().endsWith(extension)){
                     String path = file.getAbsolutePath();

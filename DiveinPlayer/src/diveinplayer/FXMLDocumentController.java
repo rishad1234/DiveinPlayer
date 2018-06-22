@@ -8,6 +8,8 @@ import static Video.VideoPlayerFXMLController.mediaPlayer;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,6 +86,7 @@ public class FXMLDocumentController implements Initializable {
     Media media;
     MediaPlayer musicPlayer;
     static int status = 0;
+    Song song;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -110,7 +113,34 @@ public class FXMLDocumentController implements Initializable {
         AlbumColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("album"));
         
         songTable.setItems(data);
-
+        
+        /*
+            how to go to the next song
+            the logic is right below
+        */        
+//        if(musicPlayer != null){
+//
+//            musicPlayer.setOnEndOfMedia(new Runnable(){
+//                @Override
+//                public void run() {
+//                    if(song != null){
+//                        for(int i = 0; i < SongProperties.size(); i++){
+//                            if(song.getName().equals(SongProperties.get(i).getName())){
+//                                if(i < SongProperties.size() - 1){
+//                                    Song play = SongProperties.get(i + 1);
+//                                    if(musicPlayer.getStopTime() == musicPlayer.getTotalDuration()){
+//                                        //initialPlayControl(new File(song.getPath()).toURI().toString());
+//                                            media = new Media(new File(play.getPath()).toURI().toString());
+//                                            musicPlayer = new MediaPlayer(media);
+//                                            musicPlayer.play();
+//                                    }
+//                                }
+//                            }
+//                        } 
+//                    }
+//                }
+//            }); 
+//        }
     }
     
     /*
@@ -149,7 +179,7 @@ public class FXMLDocumentController implements Initializable {
                 Parent root = null;
                 try {
                     root = FXMLLoader.load(getClass().getResource("/Video/VideoPlayerFXML.fxml"));
-                    //Parent root = FXMLLoader.load(getClass().getResource("/Video/FXML.fxml"));
+                    //root = FXMLLoader.load(getClass().getResource("/Video/FXML.fxml"));
                     Scene scene = new Scene(root);
 
                     Stage stage = new Stage();
@@ -242,11 +272,11 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     public void getSelectedCellData(MouseEvent event){
-        Song song =(Song) songTable.getSelectionModel().getSelectedItem();
+        song =(Song) songTable.getSelectionModel().getSelectedItem();
         System.out.println(song.getName());
         System.out.println(song.getPath());
         
-        initialPlayControl(new File(song.getPath()).toURI().toString());
+        initialPlayControl(new File(song.getPath()).toURI().toString());  
     }
     
     
