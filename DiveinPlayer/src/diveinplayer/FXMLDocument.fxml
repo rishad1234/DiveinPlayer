@@ -166,7 +166,7 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="SORT" size="25.0" />
                            </graphic>
                         </Button>
-                        <Button id="MinimizeButton" layoutX="310.0" layoutY="33.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css">
+                        <Button id="MinimizeButton" fx:id="MusicRepeatButton" layoutX="310.0" layoutY="33.0" mnemonicParsing="false" onAction="#repeatButtonEvent" prefHeight="33.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="UNDO" size="25.0" />
                            </graphic>

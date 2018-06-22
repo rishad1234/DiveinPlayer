@@ -73,6 +73,8 @@ public class FXMLDocumentController implements Initializable {
     private Button MusicPlayButton;
     @FXML
     private Button MusicPauseButton;
+    @FXML
+    private Button MusicRepeatButton;
     
     
     private double posX;
@@ -314,6 +316,14 @@ public class FXMLDocumentController implements Initializable {
         
         MusicPauseButton.setOnMouseClicked((MouseEvent event1) -> {          
             musicPlayer.pause();
+        });
+    }
+    
+    //@FXML
+    public void repeatButtonEvent(ActionEvent event){
+        
+        MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
+            musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         });
     }
     
