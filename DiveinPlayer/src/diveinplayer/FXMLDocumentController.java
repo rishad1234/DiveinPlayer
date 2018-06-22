@@ -233,11 +233,6 @@ public class FXMLDocumentController implements Initializable {
         System.out.println(song.getName());
         System.out.println(song.getPath());
         
-//        media = new Media(new File(song.getPath()).toURI().toString());
-//
-//        musicPlayer = new MediaPlayer(media);
-//        
-//        musicPlayer.play();
         initialPlayControl(new File(song.getPath()).toURI().toString());
     }
     

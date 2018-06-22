@@ -67,6 +67,12 @@ public class DiveinPlayer extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        searchAllFiles();
+        launch(args);
+    }
+    
+    public static void searchAllFiles(){
+        
         /*
             this code is to search all the mp3 files in the windows pc
         
@@ -94,8 +100,6 @@ public class DiveinPlayer extends Application {
         //SearchData.ShowFiles();
         SongData.getProperties();
         //SongData.showProperties();
-        
-        launch(args);
     }
     
 }
