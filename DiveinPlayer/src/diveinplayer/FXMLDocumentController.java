@@ -69,6 +69,10 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem Theme3MenuBarButton;
     @FXML
     private Button MuteButton;
+    @FXML
+    private Button MusicPlayButton;
+    @FXML
+    private Button MusicPauseButton;
     
     
     private double posX;
@@ -275,7 +279,7 @@ public class FXMLDocumentController implements Initializable {
         also need some work done here to set the unmute volume to the
         slider value
     */
-    
+    @FXML
     public void muteButtonEvent(ActionEvent event){
         
         MuteButton.setOnMouseClicked((MouseEvent event1) -> {          
@@ -288,6 +292,28 @@ public class FXMLDocumentController implements Initializable {
                 musicPlayer.setVolume(0.0);
             }
             
+        });
+    }
+    
+    /*
+        music play button event 
+    */
+    @FXML
+    public void PlayButtonEvent(ActionEvent event){
+        
+        MusicPlayButton.setOnMouseClicked((MouseEvent event1) -> {          
+            musicPlayer.play();
+        });
+    }
+    
+    /*
+        music pause button event
+    */
+    @FXML
+    public void PauseButtonEvent(ActionEvent event){
+        
+        MusicPauseButton.setOnMouseClicked((MouseEvent event1) -> {          
+            musicPlayer.pause();
         });
     }
     
