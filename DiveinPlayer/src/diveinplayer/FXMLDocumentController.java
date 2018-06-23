@@ -308,6 +308,7 @@ public class FXMLDocumentController implements Initializable {
                 media = new Media(filePath);
                 musicPlayer = new MediaPlayer(media);
                 musicPlayer.play();
+                musicPlayer.setVolume(0.5);
                 status = 1;
                 break;
                 
