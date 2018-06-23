@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -287,6 +289,7 @@ public class FXMLDocumentController implements Initializable {
         
         initialPlayControl(new File(song.getPath()).toURI().toString());  
         MusicSliderControls();
+        MusicSoundSliderControls();
         
     }
     
@@ -402,6 +405,22 @@ public class FXMLDocumentController implements Initializable {
                 musicPlayer.seek(Duration.seconds(MusicSlider.getValue()));
             }
 
+        });
+    }
+    
+    public void MusicSoundSliderControls(){
+        musicPlayer.setOnReady(new Runnable(){
+            @Override
+            public void run() {
+                MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
+            }
+        });
+        
+        MusicVolumeSlider.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
+            }
         });
     }
     
