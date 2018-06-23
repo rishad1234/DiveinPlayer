@@ -85,6 +85,7 @@ public class FXMLDocumentController implements Initializable {
     private Slider MusicSlider;
     @FXML
     private Slider MusicVolumeSlider;
+
     
     
     private double posX;
@@ -286,10 +287,12 @@ public class FXMLDocumentController implements Initializable {
         song =(Song) songTable.getSelectionModel().getSelectedItem();
         System.out.println(song.getName());
         System.out.println(song.getPath());
-        
+
         initialPlayControl(new File(song.getPath()).toURI().toString());  
         MusicSliderControls();
         MusicSoundSliderControls();
+
+
         
     }
     
@@ -313,6 +316,7 @@ public class FXMLDocumentController implements Initializable {
                 media = new Media(filePath);
                 musicPlayer = new MediaPlayer(media);
                 musicPlayer.play();
+                musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
                 status = 1;
                 break;
         }
@@ -423,5 +427,6 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     }
+    
     
 }
