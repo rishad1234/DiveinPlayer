@@ -12,22 +12,22 @@ and open the template in the editor.
     these are for the theme system
 */
 #MainPane{
-    -fx-background-image: url("default.png");
+    -fx-background-image: url("/resources/default.png");
     -fx-background-repeat: no-repeat;   
     -fx-background-position: center center;
 }
 #MainPane1{
-    -fx-background-image: url("Theme1.png");
+    -fx-background-image: url("/resources/Theme1.png");
     -fx-background-repeat: no-repeat;   
     -fx-background-position: center center;
 }
 #MainPane2{
-    -fx-background-image: url("Theme2.png");
+    -fx-background-image: url("/resources/Theme2.png");
     -fx-background-repeat: no-repeat;   
     -fx-background-position: center center;
 }
 #MainPane3{
-    -fx-background-image: url("Theme3.png");
+    -fx-background-image: url("/resources/Theme3.png");
     -fx-background-repeat: no-repeat;   
     -fx-background-position: center center;
 }

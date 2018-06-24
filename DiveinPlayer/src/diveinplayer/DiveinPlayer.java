@@ -50,7 +50,7 @@ public class DiveinPlayer extends Application {
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("diveIn Final.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/diveIn Final.png")));
         stage.setTitle("Divein");
     }
     
@@ -59,7 +59,7 @@ public class DiveinPlayer extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        searchAllFiles();
+        //searchAllFiles();
         launch(args);
     }
     

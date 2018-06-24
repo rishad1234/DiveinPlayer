@@ -197,7 +197,7 @@ public class FXMLDocumentController implements Initializable {
                     Stage stage = new Stage();
                     stage.setScene(scene);
                     stage.show();
-                    stage.getIcons().add(new Image(getClass().getResourceAsStream("diveIn Final.png")));
+                    stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/diveIn Final.png")));
                     stage.setTitle("Divein");
                     
                     /*
