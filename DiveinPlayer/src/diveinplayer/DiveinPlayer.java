@@ -19,10 +19,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import static search.Search.getDrives;
+import static search.Search.setRootDir;
 import search.SearchData;
 import search.SongData;
-import search.search.Drive;
-import static search.search.getDrives;
+
 
 /**
  *
@@ -59,7 +60,7 @@ public class DiveinPlayer extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //searchAllFiles();
+        searchAllFiles();
         launch(args);
     }
     
@@ -71,14 +72,14 @@ public class DiveinPlayer extends Application {
     public static void searchAllFiles(){
         
         List<String> rootPaths = new ArrayList<>(); 
-        
-        List<Drive> drives = getDrives();
+        setRootDir();
+        List<String> drives = getDrives();
         drives.forEach((drive) -> {
-            if(drive.toString().equals(new String("C:\\"))){
-                rootPaths.add(drive.toString() + "\\Users\\\\");
+            if(drive.toString().equals(new String("C:\\\\"))){
+                rootPaths.add(drive + "Users\\\\");
                 
             }else{
-                rootPaths.add(drive.toString() + "\\");
+                rootPaths.add(drive);
             }
         });
         
