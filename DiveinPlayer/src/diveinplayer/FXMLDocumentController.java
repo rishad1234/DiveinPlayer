@@ -171,6 +171,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     public void MinimizeButtonAction(ActionEvent event){
+        
         minimizeButton.setOnMouseClicked((MouseEvent event1) -> {
             Stage stage = (Stage) MainPane.getScene().getWindow();
             stage.setIconified(true);
@@ -184,6 +185,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     public void VideoPlayerButtonAction(ActionEvent event){
+        
         videoPlayerButton.addEventHandler(EventType.ROOT, new EventHandler(){
             @Override
             public void handle(Event event) {
@@ -228,6 +230,7 @@ public class FXMLDocumentController implements Initializable {
     */
     @FXML
     public void changeThemeToDefault(ActionEvent event){
+        
         DefaultMenuBarButton.addEventHandler(EventType.ROOT, new EventHandler() {
             @Override
             public void handle(Event event) {
@@ -242,6 +245,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     public void changeThemeToTheme1(ActionEvent event){
+        
         Theme1MenuBarButton.addEventHandler(EventType.ROOT, new EventHandler() {
             @Override
             public void handle(Event event) {
@@ -256,6 +260,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     public void changeThemeToTheme2(ActionEvent event){
+        
         Theme2MenuBarButton.addEventHandler(EventType.ROOT, new EventHandler() {
             @Override
             public void handle(Event event) {
@@ -270,6 +275,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     public void changeThemeToTheme3(ActionEvent event){
+        
         Theme3MenuBarButton.addEventHandler(EventType.ROOT, new EventHandler() {
             @Override
             public void handle(Event event) {
@@ -284,6 +290,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     public void getSelectedCellData(MouseEvent event){
+        
         song =(Song) songTable.getSelectionModel().getSelectedItem();
         System.out.println(song.getName());
         System.out.println(song.getPath());
@@ -291,9 +298,24 @@ public class FXMLDocumentController implements Initializable {
         initialPlayControl(new File(song.getPath()).toURI().toString());  
         MusicSliderControls();
         MusicSoundSliderControls();
-
-
         
+        /*
+            this thing controls the initial values of the sliders
+            ps: "DONT'T PUT THIS CODE SNIPPETS ANYWHERE ELES 
+                CAUSE IT DOES NOT WORK ANYWHERE ELES" 
+        */
+        musicPlayer.setOnReady(new Runnable(){
+            @Override
+            public void run() {
+                MusicSlider.setMin(musicPlayer.getStartTime().toSeconds());
+                MusicSlider.setValue(0.0);
+                MusicSlider.setMax(musicPlayer.getTotalDuration().toSeconds());  
+                MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
+            }
+        });
+        /*
+            to this
+        */ 
     }
     
     
@@ -386,15 +408,7 @@ public class FXMLDocumentController implements Initializable {
     
     */
     
-    public void MusicSliderControls(){
-        musicPlayer.setOnReady(new Runnable(){
-            @Override
-            public void run() {
-                MusicSlider.setMin(0.0);
-                MusicSlider.setMax(musicPlayer.getTotalDuration().toSeconds());
-            }
-        
-        });
+    public void MusicSliderControls(){  
         
         musicPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>(){
             @Override
@@ -413,13 +427,7 @@ public class FXMLDocumentController implements Initializable {
         });
     }
     
-    public void MusicSoundSliderControls(){
-        musicPlayer.setOnReady(new Runnable(){
-            @Override
-            public void run() {
-                MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
-            }
-        });
+    public void MusicSoundSliderControls(){ 
         
         MusicVolumeSlider.valueProperty().addListener(new InvalidationListener() {
             @Override
@@ -427,7 +435,5 @@ public class FXMLDocumentController implements Initializable {
                 musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
             }
         });
-    }
-    
-    
+    } 
 }

@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="DiveinPlayer.jar" size="2328156" download="eager" />
+    <jar href="DiveinPlayer.jar" size="2327514" download="eager" />
     <jar href="lib\fontawesomefx-8.9.jar" size="571068" download="eager" />
     <jar href="lib\tika-app-1.18.jar" size="63968460" download="eager" />
   </resources>
