@@ -357,14 +357,12 @@ public class FXMLDocumentController implements Initializable {
         
         MuteButton.setOnMouseClicked((MouseEvent event1) -> {          
             
-            if(musicPlayer.getVolume() == 0.0){
-                musicPlayer.setVolume(1.0);
-                return;
-            }
-            if(musicPlayer.getVolume() == 1.0){
+            if(musicPlayer.getVolume() > 0.0){
+                //musicPlayer.setVolume((MusicVolumeSlider.getValue() /100));
                 musicPlayer.setVolume(0.0);
+            }else if(musicPlayer.getVolume() <= 0.0){
+                musicPlayer.setVolume((MusicVolumeSlider.getValue() /100));
             }
-            
         });
     }
     
