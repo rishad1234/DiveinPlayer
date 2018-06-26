@@ -195,3 +195,10 @@ and open the template in the editor.
 .scroll-bar .thumb:hover{
     -fx-background-color: whitesmoke;
 }
+
+
+
+
+#pane{
+    -fx-background-color: transparent;
+}

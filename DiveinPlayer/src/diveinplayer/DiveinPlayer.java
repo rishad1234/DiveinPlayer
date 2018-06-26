@@ -45,7 +45,7 @@ public class DiveinPlayer extends Application {
     }
     
     public void AudioPlayerStage(Stage stage) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument_1.fxml"));
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
@@ -75,7 +75,7 @@ public class DiveinPlayer extends Application {
         setRootDir();
         List<String> drives = getDrives();
         drives.forEach((drive) -> {
-            if(drive.toString().equals(new String("C:\\\\"))){
+            if(drive.equals(new String("C:\\\\"))){
                 rootPaths.add(drive + "Users\\\\");
                 
             }else{

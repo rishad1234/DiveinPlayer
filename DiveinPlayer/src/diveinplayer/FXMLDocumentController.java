@@ -85,12 +85,25 @@ public class FXMLDocumentController implements Initializable {
     private Slider MusicSlider;
     @FXML
     private Slider MusicVolumeSlider;
-
+    @FXML
+    private StackPane ChangePane;
+    
+    @FXML
+    private Button VisualizerButton;
+    @FXML
+    private Button AllSongsButton;
+    @FXML
+    private Button PlayListButton;
+    @FXML
+    private Button AlbumButton;
+    @FXML
+    private Button AddPlayListButton;
     
     
     private double posX;
     private double posY;
     private Boolean muteStatus = false;
+    private Pane songPane;
     
     Media media;
     MediaPlayer musicPlayer;
@@ -122,6 +135,8 @@ public class FXMLDocumentController implements Initializable {
         AlbumColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("album"));
         
         songTable.setItems(data);
+        songPane =(Pane) ChangePane.getChildren().get(0);
+        
         
         /*
             how to go to the next song
@@ -425,6 +440,10 @@ public class FXMLDocumentController implements Initializable {
         });
     }
     
+    /*
+        Music volume slider action is right below
+    
+    */
     public void MusicSoundSliderControls(){ 
         
         MusicVolumeSlider.valueProperty().addListener(new InvalidationListener() {
@@ -434,4 +453,85 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     } 
+    
+    /*
+        visualizer button action is done by the method below
+        this will show the visualizer in this Pane
+    */
+    @FXML
+    private void VisualizerButtonAction(ActionEvent event){
+        VisualizerButton.setOnMouseClicked((MouseEvent event1)->{
+            try {
+                Parent root  = FXMLLoader.load(getClass().getResource("visualizerFXML.fxml"));
+                ChangePane.getChildren().clear();
+                ChangePane.getChildren().add(root);
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    
+    /*
+        Allsong button action is done by the method below
+        song table is shown here
+    */
+    
+    @FXML
+    private void AllSongsButtonAction(ActionEvent event){
+        AllSongsButton.setOnMouseClicked((MouseEvent event1)->{
+            ChangePane.getChildren().clear();
+            ChangePane.getChildren().add(songPane);
+        });
+    }
+    
+    /*
+        playlist action is done here
+        all plalist will be shown here
+    */
+    
+    @FXML
+    private void PlayListButtonAction(ActionEvent event){
+        PlayListButton.setOnMouseClicked((MouseEvent event1)->{
+            try {
+                Parent root1 = FXMLLoader.load(getClass().getResource("PlayListFXML.fxml"));
+                ChangePane.getChildren().clear();
+                ChangePane.getChildren().add(root1);
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    /*
+        album button action si done here
+        all albums will be shown in this
+    */
+    @FXML
+    private void AlbumButtonAction(ActionEvent event){
+        AlbumButton.setOnMouseClicked((MouseEvent event1)->{
+            try {
+                Parent root1 = FXMLLoader.load(getClass().getResource("AlbumFXML.fxml"));
+                ChangePane.getChildren().clear();
+                ChangePane.getChildren().add(root1);
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    
+    /*
+        Add plalist action is down here
+    */
+    @FXML
+    private void AddPlayListButtonAction(ActionEvent event){
+        AddPlayListButton.setOnMouseClicked((MouseEvent event1)->{
+            try {
+                Parent root1 = FXMLLoader.load(getClass().getResource("AddPlayListFXML.fxml"));
+                ChangePane.getChildren().clear();
+                ChangePane.getChildren().add(root1);
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }  
+    
 }
