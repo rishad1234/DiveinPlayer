@@ -85,10 +85,10 @@ public class DiveinPlayer extends Application {
         
         rootPaths.forEach((root) -> {
             File temp = new File(root);
-            if(temp.listFiles() != null){
+            //if(temp.listFiles() != null){ maybe its important but not now
                 File[] file = new File(root).listFiles();
                 SearchData.getFiles(file, ".mp3");
-            }
+            //}
         });    
         /*
             partition
