@@ -74,6 +74,8 @@ public class SongData {
                 e.printStackTrace();
             } catch (SAXException e) {
                 e.printStackTrace();
+            } catch(Exception e){
+                System.out.println("Caught it");
             }
         }
     }
