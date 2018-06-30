@@ -40,10 +40,11 @@ public class SearchData {
             }else{
                 if(file.exists() && file.getName().endsWith(extension)){
                     String path = file.getAbsolutePath();
-                    SongData.songPath.add(path);
+                    //SongData.songPath.add(path);
                     path = path.replace("\\", "\\\\");
-                    SongData.cleanSongPath.add(path);
-                    //System.out.println("File: " + path);
+                    SongData.properties(path);
+                    //SongData.cleanSongPath.add(path);
+                    System.out.println("File: " + path);
                 }
             }
         }

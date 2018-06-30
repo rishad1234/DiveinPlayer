@@ -121,22 +121,14 @@ public class FXMLDocumentController implements Initializable {
             posX = event.getSceneX();
             posY = event.getSceneY();
         });
+        
         toolBar.setOnMouseDragged((MouseEvent event) -> {
             DiveinPlayer.getStage().setX(event.getScreenX() - posX);
             DiveinPlayer.getStage().setY(event.getScreenY() - posY);
         });
         
-        ObservableList<Song> data = FXCollections.observableArrayList();
-        for(Song properties: SongProperties){
-            data.add(properties);
-        }
-        
-        NameColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
-        AlbumColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("album"));
-        
-        songTable.setItems(data);
-        songPane =(Pane) ChangePane.getChildren().get(0);
-        
+        addSongsToTable();
+ 
         
         /*
             how to go to the next song
@@ -298,6 +290,27 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     }
+    
+    /*
+        this methods add data to the song table and also to the song pane
+    */
+    
+    public void addSongsToTable(){
+        ObservableList<Song> data = FXCollections.observableArrayList();
+        for(Song properties: SongProperties){
+            data.add(properties);
+        }
+        
+//        NameColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
+//        AlbumColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("album"));
+
+        NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        AlbumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
+        
+        songTable.setItems(data);
+        songPane =(Pane) ChangePane.getChildren().get(0);
+    }
+    
     
     /*
         this method handles the mouse event occured on the table cells
