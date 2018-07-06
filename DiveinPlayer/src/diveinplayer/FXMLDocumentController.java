@@ -102,8 +102,9 @@ public class FXMLDocumentController implements Initializable {
     
     private double posX;
     private double posY;
-    private Boolean muteStatus = false;
+    //private Boolean muteStatus = false;
     private Pane songPane;
+    private boolean repeatStatus = true;
     
     Media media;
     MediaPlayer musicPlayer;
@@ -422,10 +423,22 @@ public class FXMLDocumentController implements Initializable {
     */
     @FXML
     public void repeatButtonEvent(ActionEvent event){
-        
-        MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
-            musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        });
+        if(repeatStatus){
+            MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
+                musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            });
+            repeatStatus = false;
+            MusicRepeatButton.setId("focusedButton");
+        }else{
+            MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
+                musicPlayer.setCycleCount(1);
+            });  
+            repeatStatus = true;
+            MusicRepeatButton.setId("");
+        }
+//        MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
+//            musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//        });
     }
     
     /*

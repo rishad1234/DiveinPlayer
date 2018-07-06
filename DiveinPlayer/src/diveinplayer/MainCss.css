@@ -41,9 +41,30 @@ and open the template in the editor.
 #ExitButton, #MinimizeButton{
     -fx-background-color: #404040;
 }
+
 #MinimizeButton:hover{
     -fx-opacity: 0.5;
+    -fx-border-color: white;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
 }
+
+#MinimizeButton:focused{
+    -fx-opacity: 0.5;
+    -fx-border-color: white;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+}
+
+#focusedButton{
+    -fx-opacity: 0.5;
+    -fx-border-color: white;
+    -fx-border-style: solid;
+    -fx-border-width: 2px; 
+    -fx-border-radius: 10px;
+ 
+}
+
 #ExitButton:hover{
     -fx-opacity: 0.5;  
 } 
