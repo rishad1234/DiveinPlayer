@@ -389,8 +389,10 @@ public class FXMLDocumentController implements Initializable {
             if(musicPlayer.getVolume() > 0.0){
                 //musicPlayer.setVolume((MusicVolumeSlider.getValue() /100));
                 musicPlayer.setVolume(0.0);
+                MuteButton.setId("focusedButton");
             }else if(musicPlayer.getVolume() <= 0.0){
                 musicPlayer.setVolume((MusicVolumeSlider.getValue() /100));
+                MuteButton.setId("");
             }
         });
     }
