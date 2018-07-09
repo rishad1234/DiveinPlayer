@@ -6,8 +6,6 @@
 package diveinplayer;
 
 
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,6 +58,14 @@ public class DiveinPlayer extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                synchronized(this){
+//                    searchAllFiles();
+//                } 
+//            }
+//        }).start();
         searchAllFiles();
         launch(args);
     }
@@ -85,7 +91,7 @@ public class DiveinPlayer extends Application {
         
         rootPaths.forEach((root) -> {
             File temp = new File(root);
-            //if(temp.listFiles() != null){ maybe its important but not now
+            //if(temp.listFiles() != null){
                 File[] file = new File(root).listFiles();
                 SearchData.getFiles(file, ".mp3");
             //}

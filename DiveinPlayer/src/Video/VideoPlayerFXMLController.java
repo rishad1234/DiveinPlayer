@@ -5,6 +5,7 @@
  */
 package Video;
 
+import static diveinplayer.FXMLDocumentController.musicPlayer;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,9 +16,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -58,9 +57,7 @@ public class VideoPlayerFXMLController implements Initializable {
     public static MediaPlayer mediaPlayer;
     private String filePath;
     private Media media;
-    private MediaPlayer temp;
     private static int status = 0;
-    private static boolean check = false;
     DoubleProperty height;
     DoubleProperty width;
     @Override
@@ -69,66 +66,79 @@ public class VideoPlayerFXMLController implements Initializable {
     }  
     
     @FXML
-    public void VideoPlayerButtonAction(ActionEvent event){
-        chooseFileButton.addEventHandler(EventType.ROOT, new EventHandler(){
-            @Override
-            public void handle(Event event) {
-                FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a file ", "*.mp4");
-                fileChooser.getExtensionFilters().add(filter);
-                
-                if(check == false){
-                    File file = fileChooser.showOpenDialog(null);
-                    filePath = file.toURI().toString();
-                }
-                check = true;
-                initialPlayControl(filePath);
-                mediaPlayer.setOnReady(new Runnable() {
-                    @Override
-                    public void run() {
-                        SeekSlider.setMin(mediaPlayer.getStartTime().toSeconds());
-                        SeekSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
-                    }
-                });
-                
-                
-                /*
-                    controls the volumeSlider
-                
-                */
-                VolumeSlider.setValue(mediaPlayer.getVolume() * 100);
-                VolumeSlider.valueProperty().addListener(new InvalidationListener() {
-                    @Override
-                    public void invalidated(Observable observable) {
-                        mediaPlayer.setVolume(VolumeSlider.getValue() / 100);
-                    }
-                });
-                
-                /*
-                    controls the seekSlider
-                */
-                mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>(){
-                    @Override
-                    public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
-                        SeekSlider.setValue(newValue.toSeconds());
-                    }
-                });
-                
-                /*
-                    controls the volume of the video with the seekSlider
-                */
-                SeekSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
-                    @Override
-                    public void handle(MouseEvent event) {
-                        mediaPlayer.seek(Duration.seconds(SeekSlider.getValue()));
-                    }
-                    
-                });
-                
+    public void ChooseButtonAction(ActionEvent event){
+        
+        if(musicPlayer != null){
+            musicPlayer.stop();
+        }
+        if(mediaPlayer != null){
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a file ", "*.mp4");
+            fileChooser.getExtensionFilters().add(filter);
+
+            File file = fileChooser.showOpenDialog(null);
+            try{
+                filePath = file.toURI().toString();
+            }catch(Exception e){
+
             }
-        });
+            mediaPlayer.stop();
+        }else{
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a file ", "*.mp4");
+            fileChooser.getExtensionFilters().add(filter);
+
+            File file = fileChooser.showOpenDialog(null);
+            try{
+                filePath = file.toURI().toString();
+            }catch(Exception e){
+
+            }
+        }
+        
+        
+        try{
+            initialPlayControl(filePath);
+
+            mediaPlayer.setOnReady(new Runnable() {
+                @Override
+                public void run() {
+                    SeekSlider.setMin(mediaPlayer.getStartTime().toSeconds());
+                    SeekSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
+                }
+            });
+
+            VolumeSlider.setValue(mediaPlayer.getVolume() * 100);
+            VolumeSlider.valueProperty().addListener(new InvalidationListener() {
+                @Override
+                public void invalidated(Observable observable) {
+                    mediaPlayer.setVolume(VolumeSlider.getValue() / 100);
+                }
+            });
+
+            mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>(){
+                @Override
+                public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+                    SeekSlider.setValue(newValue.toSeconds());
+                }
+            });
+
+            /*
+                controls the volume of the video with the seekSlider
+            */
+            SeekSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent event) {
+                    mediaPlayer.seek(Duration.seconds(SeekSlider.getValue()));
+                }
+
+            });
+        }catch(Exception e){
+
+        }
     }
-    public void initialPlayControl(String filePath){
+    public void initialPlayControl(String filePath) throws Exception{
         
         switch(status){
             case 0:
@@ -158,7 +168,7 @@ public class VideoPlayerFXMLController implements Initializable {
                 height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
                 mediaView.setPreserveRatio(true);
                 status = 0;
-                check = false;
+                //check = false;
                 break;
         }
     }
@@ -175,6 +185,5 @@ public class VideoPlayerFXMLController implements Initializable {
     public void StopVideo(){
         mediaPlayer.stop();
         
-    }
-    
+    } 
 }

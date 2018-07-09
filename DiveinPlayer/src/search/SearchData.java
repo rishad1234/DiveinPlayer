@@ -42,8 +42,8 @@ public class SearchData {
                     String path = file.getAbsolutePath();
                     //SongData.songPath.add(path);
                     path = path.replace("\\", "\\\\");
-                    SongData.properties(path);
                     //SongData.cleanSongPath.add(path);
+                    SongData.properties(path);
                     System.out.println("File: " + path);
                 }
             }

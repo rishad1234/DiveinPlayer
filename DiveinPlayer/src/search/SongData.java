@@ -44,9 +44,8 @@ public class SongData {
 
     public static void getProperties() {
 
-        for (String path : songPath) {
+        for (String path : cleanSongPath) {
             try {
-
                 InputStream input = new FileInputStream(new File(path));
                 ContentHandler handler = new DefaultHandler();
                 Metadata metadata = new Metadata();
@@ -63,9 +62,9 @@ public class SongData {
                 //System.out.println("Title: " + metadata.get("title"));
                 SongProperties.add(new Song(new File(path).getName(),path , metadata.get("xmpDM:album")));
                 
-//                System.out.println(new File(path).getName());
-//                System.out.println("Album: " + metadata.get("xmpDM:album"));
-//                System.out.println();
+                System.out.println(new File(path).getName());
+                System.out.println("Album: " + metadata.get("xmpDM:album"));
+                System.out.println();
 
             } catch (FileNotFoundException e) {
 
@@ -75,11 +74,10 @@ public class SongData {
             } catch (SAXException e) {
                 e.printStackTrace();
             } catch(Exception e){
-                System.out.println("Caught it");
+                System.out.println("exception catched");
             }
         }
     }
-    
     
     public static void properties(String path){
             try {

@@ -4,6 +4,7 @@ package diveinplayer;
 
 
 import Music.Song;
+import Video.VideoPlayerFXMLController;
 import static Video.VideoPlayerFXMLController.mediaPlayer;
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +43,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import static search.SongData.SongProperties;
 
@@ -104,10 +106,9 @@ public class FXMLDocumentController implements Initializable {
     private double posY;
     //private Boolean muteStatus = false;
     private Pane songPane;
-    private boolean repeatStatus = true;
     
     Media media;
-    MediaPlayer musicPlayer;
+    public static MediaPlayer musicPlayer;
     static int status = 0;
     Song song;
     
@@ -122,45 +123,12 @@ public class FXMLDocumentController implements Initializable {
             posX = event.getSceneX();
             posY = event.getSceneY();
         });
-        
         toolBar.setOnMouseDragged((MouseEvent event) -> {
             DiveinPlayer.getStage().setX(event.getScreenX() - posX);
             DiveinPlayer.getStage().setY(event.getScreenY() - posY);
         });
         
-        addSongsToTable();
- 
-        
-        /*
-            how to go to the next song
-            the logic is right below
-        */        
-//        if(musicPlayer != null){
-//
-//            musicPlayer.setOnEndOfMedia(new Runnable(){
-//                @Override
-//                public void run() {
-//                    if(song != null){
-//                        for(int i = 0; i < SongProperties.size(); i++){
-//                            if(song.getName().equals(SongProperties.get(i).getName())){
-//                                if(i < SongProperties.size() - 1){
-//                                    Song play = SongProperties.get(i + 1);
-//                                    if(musicPlayer.getStopTime() == musicPlayer.getTotalDuration()){
-//                                        //initialPlayControl(new File(song.getPath()).toURI().toString());
-//                                            media = new Media(new File(play.getPath()).toURI().toString());
-//                                            musicPlayer = new MediaPlayer(media);
-//                                            musicPlayer.play();
-//                                    }
-//                                }
-//                            }
-//                        } 
-//                    }
-//                }
-//            }); 
-//        }
-
-
-        
+        addDataToTables(); 
     }
     
     /*
@@ -185,53 +153,54 @@ public class FXMLDocumentController implements Initializable {
             stage.setIconified(true);
         });
     }
-    
+    /*
+        this methods add data to the song table and also to the song pane
+    */
+    public void addDataToTables(){
+        ObservableList<Song> data = FXCollections.observableArrayList();
+        for(Song properties: SongProperties){
+            data.add(properties);
+        }
+        
+        NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        AlbumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
+        
+        songTable.setItems(data);
+        songPane =(Pane) ChangePane.getChildren().get(0);
+    }
     /*
     this method handles the new video player fxml file and opens
     the video player
     */
     
     @FXML
-    public void VideoPlayerButtonAction(ActionEvent event){
-        
-        videoPlayerButton.addEventHandler(EventType.ROOT, new EventHandler(){
-            @Override
-            public void handle(Event event) {
-                //Stage stage = new Stage();
-                Parent root = null;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("/Video/VideoPlayerFXML.fxml"));
-                    //root = FXMLLoader.load(getClass().getResource("/Video/FXML.fxml"));
-                    Scene scene = new Scene(root);
+    public void VideoPlayerButtonAction(ActionEvent event){  
+    Parent root = null;
+    try {
+        root = FXMLLoader.load(getClass().getResource("/Video/VideoPlayerFXML.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("/Video/FXML.fxml"));
+        Scene scene = new Scene(root);
 
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                    stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/diveIn Final.png")));
-                    stage.setTitle("Divein");
-                    
-                    /*
-                        if the video player is closed the whole program will be closed
-                    
-                    */
-                    stage.addEventHandler(EventType.ROOT, new EventHandler(){
-                        @Override
-                        public void handle(Event event) {
-                            if(!stage.isShowing()){
-                                if(mediaPlayer != null && mediaPlayer.getStatus() == Status.PLAYING){
-                                    mediaPlayer.stop();
-                                }
-                                
-                                Platform.exit();
-                            }
-                        }
-                    });
-                } catch (IOException ex) {
-                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/diveIn Final.png")));
+        stage.setTitle("Divein");
+
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent we) {                        
+                Platform.setImplicitExit(false);
+                if(mediaPlayer != null){
+                    mediaPlayer.stop();
                 }
+                scene.getWindow().hide();
             }
         });
+    }catch(Exception e){
+        System.out.println("fuck");
     }
+}
     
     /*
         Change the background pic to default pic
@@ -291,27 +260,6 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     }
-    
-    /*
-        this methods add data to the song table and also to the song pane
-    */
-    
-    public void addSongsToTable(){
-        ObservableList<Song> data = FXCollections.observableArrayList();
-        for(Song properties: SongProperties){
-            data.add(properties);
-        }
-        
-//        NameColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
-//        AlbumColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("album"));
-
-        NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        AlbumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
-        
-        songTable.setItems(data);
-        songPane =(Pane) ChangePane.getChildren().get(0);
-    }
-    
     
     /*
         this method handles the mouse event occured on the table cells
@@ -389,10 +337,8 @@ public class FXMLDocumentController implements Initializable {
             if(musicPlayer.getVolume() > 0.0){
                 //musicPlayer.setVolume((MusicVolumeSlider.getValue() /100));
                 musicPlayer.setVolume(0.0);
-                MuteButton.setId("focusedButton");
             }else if(musicPlayer.getVolume() <= 0.0){
                 musicPlayer.setVolume((MusicVolumeSlider.getValue() /100));
-                MuteButton.setId("");
             }
         });
     }
@@ -425,22 +371,10 @@ public class FXMLDocumentController implements Initializable {
     */
     @FXML
     public void repeatButtonEvent(ActionEvent event){
-        if(repeatStatus){
-            MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
-                musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            });
-            repeatStatus = false;
-            MusicRepeatButton.setId("focusedButton");
-        }else{
-            MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
-                musicPlayer.setCycleCount(1);
-            });  
-            repeatStatus = true;
-            MusicRepeatButton.setId("");
-        }
-//        MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
-//            musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//        });
+        
+        MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
+            musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        });
     }
     
     /*

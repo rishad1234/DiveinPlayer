@@ -85,7 +85,7 @@
                <menus>
                   <Menu mnemonicParsing="false" text="File">
                      <items>
-                        <MenuItem fx:id="chooseFileButton" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="Choose" />
+                        <MenuItem fx:id="chooseFileButton" mnemonicParsing="false" onAction="#ChooseButtonAction" text="Choose" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Help">
