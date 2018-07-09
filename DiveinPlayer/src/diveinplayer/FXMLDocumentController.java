@@ -312,6 +312,9 @@ public class FXMLDocumentController implements Initializable {
                 musicPlayer.play();
                 musicPlayer.setVolume(0.5);
                 status = 1;
+                if(!repeatStatus){
+                    musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                }
                 break;
                 
             case 1:
@@ -321,6 +324,9 @@ public class FXMLDocumentController implements Initializable {
                 musicPlayer.play();
                 musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
                 status = 1;
+                if(!repeatStatus){
+                    musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                }
                 break;
         }
     }
@@ -388,25 +394,31 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     public void repeatButtonEvent(ActionEvent event){
         
-        //MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
-            try{
-                if(repeatStatus){
-                    MusicRepeatButton.setOnMouseClicked((MouseEvent event2) -> {          
+        try{
+            if(repeatStatus){
+                MusicRepeatButton.setOnMouseClicked((MouseEvent event2) -> {          
+                    try{
                         musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                });
-                repeatStatus = false;
-                MusicRepeatButton.setId("focusedButton");
-                }else{
-                    MusicRepeatButton.setOnMouseClicked((MouseEvent event2) -> {          
+                    }catch(NullPointerException e){
+                        
+                    }
+            });
+            repeatStatus = false;
+            MusicRepeatButton.setId("focusedButton");
+            }else{
+                MusicRepeatButton.setOnMouseClicked((MouseEvent event2) -> {          
+                    try{
                         musicPlayer.setCycleCount(1);
-                    });  
-                repeatStatus = true;
-                MusicRepeatButton.setId("");
-                }
-            }catch(Exception e){
-                
+                    }catch(NullPointerException e){
+                        
+                    }
+                });  
+            repeatStatus = true;
+            MusicRepeatButton.setId("");
             }
-        //});
+        }catch(Exception e){
+
+        }
     }
     
     /*
@@ -416,7 +428,6 @@ public class FXMLDocumentController implements Initializable {
     */
 
     public void MusicSliderControls(){  
-        
         musicPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>(){
             @Override
             public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
