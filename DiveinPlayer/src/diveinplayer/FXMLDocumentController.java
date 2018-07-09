@@ -129,6 +129,7 @@ public class FXMLDocumentController implements Initializable {
         });
         
         addDataToTables(); 
+        
     }
     
     /*
@@ -293,6 +294,7 @@ public class FXMLDocumentController implements Initializable {
         /*
             to this
         */ 
+        
     }
     
     
@@ -333,12 +335,15 @@ public class FXMLDocumentController implements Initializable {
     public void muteButtonEvent(ActionEvent event){
         
         MuteButton.setOnMouseClicked((MouseEvent event1) -> {          
-            
-            if(musicPlayer.getVolume() > 0.0){
-                //musicPlayer.setVolume((MusicVolumeSlider.getValue() /100));
-                musicPlayer.setVolume(0.0);
-            }else if(musicPlayer.getVolume() <= 0.0){
-                musicPlayer.setVolume((MusicVolumeSlider.getValue() /100));
+            try{
+                if(musicPlayer.getVolume() > 0.0){
+                    //musicPlayer.setVolume((MusicVolumeSlider.getValue() /100));
+                    musicPlayer.setVolume(0.0);
+                }else if(musicPlayer.getVolume() <= 0.0){
+                    musicPlayer.setVolume((MusicVolumeSlider.getValue() /100));
+                }
+            }catch(Exception e){
+                
             }
         });
     }
@@ -350,7 +355,11 @@ public class FXMLDocumentController implements Initializable {
     public void PlayButtonEvent(ActionEvent event){
         
         MusicPlayButton.setOnMouseClicked((MouseEvent event1) -> {          
-            musicPlayer.play();
+            try{
+                musicPlayer.play();
+            }catch(Exception e){
+                
+            }
         });
     }
     
@@ -361,7 +370,11 @@ public class FXMLDocumentController implements Initializable {
     public void PauseButtonEvent(ActionEvent event){
         
         MusicPauseButton.setOnMouseClicked((MouseEvent event1) -> {          
-            musicPlayer.pause();
+            try{
+                musicPlayer.pause();
+            }catch(Exception e){
+                
+            }
         });
     }
     
@@ -373,7 +386,11 @@ public class FXMLDocumentController implements Initializable {
     public void repeatButtonEvent(ActionEvent event){
         
         MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
-            musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            try{
+                musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            }catch(Exception e){
+                
+            }
         });
     }
     
@@ -382,7 +399,7 @@ public class FXMLDocumentController implements Initializable {
         down below
     
     */
-    
+
     public void MusicSliderControls(){  
         
         musicPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>(){

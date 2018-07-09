@@ -105,7 +105,7 @@
                         <Image url="@../resources/diveIn%20Final.png" />
                      </image>
                   </ImageView>
-                  <Button id="MinimizeButton" fx:id="minimizeButton" layoutX="906.0" layoutY="-3.0" mnemonicParsing="false" onAction="#MinimizeButtonAction" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 0px;" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="minimizeButton" layoutX="905.0" layoutY="-3.0" mnemonicParsing="false" onAction="#MinimizeButtonAction" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 0px;" textFill="WHITE">
                      <font>
                         <Font name="Californian FB" size="13.0" />
                      </font>
@@ -116,7 +116,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="ARROW_CIRCLE_DOWN" size="15.0" />
                      </graphic>
                   </Button>
-                  <Button id="MinimizeButton" fx:id="closeButton" layoutX="954.0" layoutY="-3.0" mnemonicParsing="false" onAction="#CloseButtonAction" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="closeButton" layoutX="953.0" layoutY="-3.0" mnemonicParsing="false" onAction="#CloseButtonAction" prefHeight="31.0" prefWidth="47.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
                         <Font name="Californian FB" size="13.0" />
                      </font>
