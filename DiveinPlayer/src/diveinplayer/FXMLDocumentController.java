@@ -388,7 +388,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     public void repeatButtonEvent(ActionEvent event){
         
-        MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
+        //MusicRepeatButton.setOnMouseClicked((MouseEvent event1) -> {          
             try{
                 if(repeatStatus){
                     MusicRepeatButton.setOnMouseClicked((MouseEvent event2) -> {          
@@ -406,7 +406,7 @@ public class FXMLDocumentController implements Initializable {
             }catch(Exception e){
                 
             }
-        });
+        //});
     }
     
     /*
