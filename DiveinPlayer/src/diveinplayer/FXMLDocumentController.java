@@ -312,6 +312,7 @@ public class FXMLDocumentController implements Initializable {
                 musicPlayer.setVolume(0.5);
                 status = 1;
                 if(!repeatStatus){
+                    MusicSliderControls();
                     musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
                 }
                 //MusicSliderControls();
@@ -325,7 +326,7 @@ public class FXMLDocumentController implements Initializable {
                         //MusicSliderControls();
                     }
                 });
-                MusicSliderControls();
+                //MusicSliderControls();
                 break;
                 
             case 1:
@@ -336,6 +337,7 @@ public class FXMLDocumentController implements Initializable {
                 musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
                 status = 1;
                 if(!repeatStatus){
+                    MusicSliderControls();
                     musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
                 }
                 musicPlayer.setOnReady(new Runnable(){
@@ -348,7 +350,7 @@ public class FXMLDocumentController implements Initializable {
                         //MusicSliderControls();
                     }
                 });
-                MusicSliderControls();
+                //MusicSliderControls();
                 break;
         }
     }
@@ -503,11 +505,11 @@ public class FXMLDocumentController implements Initializable {
 //            }
 //        });
         
-        musicPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
-            if (! MusicSlider.isValueChanging()) {
-                MusicSlider.setValue(newTime.toSeconds());
-            }
-        });
+//        musicPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
+//            if (! MusicSlider.isValueChanging()) {
+//                MusicSlider.setValue(newTime.toSeconds());
+//            }
+//        });
         MusicSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
