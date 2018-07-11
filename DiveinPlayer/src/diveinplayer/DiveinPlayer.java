@@ -20,7 +20,6 @@ import javafx.stage.StageStyle;
 import static search.Search.getDrives;
 import static search.Search.setRootDir;
 import search.SearchData;
-import search.SongData;
 
 
 /**
@@ -45,7 +44,6 @@ public class DiveinPlayer extends Application {
     public void AudioPlayerStage(Stage stage) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument_1.fxml"));
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();

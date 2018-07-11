@@ -130,7 +130,6 @@ public class FXMLDocumentController implements Initializable {
         });
         
         addDataToTables(); 
-        
     }
     
     /*
@@ -283,15 +282,15 @@ public class FXMLDocumentController implements Initializable {
             ps: "DONT'T PUT THIS CODE SNIPPETS ANYWHERE ELES 
                 CAUSE IT DOES NOT WORK ANYWHERE ELES" 
         */
-        musicPlayer.setOnReady(new Runnable(){
-            @Override
-            public void run() {
-                MusicSlider.setMin(musicPlayer.getStartTime().toSeconds());
-                MusicSlider.setValue(0.0);
-                MusicSlider.setMax(musicPlayer.getTotalDuration().toSeconds());  
-                MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
-            }
-        });
+//        musicPlayer.setOnReady(new Runnable(){
+//            @Override
+//            public void run() {
+//                MusicSlider.setMin(musicPlayer.getStartTime().toSeconds());
+//                MusicSlider.setValue(0.0);
+//                MusicSlider.setMax(musicPlayer.getTotalDuration().toSeconds());  
+//                MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
+//            }
+//        });
         /*
             to this
         */ 
@@ -315,6 +314,18 @@ public class FXMLDocumentController implements Initializable {
                 if(!repeatStatus){
                     musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
                 }
+                //MusicSliderControls();
+                musicPlayer.setOnReady(new Runnable(){
+                    @Override
+                    public void run() {
+                        MusicSlider.setMin(musicPlayer.getStartTime().toSeconds());
+                        MusicSlider.setValue(0.0);
+                        MusicSlider.setMax(musicPlayer.getTotalDuration().toSeconds());  
+                        MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
+                        //MusicSliderControls();
+                    }
+                });
+                MusicSliderControls();
                 break;
                 
             case 1:
@@ -327,6 +338,17 @@ public class FXMLDocumentController implements Initializable {
                 if(!repeatStatus){
                     musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
                 }
+                musicPlayer.setOnReady(new Runnable(){
+                    @Override
+                    public void run() {
+                        MusicSlider.setMin(musicPlayer.getStartTime().toSeconds());
+                        MusicSlider.setValue(0.0);
+                        MusicSlider.setMax(musicPlayer.getTotalDuration().toSeconds());  
+                        MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
+                        //MusicSliderControls();
+                    }
+                });
+                MusicSliderControls();
                 break;
         }
     }
@@ -434,8 +456,58 @@ public class FXMLDocumentController implements Initializable {
                 MusicSlider.setValue(newValue.toSeconds());
             }
         });
+
+        try{
+            MusicSlider.valueProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> obs, Number oldValue, Number newValue) {
+                    if (! MusicSlider.isValueChanging()) {
+                        double currentTime = 0.0;
+                        try{
+                            currentTime = mediaPlayer.getCurrentTime().toSeconds();
+                        }catch(Exception e){
+                            //double currentTime = mediaPlayer.getCurrentTime().toSeconds();
+                        }
+                        //double currentTime = mediaPlayer.getCurrentTime().toSeconds();
+                        double sliderTime = newValue.doubleValue();
+                        if (Math.abs(currentTime - sliderTime) > 0.5) {
+                            try{
+                                mediaPlayer.seek(new Duration(newValue.doubleValue()));
+                            }catch(Exception e){
+                                
+                            }
+                            //mediaPlayer.seek(new Duration(newValue.doubleValue()));
+                        }
+                    }
+                }
+            });
+        }catch(Exception e){
+            
+        }
+//        MusicSlider.valueProperty().addListener(new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> obs, Number oldValue, Number newValue) {
+//                if (! MusicSlider.isValueChanging()) {
+//                    double currentTime = 0.0;
+//                    try{
+//                        currentTime = mediaPlayer.getCurrentTime().toSeconds();
+//                    }catch(Exception e){
+//                        //double currentTime = mediaPlayer.getCurrentTime().toSeconds();
+//                    }
+//                    //double currentTime = mediaPlayer.getCurrentTime().toSeconds();
+//                    double sliderTime = newValue.doubleValue();
+//                    if (Math.abs(currentTime - sliderTime) > 0.5) {
+//                        mediaPlayer.seek(new Duration(newValue.doubleValue()));
+//                    }
+//                }
+//            }
+//        });
         
-        
+        musicPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
+            if (! MusicSlider.isValueChanging()) {
+                MusicSlider.setValue(newTime.toSeconds());
+            }
+        });
         MusicSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
