@@ -131,6 +131,11 @@ public class FXMLDocumentController implements Initializable {
         
         addDataToTables(); 
         
+        
+        //////////////////////////////////////////////////////////
+        /*
+            these two methods handles the actions of the music sliders
+        */
         MusicSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
@@ -147,6 +152,8 @@ public class FXMLDocumentController implements Initializable {
                 musicPlayer.seek(Duration.seconds(MusicSlider.getValue()));
             }
         });
+        
+        ///////////////////////////////////////////////////////////
     }
     
     /*
@@ -314,15 +321,7 @@ public class FXMLDocumentController implements Initializable {
                 if(!repeatStatus){
                     repeatStatus = true;
                 }
-                musicPlayer.setOnReady(new Runnable(){
-                    @Override
-                    public void run() {
-                        MusicSlider.setMin(musicPlayer.getStartTime().toSeconds());
-                        MusicSlider.setValue(0.0);
-                        MusicSlider.setMax(musicPlayer.getTotalDuration().toSeconds());  
-                        MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
-                    }
-                });
+                musicSetOnReady();
                 break;
                 
             case 1:
@@ -336,15 +335,7 @@ public class FXMLDocumentController implements Initializable {
                 if(!repeatStatus){
                     repeatStatus = true;
                 }
-                musicPlayer.setOnReady(new Runnable(){
-                    @Override
-                    public void run() {
-                        MusicSlider.setMin(musicPlayer.getStartTime().toSeconds());
-                        MusicSlider.setValue(0.0);
-                        MusicSlider.setMax(musicPlayer.getTotalDuration().toSeconds());  
-                        MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
-                    }
-                });
+                musicSetOnReady();
                 break;
         }
     }
@@ -445,17 +436,26 @@ public class FXMLDocumentController implements Initializable {
     */
 
     public void MusicSliderControls(){  
-//        musicPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>(){
-//            @Override
-//            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
-//                MusicSlider.setValue(newValue.toSeconds());
-//            }
-//        });
-        
         musicPlayer.currentTimeProperty().addListener(new InvalidationListener() {
             @Override
             public void invalidated(Observable ov) {
                 MusicSlider.setValue(musicPlayer.getCurrentTime().toSeconds());
+            }
+        });
+    }
+    
+    /*
+        this method sets the musicSlider and the volume slider to the 
+        actual state every time
+    */
+    public void musicSetOnReady(){
+        musicPlayer.setOnReady(new Runnable(){
+            @Override
+            public void run() {
+                MusicSlider.setMin(musicPlayer.getStartTime().toSeconds());
+                MusicSlider.setValue(0.0);
+                MusicSlider.setMax(musicPlayer.getTotalDuration().toSeconds());  
+                MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
             }
         });
     }
