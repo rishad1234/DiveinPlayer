@@ -123,6 +123,12 @@ public class VideoPlayerFXMLController implements Initializable {
                     SeekSlider.setValue(newValue.toSeconds());
                 }
             });
+            SeekSlider.setOnMouseDragged(new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent event) {
+                    mediaPlayer.seek(Duration.seconds(SeekSlider.getValue()));
+                }
+            });
 
             /*
                 controls the volume of the video with the seekSlider
