@@ -291,8 +291,9 @@ public class FXMLDocumentController implements Initializable {
         System.out.println(song.getPath());
 
         initialPlayControl(new File(song.getPath()).toURI().toString());  
-        //MusicSliderControls();
+        MusicSliderControls();
         MusicSoundSliderControls();
+        
     }
     
     
@@ -309,11 +310,10 @@ public class FXMLDocumentController implements Initializable {
                 musicPlayer.play();
                 musicPlayer.setVolume(0.5);
                 status = 1;
+                MusicRepeatButton.setId("MinimizeButton");
                 if(!repeatStatus){
-                    //MusicSliderControls();
-                    musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                    repeatStatus = true;
                 }
-                MusicSliderControls();
                 musicPlayer.setOnReady(new Runnable(){
                     @Override
                     public void run() {
@@ -321,7 +321,6 @@ public class FXMLDocumentController implements Initializable {
                         MusicSlider.setValue(0.0);
                         MusicSlider.setMax(musicPlayer.getTotalDuration().toSeconds());  
                         MusicVolumeSlider.setValue(musicPlayer.getVolume() * 100);
-                        //MusicSliderControls();
                     }
                 });
                 break;
@@ -333,11 +332,10 @@ public class FXMLDocumentController implements Initializable {
                 musicPlayer.play();
                 musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
                 status = 1;
+                MusicRepeatButton.setId("MinimizeButton");
                 if(!repeatStatus){
-                    //MusicSliderControls();
-                    musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                    repeatStatus = true;
                 }
-                MusicSliderControls();
                 musicPlayer.setOnReady(new Runnable(){
                     @Override
                     public void run() {
