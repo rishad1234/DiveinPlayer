@@ -176,7 +176,6 @@ public class VideoPlayerFXMLController implements Initializable {
                 mediaView.setPreserveRatio(true);
                 mediaPlayer.setAutoPlay(true);
                 status = 0;
-                //check = false;
                 break;
         }
     }
