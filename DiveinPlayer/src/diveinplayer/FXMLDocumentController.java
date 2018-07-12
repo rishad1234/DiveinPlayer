@@ -130,6 +130,23 @@ public class FXMLDocumentController implements Initializable {
         });
         
         addDataToTables(); 
+        
+        MusicSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() < 2){
+                    musicPlayer.seek(Duration.seconds(MusicSlider.getValue()));
+                }
+            }
+
+        });
+        
+        MusicSlider.setOnMouseDragged(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                musicPlayer.seek(Duration.seconds(MusicSlider.getValue()));
+            }
+        });
     }
     
     /*
@@ -468,9 +485,8 @@ public class FXMLDocumentController implements Initializable {
                         try{
                             currentTime = mediaPlayer.getCurrentTime().toSeconds();
                         }catch(Exception e){
-                            //double currentTime = mediaPlayer.getCurrentTime().toSeconds();
+                           
                         }
-                        //double currentTime = mediaPlayer.getCurrentTime().toSeconds();
                         double sliderTime = newValue.doubleValue();
                         if (Math.abs(currentTime - sliderTime) > 0.5) {
                             try{
@@ -478,7 +494,6 @@ public class FXMLDocumentController implements Initializable {
                             }catch(Exception e){
                                 
                             }
-                            //mediaPlayer.seek(new Duration(newValue.doubleValue()));
                         }
                     }
                 }
@@ -510,13 +525,13 @@ public class FXMLDocumentController implements Initializable {
 //                MusicSlider.setValue(newTime.toSeconds());
 //            }
 //        });
-        MusicSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                musicPlayer.seek(Duration.seconds(MusicSlider.getValue()));
-            }
-
-        });
+//        MusicSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
+//            @Override
+//            public void handle(MouseEvent event) {
+//                musicPlayer.seek(Duration.seconds(MusicSlider.getValue()));
+//            }
+//
+//        });
     }
     
     /*
