@@ -8,11 +8,13 @@ import static Video.VideoPlayerFXMLController.mediaPlayer;
 import static diveinplayer.DiveinPlayer.saveToFiles;
 import static diveinplayer.DiveinPlayer.searchAllFiles;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.channels.FileChannel;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -568,7 +570,11 @@ public class FXMLDocumentController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                reSearch();
+                try {
+                    reSearch();
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }).start();
     }
@@ -577,7 +583,7 @@ public class FXMLDocumentController implements Initializable {
         this controls the research option when the user taps 
         THE RESEARCH BUTTON
     */
-    public void reSearch(){
+    public void reSearch() throws IOException{
         if(new File("C:\\Windows\\Temp\\SongData.txt").exists()){
             System.err.println("lolololol");
             File file = new File("C:\\Windows\\Temp\\SongData.txt");
@@ -585,11 +591,13 @@ public class FXMLDocumentController implements Initializable {
         }
         searchAllFiles();
         try {
-            saveToFiles("C:\\Windows\\Temp\\SongData.txt");
+            saveToFiles("C:\\Windows\\Temp\\Tempdata.txt");
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-
+            FileChannel src = new FileInputStream(new File("C:\\Windows\\Temp\\Tempdata.txt")).getChannel();
+            FileChannel dest = new FileOutputStream(new File("C:\\Windows\\Temp\\SongData.txt")).getChannel();
+            dest.transferFrom(src, 0, src.size());
         }
     }
     
