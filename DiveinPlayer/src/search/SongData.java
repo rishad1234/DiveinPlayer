@@ -60,7 +60,7 @@ public class SongData {
                 input.close();
 
                 //System.out.println("Title: " + metadata.get("title"));
-                SongProperties.add(new Song(new File(path).getName(),path , metadata.get("xmpDM:album")));
+                SongProperties.add(new Song(new File(path).getName(), path, metadata.get("xmpDM:album")));
                 
                 System.out.println(new File(path).getName());
                 System.out.println("Album: " + metadata.get("xmpDM:album"));
