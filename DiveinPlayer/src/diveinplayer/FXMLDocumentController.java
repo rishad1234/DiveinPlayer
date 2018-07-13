@@ -5,6 +5,8 @@ package diveinplayer;
 
 import Music.Song;
 import static Video.VideoPlayerFXMLController.mediaPlayer;
+import static diveinplayer.DiveinPlayer.saveToFiles;
+import static diveinplayer.DiveinPlayer.searchAllFiles;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -85,6 +87,8 @@ public class FXMLDocumentController implements Initializable {
     private Slider MusicVolumeSlider;
     @FXML
     private StackPane ChangePane;
+    @FXML
+    private Button SearchButton;
     
     @FXML
     private Button VisualizerButton;
@@ -549,5 +553,27 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     }  
+    
+    @FXML
+    public void searchButtonAction(ActionEvent event){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(new File("C:\\Windows\\Temp\\SongData.txt").exists()){
+                    System.err.println("lolololol");
+                    File file = new File("C:\\Windows\\Temp\\SongData.txt");
+                    file.delete();
+                }
+                searchAllFiles();
+//                try {
+//                    saveToFiles();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//                }finally{
+//                    Platform.exit();
+//                }
+            }
+        }).start();
+    }
     
 }

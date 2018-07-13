@@ -45,7 +45,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="HEARTBEAT" size="29.0" />
                      </graphic>
                   </Button>
-                  <Button id="MinimizeButton" layoutY="321.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="SearchButton" layoutY="321.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
