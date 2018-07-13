@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -75,7 +76,7 @@ public class DiveinPlayer extends Application {
         }else{
             try {
                 searchAllFiles();
-                saveToFiles();
+                saveToFiles("C:\\Windows\\Temp\\SongData.txt");
                 readFiles();
             } catch (IOException ex) {
                 Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,8 +120,8 @@ public class DiveinPlayer extends Application {
         //SongData.showProperties();
     }
     
-    public static void saveToFiles() throws IOException{
-        FileOutputStream file = new FileOutputStream("C:\\Windows\\Temp\\SongData.txt");
+    public static void saveToFiles(String path) throws IOException{
+        FileOutputStream file = new FileOutputStream(path);
         ObjectOutputStream writer = new ObjectOutputStream(file);
         for(Song song : temp){
             writer.writeObject(song);
@@ -147,6 +148,7 @@ public class DiveinPlayer extends Application {
             }
         }
         reader.close();
+        temp.clear();
         for(Song song : SongProperties){
             System.out.println(song);
         }

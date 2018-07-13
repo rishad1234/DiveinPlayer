@@ -572,7 +572,7 @@ public class FXMLDocumentController implements Initializable {
                 }
                 searchAllFiles();
                 try {
-                    saveToFiles();
+                    saveToFiles("C:\\Windows\\Temp\\SongData.txt");
                 } catch (IOException ex) {
                     Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                 }finally{
