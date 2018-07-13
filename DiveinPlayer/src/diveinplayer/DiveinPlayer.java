@@ -67,21 +67,7 @@ public class DiveinPlayer extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        if(new File("C:\\Windows\\Temp\\SongData.txt").exists()){
-            try {
-                readFiles();
-            } catch (IOException ex) {
-                Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else{
-            try {
-                searchAllFiles();
-                saveToFiles("C:\\Windows\\Temp\\SongData.txt");
-                readFiles();
-            } catch (IOException ex) {
-                Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
-            }   
-        }
+        controlledSearch();
         launch(args);
     }
     
@@ -120,6 +106,10 @@ public class DiveinPlayer extends Application {
         //SongData.showProperties();
     }
     
+    /*
+        this method save the songs to a file located in
+        temp folder
+    */
     public static void saveToFiles(String path) throws IOException{
         FileOutputStream file = new FileOutputStream(path);
         ObjectOutputStream writer = new ObjectOutputStream(file);
@@ -134,6 +124,11 @@ public class DiveinPlayer extends Application {
        }
     }
     
+    
+    /*
+        this method reads the serializable file and make objects
+        of song,
+    */
     public static void readFiles() throws FileNotFoundException, IOException{
         System.err.println("reading files: ");
         FileInputStream file = new FileInputStream("C:\\Windows\\Temp\\SongData.txt");
@@ -148,9 +143,35 @@ public class DiveinPlayer extends Application {
             }
         }
         reader.close();
-        temp.clear();
+        temp.clear();  /////// this line is very important, do not remove int
         for(Song song : SongProperties){
             System.out.println(song);
+        }
+    }
+    
+    /*
+        this method tries to find the file and then reinitiate the 
+        Soang objects list
+        if file is not found then it searches the directories again
+        and write the objects in a txt file located in the temp 
+        DIRECTORY   
+    */
+    
+    public static void controlledSearch(){
+        if(new File("C:\\Windows\\Temp\\SongData.txt").exists()){
+            try {
+                readFiles();
+            } catch (IOException ex) {
+                Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                searchAllFiles();
+                saveToFiles("C:\\Windows\\Temp\\SongData.txt");
+                readFiles();
+            } catch (IOException ex) {
+                Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }   
         }
     }
     

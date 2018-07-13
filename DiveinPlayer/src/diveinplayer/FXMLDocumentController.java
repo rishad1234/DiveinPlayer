@@ -557,29 +557,40 @@ public class FXMLDocumentController implements Initializable {
         });
     }  
     
+    
+    /*
+        this methods searches all the directories and save the mp3 files
+        in a txt file in the temp folder
+    */
+    
     @FXML
     public void searchButtonAction(ActionEvent event){
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if(new File("C:\\Windows\\Temp\\SongData.txt").exists()){
-                    System.err.println("lolololol");
-                    File file = new File("C:\\Windows\\Temp\\SongData.txt");
-                    //FileWriter file = new FileWriter("C:\\Windows\\Temp\\SongData.txt");
-                    //file.write("");
-                    //file.close();
-                    file.delete();
-                }
-                searchAllFiles();
-                try {
-                    saveToFiles("C:\\Windows\\Temp\\SongData.txt");
-                } catch (IOException ex) {
-                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                }finally{
-                    
-                }
+                reSearch();
             }
         }).start();
+    }
+    
+    /*
+        this controls the research option when the user taps 
+        THE RESEARCH BUTTON
+    */
+    public void reSearch(){
+        if(new File("C:\\Windows\\Temp\\SongData.txt").exists()){
+            System.err.println("lolololol");
+            File file = new File("C:\\Windows\\Temp\\SongData.txt");
+            file.delete();
+        }
+        searchAllFiles();
+        try {
+            saveToFiles("C:\\Windows\\Temp\\SongData.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+
+        }
     }
     
 }
