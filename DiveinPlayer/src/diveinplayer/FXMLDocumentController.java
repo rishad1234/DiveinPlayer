@@ -595,6 +595,7 @@ public class FXMLDocumentController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
+            //// this thing copies the temp file docs to main file
             FileChannel src = new FileInputStream(new File("C:\\Windows\\Temp\\Tempdata.txt")).getChannel();
             FileChannel dest = new FileOutputStream(new File("C:\\Windows\\Temp\\SongData.txt")).getChannel();
             dest.transferFrom(src, 0, src.size());
