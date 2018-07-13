@@ -135,7 +135,6 @@ public class DiveinPlayer extends Application {
     
     public static void readFiles() throws FileNotFoundException, IOException{
         System.err.println("reading files: ");
-        List<Song> songs = new ArrayList<>();
         FileInputStream file = new FileInputStream("C:\\Windows\\Temp\\SongData.txt");
         ObjectInputStream reader = new ObjectInputStream(file);
         while (true) {

@@ -81,37 +81,37 @@ public class SongData {
     }
     
     public static void properties(String path){
+        try {
+            InputStream input = new FileInputStream(new File(path));
+            ContentHandler handler = new DefaultHandler();
+            Metadata metadata = new Metadata();
+            Mp3Parser parser = new Mp3Parser();
+            ParseContext parseCtx = new ParseContext();
             try {
-                InputStream input = new FileInputStream(new File(path));
-                ContentHandler handler = new DefaultHandler();
-                Metadata metadata = new Metadata();
-                Mp3Parser parser = new Mp3Parser();
-                ParseContext parseCtx = new ParseContext();
-                try {
-                    parser.parse(input, handler, metadata, parseCtx);
-                } catch (TikaException e) {
-
-                    e.printStackTrace();
-                }
-                input.close();
-
-                //System.out.println("Title: " + metadata.get("title"));
-                temp.add(new Song(new File(path).getName(),path , metadata.get("xmpDM:album")));
-                
-                System.out.println(new File(path).getName());
-                System.out.println("Album: " + metadata.get("xmpDM:album"));
-                System.out.println();
-
-            } catch (FileNotFoundException e) {
+                parser.parse(input, handler, metadata, parseCtx);
+            } catch (TikaException e) {
 
                 e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch(Exception e){
-                System.out.println("exception catched");
             }
+            input.close();
+
+            //System.out.println("Title: " + metadata.get("title"));
+            temp.add(new Song(new File(path).getName(),path , metadata.get("xmpDM:album")));
+
+            System.out.println(new File(path).getName());
+            System.out.println("Album: " + metadata.get("xmpDM:album"));
+            System.out.println();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch(Exception e){
+            System.out.println("exception catched");
+        }
     }
     
     /*

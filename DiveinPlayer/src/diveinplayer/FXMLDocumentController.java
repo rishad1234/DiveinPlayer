@@ -8,6 +8,9 @@ import static Video.VideoPlayerFXMLController.mediaPlayer;
 import static diveinplayer.DiveinPlayer.saveToFiles;
 import static diveinplayer.DiveinPlayer.searchAllFiles;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -562,6 +565,9 @@ public class FXMLDocumentController implements Initializable {
                 if(new File("C:\\Windows\\Temp\\SongData.txt").exists()){
                     System.err.println("lolololol");
                     File file = new File("C:\\Windows\\Temp\\SongData.txt");
+                    //FileWriter file = new FileWriter("C:\\Windows\\Temp\\SongData.txt");
+                    //file.write("");
+                    //file.close();
                     file.delete();
                 }
                 searchAllFiles();
@@ -570,7 +576,7 @@ public class FXMLDocumentController implements Initializable {
                 } catch (IOException ex) {
                     Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                 }finally{
-                    Platform.exit();
+                    
                 }
             }
         }).start();
