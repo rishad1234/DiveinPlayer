@@ -29,6 +29,7 @@ import static search.Search.getDrives;
 import static search.Search.setRootDir;
 import search.SearchData;
 import static search.SongData.SongProperties;
+import static search.SongData.temp;
 
 
 /**
@@ -75,6 +76,7 @@ public class DiveinPlayer extends Application {
             try {
                 searchAllFiles();
                 saveToFiles();
+                readFiles();
             } catch (IOException ex) {
                 Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
             }   
@@ -120,11 +122,15 @@ public class DiveinPlayer extends Application {
     public static void saveToFiles() throws IOException{
         FileOutputStream file = new FileOutputStream("C:\\Windows\\Temp\\SongData.txt");
         ObjectOutputStream writer = new ObjectOutputStream(file);
-        for(Song song : SongProperties){
+        for(Song song : temp){
             writer.writeObject(song);
         }
        writer.close(); 
        file.close();
+       
+       for(Song song : SongProperties){
+           System.out.println(song);
+       }
     }
     
     public static void readFiles() throws FileNotFoundException, IOException{

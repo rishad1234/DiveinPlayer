@@ -26,7 +26,8 @@ public class SongData {
         this List saves all the song properties
     */
     public static List<Song> SongProperties = new ArrayList<Song>();
-
+    public static List<Song> temp = new ArrayList<Song>();
+    
     public SongData() {
         
     }
@@ -95,7 +96,7 @@ public class SongData {
                 input.close();
 
                 //System.out.println("Title: " + metadata.get("title"));
-                SongProperties.add(new Song(new File(path).getName(),path , metadata.get("xmpDM:album")));
+                temp.add(new Song(new File(path).getName(),path , metadata.get("xmpDM:album")));
                 
                 System.out.println(new File(path).getName());
                 System.out.println("Album: " + metadata.get("xmpDM:album"));

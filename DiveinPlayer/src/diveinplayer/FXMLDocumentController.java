@@ -565,13 +565,13 @@ public class FXMLDocumentController implements Initializable {
                     file.delete();
                 }
                 searchAllFiles();
-//                try {
-//                    saveToFiles();
-//                } catch (IOException ex) {
-//                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//                }finally{
-//                    Platform.exit();
-//                }
+                try {
+                    saveToFiles();
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                }finally{
+                    Platform.exit();
+                }
             }
         }).start();
     }
