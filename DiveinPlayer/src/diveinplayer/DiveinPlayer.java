@@ -6,10 +6,18 @@
 package diveinplayer;
 
 
+import Music.Song;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,6 +28,7 @@ import javafx.stage.StageStyle;
 import static search.Search.getDrives;
 import static search.Search.setRootDir;
 import search.SearchData;
+import static search.SongData.SongProperties;
 
 
 /**
@@ -56,15 +65,20 @@ public class DiveinPlayer extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                synchronized(this){
-//                    searchAllFiles();
-//                } 
-//            }
-//        }).start();
-        searchAllFiles();
+        if(new File("C:\\Windows\\Temp\\SongData.txt").exists()){
+            try {
+                readFiles();
+            } catch (IOException ex) {
+                Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                searchAllFiles();
+                saveToFiles();
+            } catch (IOException ex) {
+                Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+        }
         launch(args);
     }
     
@@ -101,6 +115,36 @@ public class DiveinPlayer extends Application {
         //SearchData.ShowFiles();
         //SongData.getProperties();
         //SongData.showProperties();
+    }
+    
+    public static void saveToFiles() throws IOException{
+        FileOutputStream file = new FileOutputStream("C:\\Windows\\Temp\\SongData.txt");
+        ObjectOutputStream writer = new ObjectOutputStream(file);
+        for(Song song : SongProperties){
+            writer.writeObject(song);
+        }
+       writer.close(); 
+       file.close();
+    }
+    
+    public static void readFiles() throws FileNotFoundException, IOException{
+        System.err.println("reading files: ");
+        List<Song> songs = new ArrayList<>();
+        FileInputStream file = new FileInputStream("C:\\Windows\\Temp\\SongData.txt");
+        ObjectInputStream reader = new ObjectInputStream(file);
+        while (true) {
+            try { 
+                Song obj = (Song)reader.readObject();
+                SongProperties.add(obj);
+            } catch (Exception ex) {
+                System.err.println("end of reader file ");
+                break;
+            }
+        }
+        reader.close();
+        for(Song song : SongProperties){
+            System.out.println(song);
+        }
     }
     
 }
