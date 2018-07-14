@@ -312,9 +312,8 @@ public class FXMLDocumentController implements Initializable {
         for(int i = 0; i < SongProperties.size(); i++){
             if(song.getName().equals(SongProperties.get(i).getName()) && i != (SongProperties.size() - 1)){
                 System.out.println(i);
-                songId = i + 1;
-            } else if(song.getName().equals(SongProperties.get(i).getName()) && i != 0){
-                songId = i - 1;
+                songId = i;
+                break;
             }
         }
         
@@ -620,7 +619,7 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 musicPlayer.stop();
-                media = new Media(new File(SongProperties.get(songId).getPath()).toURI().toString());
+                media = new Media(new File(SongProperties.get(songId + 1).getPath()).toURI().toString());
                 musicPlayer = new MediaPlayer(media);
                 musicPlayer.play();
                 musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
@@ -630,10 +629,10 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
-                if(songId != SongProperties.size() - 1){
+                if(songId != SongProperties.size() - 2){
                     songId += 1;
                 }else{
-                    songId = 1;
+                    songId = 0;
                 }
             }
     
@@ -646,7 +645,7 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 musicPlayer.stop();
-                media = new Media(new File(SongProperties.get(songId).getPath()).toURI().toString());
+                media = new Media(new File(SongProperties.get(songId - 1).getPath()).toURI().toString());
                 musicPlayer = new MediaPlayer(media);
                 musicPlayer.play();
                 musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
@@ -656,10 +655,10 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
-                if(songId != 0){
+                if(songId > 1){
                     songId -= 1;
                 }else{
-                    songId = SongProperties.size() - 1;
+                    songId = SongProperties.size();
                 }
             }
     
