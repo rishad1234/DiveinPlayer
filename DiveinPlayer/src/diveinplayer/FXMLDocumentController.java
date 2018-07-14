@@ -309,6 +309,11 @@ public class FXMLDocumentController implements Initializable {
         MusicSliderControls();
         MusicSoundSliderControls();
         
+        ///////////////////////////////////////////////
+        /*
+            this loop gives us the position of the 
+            song in the list
+        */
         for(int i = 0; i < SongProperties.size(); i++){
             if(song.getName().equals(SongProperties.get(i).getName())){
                 System.out.println(i);
@@ -613,6 +618,9 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
+    /*
+        this method handles the next button 
+    */
     @FXML
     public void PlayNextAction(ActionEvent event){
         PlayNext.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -638,7 +646,9 @@ public class FXMLDocumentController implements Initializable {
     
         });
     }
-    
+    /*
+        this method handles the previous button 
+    */
     @FXML
     public void PlayPreviousAction(ActionEvent event){
         PlayPrevious.setOnMouseClicked(new EventHandler<MouseEvent>(){
