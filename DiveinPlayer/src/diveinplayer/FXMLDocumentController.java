@@ -9,9 +9,7 @@ import static diveinplayer.DiveinPlayer.saveToFiles;
 import static diveinplayer.DiveinPlayer.searchAllFiles;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
@@ -96,6 +94,8 @@ public class FXMLDocumentController implements Initializable {
     private Button SearchButton;
     @FXML
     private Button PlayNext;
+    @FXML
+    private Button PlayPrevious;
     
     @FXML
     private Button VisualizerButton;
@@ -612,7 +612,18 @@ public class FXMLDocumentController implements Initializable {
                 System.out.println("gfdgdgsdgsg");
             }
     
-    });
+        });
+    }
+    
+    @FXML
+    public void PlayPreviousAction(ActionEvent event){
+        PlayPrevious.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("gfdgdgsdgsg");
+            }
+    
+        });
     }
     
 }

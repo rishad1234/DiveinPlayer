@@ -166,10 +166,14 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="PAUSE" size="29.0" />
                            </graphic>
                         </Button>
-                        <Button id="MinimizeButton" layoutX="572.0" layoutY="16.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css" />
-                        <Button id="MinimizeButton" layoutX="409.0" layoutY="16.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css" />
-                        <FontAwesomeIconView fill="WHITE" glyphName="ANGLE_RIGHT" layoutX="588.0" layoutY="39.0" size="25.0" wrappingWidth="12.0" />
-                        <FontAwesomeIconView fill="WHITE" glyphName="ANGLE_LEFT" layoutX="420.0" layoutY="40.0" size="25.0" />
+                        <Button id="MinimizeButton" fx:id="PlayNext" layoutX="572.0" layoutY="16.0" mnemonicParsing="false" onAction="#PlayNextAction" prefHeight="31.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="ANGLE_RIGHT" size="25.0" wrappingWidth="12.0" />
+                           </graphic></Button>
+                        <Button id="MinimizeButton" fx:id="PlayPrevious" layoutX="409.0" layoutY="16.0" mnemonicParsing="false" onAction="#PlayPreviousAction" prefHeight="31.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="ANGLE_LEFT" size="25.0" />
+                           </graphic></Button>
                         <Slider fx:id="MusicSlider" layoutX="390.0" layoutY="63.0" prefHeight="14.0" prefWidth="241.0" stylesheets="@MainCss.css" />
                         <Slider fx:id="MusicVolumeSlider" layoutX="728.0" layoutY="34.0" prefHeight="14.0" prefWidth="150.0" stylesheets="@MainCss.css" />
                         <Button id="MinimizeButton" layoutX="258.0" layoutY="33.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css">
