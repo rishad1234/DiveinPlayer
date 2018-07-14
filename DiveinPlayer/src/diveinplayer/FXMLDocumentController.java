@@ -94,6 +94,8 @@ public class FXMLDocumentController implements Initializable {
     private StackPane ChangePane;
     @FXML
     private Button SearchButton;
+    @FXML
+    private Button PlayNext;
     
     @FXML
     private Button VisualizerButton;
@@ -600,6 +602,17 @@ public class FXMLDocumentController implements Initializable {
             FileChannel dest = new FileOutputStream(new File("C:\\Windows\\Temp\\SongData.txt")).getChannel();
             dest.transferFrom(src, 0, src.size());
         }
+    }
+    
+    @FXML
+    public void PlayNextAction(ActionEvent event){
+        PlayNext.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("gfdgdgsdgsg");
+            }
+    
+    });
     }
     
 }
