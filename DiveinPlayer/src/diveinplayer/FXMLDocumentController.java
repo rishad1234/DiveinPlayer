@@ -119,6 +119,7 @@ public class FXMLDocumentController implements Initializable {
     public static MediaPlayer musicPlayer;
     static int status = 0;
     Song song;
+    private int songId = -1;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -307,6 +308,15 @@ public class FXMLDocumentController implements Initializable {
         initialPlayControl(new File(song.getPath()).toURI().toString());  
         MusicSliderControls();
         MusicSoundSliderControls();
+        
+        for(int i = 0; i < SongProperties.size(); i++){
+            if(song.getName().equals(SongProperties.get(i).getName()) && i != (SongProperties.size() - 1)){
+                System.out.println(i);
+                songId = i + 1;
+            } else if(song.getName().equals(SongProperties.get(i).getName()) && i != 0){
+                songId = i - 1;
+            }
+        }
         
     }
     
@@ -609,7 +619,22 @@ public class FXMLDocumentController implements Initializable {
         PlayNext.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("gfdgdgsdgsg");
+                musicPlayer.stop();
+                media = new Media(new File(SongProperties.get(songId).getPath()).toURI().toString());
+                musicPlayer = new MediaPlayer(media);
+                musicPlayer.play();
+                musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
+                status = 1;
+                MusicRepeatButton.setId("MinimizeButton");
+                if(!repeatStatus){
+                    repeatStatus = true;
+                }
+                musicSetOnReady();
+                if(songId != SongProperties.size() - 1){
+                    songId += 1;
+                }else{
+                    songId = 1;
+                }
             }
     
         });
@@ -620,7 +645,22 @@ public class FXMLDocumentController implements Initializable {
         PlayPrevious.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("gfdgdgsdgsg");
+                musicPlayer.stop();
+                media = new Media(new File(SongProperties.get(songId).getPath()).toURI().toString());
+                musicPlayer = new MediaPlayer(media);
+                musicPlayer.play();
+                musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
+                status = 1;
+                MusicRepeatButton.setId("MinimizeButton");
+                if(!repeatStatus){
+                    repeatStatus = true;
+                }
+                musicSetOnReady();
+                if(songId != 0){
+                    songId -= 1;
+                }else{
+                    songId = SongProperties.size() - 1;
+                }
             }
     
         });
