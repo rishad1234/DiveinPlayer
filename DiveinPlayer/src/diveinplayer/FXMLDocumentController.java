@@ -376,11 +376,16 @@ public class FXMLDocumentController implements Initializable {
                 break;
         }
     }
-    
+    /*
+        this method is built to set the label value to whatever i want
+    */
     public void setLabelName(String name){
         NameLabel.setText(name);
     }
     
+    /*
+        this method deals with the automatic play system
+    */
     public void playOneByOne(){
         try{
             musicPlayer.setOnEndOfMedia(new Runnable(){
