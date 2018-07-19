@@ -203,7 +203,6 @@ public class FXMLDocumentController implements Initializable {
         NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         AlbumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
         
-        
         songTable.setItems(data);
         songPane =(Pane) ChangePane.getChildren().get(0);
     }
@@ -309,6 +308,7 @@ public class FXMLDocumentController implements Initializable {
         
         song =(Song) songTable.getSelectionModel().getSelectedItem();
         
+        
         System.out.println(song.getName());
         System.out.println(song.getPath());
         
@@ -316,7 +316,6 @@ public class FXMLDocumentController implements Initializable {
         initialPlayControl(new File(song.getPath()).toURI().toString());  
         MusicSliderControls();
         MusicSoundSliderControls();
-        
         
         ///////////////////////////////////////////////
         /*
@@ -394,6 +393,11 @@ public class FXMLDocumentController implements Initializable {
                 @Override
                 public void run() {
                     try{
+//                        songTable.getSelectionModel().clearSelection();
+//                        songTable.getSelectionModel().select(new Song(SongProperties.get(oneByOne + 1).getName(),
+//                                                                      SongProperties.get(oneByOne + 1).getAlbum(),
+//                                                                      SongProperties.get(oneByOne + 1).getPath()));
+                        songId++;
                         setLabelName(SongProperties.get(oneByOne + 1).getName());
                         initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
                         MusicSliderControls();
@@ -694,6 +698,9 @@ public class FXMLDocumentController implements Initializable {
                 MusicSoundSliderControls();
                 setLabelName(SongProperties.get(songId).getName());
                 playOneByOne();
+                if(oneByOne != SongProperties.size() - 1){
+                    oneByOne++;
+                }
             }
     
         });
@@ -724,6 +731,11 @@ public class FXMLDocumentController implements Initializable {
                 musicSetOnReady();
                 MusicSliderControls();
                 MusicSoundSliderControls();
+                playOneByOne();
+                if(oneByOne > 0){
+                    oneByOne--;
+                }
+
                 setLabelName(SongProperties.get(songId).getName());
             }
         });
