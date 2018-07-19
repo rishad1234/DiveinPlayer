@@ -109,7 +109,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button AddPlayListButton;
     @FXML
-    private Label NameLabel;
+    public Label NameLabel;
     
     
     private double posX;
@@ -141,7 +141,7 @@ public class FXMLDocumentController implements Initializable {
             DiveinPlayer.getStage().setY(event.getScreenY() - posY);
         });
         
-        setLabelName("");
+//        setLabelName("");
         addDataToTables(); 
         
         

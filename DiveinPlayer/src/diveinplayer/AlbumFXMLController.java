@@ -31,6 +31,8 @@ public class AlbumFXMLController implements Initializable {
     private TableColumn AlbumNameColumn;
     @FXML
     private TableColumn AlbumColumn;
+    
+    private Song song;
 
     /**
      * Initializes the controller class.
@@ -39,12 +41,17 @@ public class AlbumFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        //setLabelName("");
         addDataToTable();
     }    
 
     @FXML
     private void getSelectedCellData(MouseEvent event) {
+        song =(Song) AlbumSongTable.getSelectionModel().getSelectedItem();
+        
+        
+        System.out.println(song.getName());
+        System.out.println(song.getPath());
         
     }
     
