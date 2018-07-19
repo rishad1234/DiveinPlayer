@@ -120,6 +120,7 @@ public class FXMLDocumentController implements Initializable {
     static int status = 0;
     Song song;
     private int songId = -1;
+    private int oneByOne = -1;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -318,6 +319,7 @@ public class FXMLDocumentController implements Initializable {
             if(song.getName().equals(SongProperties.get(i).getName())){
                 System.out.println(i);
                 songId = i;
+                oneByOne = i;
                 break;
             }
         }
@@ -343,6 +345,10 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
+                playOneByOne();
+                if(oneByOne != SongProperties.size() - 1){
+                    oneByOne++;
+                }
                 break;
                 
             case 1:
@@ -357,8 +363,38 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
+                playOneByOne();
+                if(oneByOne != SongProperties.size() - 1){
+                    oneByOne++;
+                }
                 break;
         }
+    }
+    
+    public void playOneByOne(){
+        try{
+            musicPlayer.setOnEndOfMedia(new Runnable(){
+                @Override
+                public void run() {
+                    try{
+//                        musicPlayer.stop();
+//                        media = new Media(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
+//                        musicPlayer = new MediaPlayer(media);
+//                        musicPlayer.play();
+//                        if(oneByOne != SongProperties.size() - 1){
+//                            oneByOne++;
+//                        }
+                        initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
+                    }catch(Exception e){
+
+                    }
+                }
+
+            });
+        }catch(Exception e){
+            
+        }
+        //initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
     }
     
     /*
@@ -642,6 +678,7 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
+                playOneByOne();
             }
     
         });
