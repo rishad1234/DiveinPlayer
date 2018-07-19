@@ -191,6 +191,11 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="MICROPHONE_SLASH" size="25.0" />
                            </graphic>
                         </Button>
+                        <Label fx:id="NameLabel" layoutX="28.0" layoutY="31.0" prefHeight="17.0" prefWidth="210.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI" size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                   <ToolBar fx:id="toolBar" layoutX="115.0" layoutY="-2.0" prefHeight="31.0" prefWidth="790.0" style="-fx-opacity: 0;" />

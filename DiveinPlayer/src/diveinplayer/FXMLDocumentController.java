@@ -31,6 +31,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
@@ -107,6 +108,8 @@ public class FXMLDocumentController implements Initializable {
     private Button AlbumButton;
     @FXML
     private Button AddPlayListButton;
+    @FXML
+    private Label NameLabel;
     
     
     private double posX;
@@ -138,6 +141,7 @@ public class FXMLDocumentController implements Initializable {
             DiveinPlayer.getStage().setY(event.getScreenY() - posY);
         });
         
+        setLabelName("");
         addDataToTables(); 
         
         
@@ -303,9 +307,11 @@ public class FXMLDocumentController implements Initializable {
     public void getSelectedCellData(MouseEvent event){
         
         song =(Song) songTable.getSelectionModel().getSelectedItem();
+        
         System.out.println(song.getName());
         System.out.println(song.getPath());
-
+        
+        setLabelName(song.getName());
         initialPlayControl(new File(song.getPath()).toURI().toString());  
         MusicSliderControls();
         MusicSoundSliderControls();
@@ -371,12 +377,17 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
+    public void setLabelName(String name){
+        NameLabel.setText(name);
+    }
+    
     public void playOneByOne(){
         try{
             musicPlayer.setOnEndOfMedia(new Runnable(){
                 @Override
                 public void run() {
                     try{
+                        setLabelName(SongProperties.get(oneByOne + 1).getName());
                         initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
                         MusicSliderControls();
                         MusicSoundSliderControls();
@@ -672,6 +683,7 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
+                setLabelName(SongProperties.get(songId).getName());
                 playOneByOne();
             }
     
@@ -701,6 +713,7 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
+                setLabelName(SongProperties.get(songId).getName());
             }
         });
     }
