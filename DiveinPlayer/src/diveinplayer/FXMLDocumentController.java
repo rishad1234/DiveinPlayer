@@ -203,6 +203,7 @@ public class FXMLDocumentController implements Initializable {
         NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         AlbumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
         
+        
         songTable.setItems(data);
         songPane =(Pane) ChangePane.getChildren().get(0);
     }
@@ -315,6 +316,7 @@ public class FXMLDocumentController implements Initializable {
         initialPlayControl(new File(song.getPath()).toURI().toString());  
         MusicSliderControls();
         MusicSoundSliderControls();
+        
         
         ///////////////////////////////////////////////
         /*
@@ -688,6 +690,8 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
+                MusicSliderControls();
+                MusicSoundSliderControls();
                 setLabelName(SongProperties.get(songId).getName());
                 playOneByOne();
             }
@@ -718,6 +722,8 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
+                MusicSliderControls();
+                MusicSoundSliderControls();
                 setLabelName(SongProperties.get(songId).getName());
             }
         });
