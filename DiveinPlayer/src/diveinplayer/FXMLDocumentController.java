@@ -377,14 +377,9 @@ public class FXMLDocumentController implements Initializable {
                 @Override
                 public void run() {
                     try{
-//                        musicPlayer.stop();
-//                        media = new Media(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
-//                        musicPlayer = new MediaPlayer(media);
-//                        musicPlayer.play();
-//                        if(oneByOne != SongProperties.size() - 1){
-//                            oneByOne++;
-//                        }
                         initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
+                        MusicSliderControls();
+                        MusicSoundSliderControls();
                     }catch(Exception e){
 
                     }
@@ -394,7 +389,6 @@ public class FXMLDocumentController implements Initializable {
         }catch(Exception e){
             
         }
-        //initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
     }
     
     /*
