@@ -109,7 +109,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button AddPlayListButton;
     @FXML
-    public Label NameLabel;
+    private Label NameLabel;
+    @FXML
+    private Pane ButtonPane;
     
     
     private double posX;
@@ -118,12 +120,24 @@ public class FXMLDocumentController implements Initializable {
     private Pane songPane;
     private boolean repeatStatus = true;
     
-    Media media;
+    static Media media;
     public static MediaPlayer musicPlayer;
     static int status = 0;
     Song song;
     private int songId = -1;
     private int oneByOne = -1;
+    
+    public Pane getPane(){
+        return ButtonPane;
+    }
+
+    public void setNameLabel(Label NameLabel) {
+        this.NameLabel = NameLabel;
+    }
+    
+    public Label getNameLabel() {
+        return NameLabel;
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -140,10 +154,7 @@ public class FXMLDocumentController implements Initializable {
             DiveinPlayer.getStage().setX(event.getScreenX() - posX);
             DiveinPlayer.getStage().setY(event.getScreenY() - posY);
         });
-        
-//        setLabelName("");
-        addDataToTables(); 
-        
+        addDataToTables();
         
         //////////////////////////////////////////////////////////
         /*
@@ -332,8 +343,7 @@ public class FXMLDocumentController implements Initializable {
         }
         
     }
-    
-    
+
     /*
         this method make decision to play the song and also 
         prevent double music play
@@ -393,10 +403,6 @@ public class FXMLDocumentController implements Initializable {
                 @Override
                 public void run() {
                     try{
-//                        songTable.getSelectionModel().clearSelection();
-//                        songTable.getSelectionModel().select(new Song(SongProperties.get(oneByOne + 1).getName(),
-//                                                                      SongProperties.get(oneByOne + 1).getAlbum(),
-//                                                                      SongProperties.get(oneByOne + 1).getPath()));
                         songId++;
                         setLabelName(SongProperties.get(oneByOne + 1).getName());
                         initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
