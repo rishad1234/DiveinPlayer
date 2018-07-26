@@ -13,6 +13,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -109,9 +112,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button AddPlayListButton;
     @FXML
-    private Label NameLabel;
+    public Label NameLabel;
     @FXML
     private Pane ButtonPane;
+    public FXMLDocumentController documentController;
     
     
     private double posX;
@@ -363,9 +367,9 @@ public class FXMLDocumentController implements Initializable {
                 }
                 musicSetOnReady();
                 playOneByOne();
-                if(oneByOne != SongProperties.size() - 1){
-                    oneByOne++;
-                }
+                    if(oneByOne != SongProperties.size() - 1){
+                        oneByOne++;
+                    }
                 break;
                 
             case 1:
@@ -381,9 +385,9 @@ public class FXMLDocumentController implements Initializable {
                 }
                 musicSetOnReady();
                 playOneByOne();
-                if(oneByOne != SongProperties.size() - 1){
-                    oneByOne++;
-                }
+                    if(oneByOne != SongProperties.size() - 1){
+                        oneByOne++;
+                    }
                 break;
         }
     }
@@ -403,11 +407,13 @@ public class FXMLDocumentController implements Initializable {
                 @Override
                 public void run() {
                     try{
-                        songId++;
-                        setLabelName(SongProperties.get(oneByOne + 1).getName());
-                        initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
-                        MusicSliderControls();
-                        MusicSoundSliderControls();
+                        if(repeatStatus){
+                            songId++;
+                            setLabelName(SongProperties.get(oneByOne + 1).getName());
+                            initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
+                            MusicSliderControls();
+                            MusicSoundSliderControls(); 
+                        }
                     }catch(Exception e){
 
                     }
@@ -607,10 +613,16 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void AlbumButtonAction(ActionEvent event){
         AlbumButton.setOnMouseClicked((MouseEvent event1)->{
-            try {
-                Parent root1 = FXMLLoader.load(getClass().getResource("AlbumFXML.fxml"));
+            try {     
+                FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("AlbumFXML.fxml"));
+                Pane pane = (Pane)fXMLLoader.load();
+
+                ChangePane.getChildren().removeAll();
                 ChangePane.getChildren().clear();
-                ChangePane.getChildren().add(root1);
+                ChangePane.getChildren().add(pane);
+                AlbumFXMLController albumFXMLController = fXMLLoader.getController();
+
+                albumFXMLController.documentController = this;
             } catch (IOException ex) {
                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
             }

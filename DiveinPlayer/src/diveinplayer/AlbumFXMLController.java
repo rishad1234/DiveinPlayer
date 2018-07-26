@@ -40,6 +40,7 @@ public class AlbumFXMLController implements Initializable {
     public Pane AlbumPane;
     private Song song;
     private Label albumLabel;
+    public FXMLDocumentController documentController;
 
     public Label getAlbumLabel() {
         return albumLabel;
@@ -66,7 +67,8 @@ public class AlbumFXMLController implements Initializable {
 //        FXMLDocumentController.media = new Media(new File(song.getPath()).toURI().toString());
 //        FXMLDocumentController.musicPlayer = new MediaPlayer(FXMLDocumentController.media);
 //        FXMLDocumentController.musicPlayer.play();
-        
+        //System.out.println(song);
+        documentController.NameLabel.setText(song.getName());
         System.out.println(song.getName());
         System.out.println(song.getPath());
     }
