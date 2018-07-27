@@ -375,9 +375,9 @@ public class FXMLDocumentController implements Initializable {
                 if(isAuto){
                     playOneByOne();
                 }
-                    if(oneByOne != SongProperties.size() - 1){
-                        oneByOne++;
-                    }
+                if(oneByOne != SongProperties.size() - 1){
+                    oneByOne++;
+                }
                 break;
                 
             case 1:
@@ -395,9 +395,9 @@ public class FXMLDocumentController implements Initializable {
                 if(isAuto){
                     playOneByOne();
                 }
-                    if(oneByOne != SongProperties.size() - 1){
-                        oneByOne++;
-                    }
+                if(oneByOne != SongProperties.size() - 1){
+                    oneByOne++;
+                }
                 break;
         }
     }
@@ -675,12 +675,16 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void run() {
                 try {
+                    minimizeButton.setDisable(true);
                     reSearch();
                 } catch (IOException ex) {
                     Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                }finally{
+                    minimizeButton.setDisable(false);
                 }
             }
         }).start();
+        //minimizeButton.setDisable(false);
     }
     
     /*
