@@ -648,13 +648,12 @@ public class FXMLDocumentController implements Initializable {
                 
                 //readFilesForPlayList();
                 addToPlayListFile();
+                songId = -1;
+                oneByOne = -1;
                 
                 allSongActivated = false;
                 playListActivated = true;
                 albumActivated = false;
-//                for(Song s : playlist){
-//                    System.out.println(s);
-//                }
             } catch (IOException ex) {
                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
             }

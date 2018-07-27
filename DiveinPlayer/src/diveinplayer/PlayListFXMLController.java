@@ -7,6 +7,7 @@ package diveinplayer;
 
 import Music.Song;
 import static diveinplayer.FXMLDocumentController.playlist;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -41,7 +42,28 @@ public class PlayListFXMLController implements Initializable {
 
     @FXML
     private void getSelectedCellDataForPLaylist(MouseEvent event) {
-        
+        Song song = (Song) AlbumSongTable.getSelectionModel().getSelectedItem();
+        //System.out.println(FXMLDocumentController.ButtonPane);
+        try{
+            FXMLDocumentController.musicPlayer.stop();
+        }catch(Exception e){
+            
+        }
+        documentController.initialPlayControl(new File(song.getPath()).toURI().toString());
+        documentController.MusicSliderControls();
+        documentController.MusicSoundSliderControls();
+        documentController.NameLabel.setText(song.getName());
+        System.out.println(song.getName());
+        System.out.println(song.getPath());
+ 
+        for(int i = 0; i < playlist.size(); i++){
+            if(song.getName().equals(playlist.get(i).getName())){
+                System.out.println(i);
+                documentController.songId = i;
+                documentController.oneByOne = i;
+                break;
+            }
+        }
         
     }
     
