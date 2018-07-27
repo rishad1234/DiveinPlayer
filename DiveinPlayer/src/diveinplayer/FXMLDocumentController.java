@@ -5,7 +5,6 @@ package diveinplayer;
 
 import Music.Song;
 import static Video.VideoPlayerFXMLController.mediaPlayer;
-import static diveinplayer.AlbumFXMLController.albumList;
 import static diveinplayer.DiveinPlayer.saveToFiles;
 import static diveinplayer.DiveinPlayer.searchAllFiles;
 import java.io.File;
@@ -14,9 +13,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +41,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -132,6 +131,7 @@ public class FXMLDocumentController implements Initializable {
     Song song;
     public static int songId = -1;
     public static int oneByOne = -1;
+    public static List<Song> playlist = new ArrayList<>();
     
     public Pane getPane(){
         return ButtonPane;
@@ -324,29 +324,33 @@ public class FXMLDocumentController implements Initializable {
     public void getSelectedCellData(MouseEvent event){
         
         song =(Song) songTable.getSelectionModel().getSelectedItem();
-        
-        
-        System.out.println(song.getName());
-        System.out.println(song.getPath());
-        
-        setLabelName(song.getName());
-        initialPlayControl(new File(song.getPath()).toURI().toString(), true);  
-        MusicSliderControls();
-        MusicSoundSliderControls();
+        if(event.getButton() == MouseButton.SECONDARY){
+            playlist.add(song);
+        }
+        if(event.getButton() == MouseButton.PRIMARY){
+            //song =(Song) songTable.getSelectionModel().getSelectedItem();
+            System.out.println(song.getName());
+            System.out.println(song.getPath());
+
+            setLabelName(song.getName());
+            initialPlayControl(new File(song.getPath()).toURI().toString(), true);  
+            MusicSliderControls();
+            MusicSoundSliderControls();
+            for(int i = 0; i < SongProperties.size(); i++){
+                if(song.getName().equals(SongProperties.get(i).getName())){
+                    System.out.println(i);
+                    songId = i;
+                    oneByOne = i;
+                    break;
+                }
+            }
+        }
         
         ///////////////////////////////////////////////
         /*
             this loop gives us the position of the 
             song in the list
         */
-        for(int i = 0; i < SongProperties.size(); i++){
-            if(song.getName().equals(SongProperties.get(i).getName())){
-                System.out.println(i);
-                songId = i;
-                oneByOne = i;
-                break;
-            }
-        }
         
     }
 
@@ -610,6 +614,9 @@ public class FXMLDocumentController implements Initializable {
                 Parent root1 = FXMLLoader.load(getClass().getResource("PlayListFXML.fxml"));
                 ChangePane.getChildren().clear();
                 ChangePane.getChildren().add(root1);
+                for(Song s : playlist){
+                    System.out.println(s);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
             }

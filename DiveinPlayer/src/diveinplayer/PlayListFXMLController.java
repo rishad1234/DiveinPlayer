@@ -21,9 +21,9 @@ import javafx.scene.input.MouseEvent;
 public class PlayListFXMLController implements Initializable {
 
     @FXML
-    private TableView<?> AlbumSongTable;
+    private TableView AlbumSongTable;
     @FXML
-    private TableColumn<?, ?> AlbumNameColumn;
+    private TableColumn AlbumNameColumn;
 
     /**
      * Initializes the controller class.
@@ -34,7 +34,9 @@ public class PlayListFXMLController implements Initializable {
     }    
 
     @FXML
-    private void getSelectedCellDataForAlbums(MouseEvent event) {
+    private void getSelectedCellDataForPLaylist(MouseEvent event) {
+        
+        
     }
     
 }
