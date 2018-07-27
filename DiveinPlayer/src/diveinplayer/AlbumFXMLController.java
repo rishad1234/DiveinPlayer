@@ -60,7 +60,7 @@ public class AlbumFXMLController implements Initializable {
         }catch(Exception e){
             
         }
-        documentController.initialPlayControl(new File(song.getPath()).toURI().toString(), false);
+        documentController.initialPlayControl(new File(song.getPath()).toURI().toString());
         documentController.MusicSliderControls();
         documentController.MusicSoundSliderControls();
         documentController.NameLabel.setText(song.getName());

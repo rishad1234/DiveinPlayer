@@ -341,7 +341,7 @@ public class FXMLDocumentController implements Initializable {
             System.out.println(song.getPath());
 
             setLabelName(song.getName());
-            initialPlayControl(new File(song.getPath()).toURI().toString(), true);  
+            initialPlayControl(new File(song.getPath()).toURI().toString());  
             MusicSliderControls();
             MusicSoundSliderControls();
             for(int i = 0; i < SongProperties.size(); i++){
@@ -366,7 +366,7 @@ public class FXMLDocumentController implements Initializable {
         this method make decision to play the song and also 
         prevent double music play
     */
-    public void initialPlayControl(String filePath, boolean isAuto){
+    public void initialPlayControl(String filePath){
         
         switch(status){
             case 0:
@@ -380,9 +380,9 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
-                if(isAuto){
-                    playOneByOne();
-                }
+                
+                playOneByOne();
+                
                 if(oneByOne != SongProperties.size() - 1){
                     oneByOne++;
                 }
@@ -400,9 +400,9 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
-                if(isAuto){
-                    playOneByOne();
-                }
+                
+                playOneByOne();
+                
                 if(oneByOne != SongProperties.size() - 1){
                     oneByOne++;
                 }
@@ -425,12 +425,14 @@ public class FXMLDocumentController implements Initializable {
                 @Override
                 public void run() {
                     try{
-                        if(repeatStatus){
-                            songId++;
-                            setLabelName(SongProperties.get(oneByOne + 1).getName());
-                            initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString(), true);
-                            MusicSliderControls();
-                            MusicSoundSliderControls(); 
+                        if(allSongActivated){
+                            oneByOneFunction(SongProperties);
+                        }
+                        if(albumActivated){
+                            oneByOneFunction(albumList);
+                        }
+                        if(playListActivated){
+                            oneByOneFunction(playlist);
                         }
                     }catch(Exception e){
 
@@ -699,12 +701,12 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void run() {
                 try {
-                    minimizeButton.setDisable(true);
+                    closeButton.setDisable(true);
                     reSearch();
                 } catch (IOException ex) {
                     Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                 }finally{
-                    minimizeButton.setDisable(false);
+                    closeButton.setDisable(false);
                 }
             }
         }).start();
@@ -830,4 +832,13 @@ public class FXMLDocumentController implements Initializable {
         setLabelName(list.get(songId).getName());
     }
     
+    public void oneByOneFunction(List<Song> list){
+        if(repeatStatus){
+            songId++;
+            setLabelName(list.get(oneByOne + 1).getName());
+            initialPlayControl(new File(list.get(oneByOne + 1).getPath()).toURI().toString());
+            MusicSliderControls();
+            MusicSoundSliderControls(); 
+        }
+    }
 }
