@@ -29,7 +29,7 @@
          <children>
             <Pane prefHeight="561.0" prefWidth="972.0">
                <children>
-                  <Button id="MinimizeButton" fx:id="AlbumButton" layoutY="270.0" mnemonicParsing="false" onAction="#AlbumButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="AlbumButton" layoutY="219.0" mnemonicParsing="false" onAction="#AlbumButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -45,7 +45,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="HEARTBEAT" size="29.0" />
                      </graphic>
                   </Button>
-                  <Button id="MinimizeButton" fx:id="SearchButton" layoutY="321.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="SearchButton" layoutY="270.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -81,13 +81,6 @@
                               <MenuItem fx:id="Theme3MenuBarButton" mnemonicParsing="false" onAction="#changeThemeToTheme3" text="Theme 3" />
                         </items>
                       </Menu>
-                        <Menu mnemonicParsing="false" text="Visualizer">
-                           <items>
-                              <MenuItem fx:id="videoPlayerButton1" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="visualizer1" />
-                              <MenuItem fx:id="videoPlayerButton11" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="visualizer2" />
-                              <MenuItem fx:id="videoPlayerButton12" mnemonicParsing="false" onAction="#VideoPlayerButtonAction" text="visualizer3" />
-                           </items>
-                        </Menu>
                       <Menu mnemonicParsing="false" text="Help">
                         <items>
                           <MenuItem mnemonicParsing="false" text="About" />
@@ -125,14 +118,6 @@
                      </padding>
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="CLOSE" size="17.0" />
-                     </graphic>
-                  </Button>
-                  <Button id="MinimizeButton" fx:id="AddPlayListButton" layoutY="219.0" mnemonicParsing="false" onAction="#AddPlayListButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE_ALT" size="29.0" />
                      </graphic>
                   </Button>
                   <Pane layoutX="58.0" layoutY="63.0" prefHeight="433.0" prefWidth="942.0">

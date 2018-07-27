@@ -111,8 +111,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button AlbumButton;
     @FXML
-    private Button AddPlayListButton;
-    @FXML
     public Label NameLabel;
     @FXML
     private Pane ButtonPane;
@@ -672,24 +670,7 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     }
-    
-    /*
-        Add plalist action is down here
-    */
-    @FXML
-    private void AddPlayListButtonAction(ActionEvent event){
-        AddPlayListButton.setOnMouseClicked((MouseEvent event1)->{
-            try {
-                Parent root1 = FXMLLoader.load(getClass().getResource("AddPlayListFXML.fxml"));
-                ChangePane.getChildren().clear();
-                ChangePane.getChildren().add(root1);
-            } catch (IOException ex) {
-                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-    }  
-    
-    
+ 
     /*
         this methods searches all the directories and save the mp3 files
         in a txt file in the temp folder

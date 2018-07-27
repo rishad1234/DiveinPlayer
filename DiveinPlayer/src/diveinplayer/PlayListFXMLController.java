@@ -54,7 +54,7 @@ public class PlayListFXMLController implements Initializable {
         AlbumNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         
         AlbumSongTable.setItems(data);
-        System.out.println("Album"); 
+        System.out.println("Playlist"); 
     }
     
 }
