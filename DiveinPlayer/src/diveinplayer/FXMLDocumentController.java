@@ -5,6 +5,7 @@ package diveinplayer;
 
 import Music.Song;
 import static Video.VideoPlayerFXMLController.mediaPlayer;
+import static diveinplayer.AlbumFXMLController.albumList;
 import static diveinplayer.DiveinPlayer.saveToFiles;
 import static diveinplayer.DiveinPlayer.searchAllFiles;
 import java.io.File;
@@ -122,6 +123,7 @@ public class FXMLDocumentController implements Initializable {
     private double posY;
     //private Boolean muteStatus = false;
     private Pane songPane;
+    private Pane albumPane;
     public static boolean repeatStatus = true;
     
     static Media media;
@@ -328,7 +330,7 @@ public class FXMLDocumentController implements Initializable {
         System.out.println(song.getPath());
         
         setLabelName(song.getName());
-        initialPlayControl(new File(song.getPath()).toURI().toString());  
+        initialPlayControl(new File(song.getPath()).toURI().toString(), true);  
         MusicSliderControls();
         MusicSoundSliderControls();
         
@@ -352,7 +354,7 @@ public class FXMLDocumentController implements Initializable {
         this method make decision to play the song and also 
         prevent double music play
     */
-    public void initialPlayControl(String filePath){
+    public void initialPlayControl(String filePath, boolean isAuto){
         
         switch(status){
             case 0:
@@ -366,7 +368,9 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
-                playOneByOne();
+                if(isAuto){
+                    playOneByOne();
+                }
                     if(oneByOne != SongProperties.size() - 1){
                         oneByOne++;
                     }
@@ -384,7 +388,9 @@ public class FXMLDocumentController implements Initializable {
                     repeatStatus = true;
                 }
                 musicSetOnReady();
-                playOneByOne();
+                if(isAuto){
+                    playOneByOne();
+                }
                     if(oneByOne != SongProperties.size() - 1){
                         oneByOne++;
                     }
@@ -410,7 +416,7 @@ public class FXMLDocumentController implements Initializable {
                         if(repeatStatus){
                             songId++;
                             setLabelName(SongProperties.get(oneByOne + 1).getName());
-                            initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString());
+                            initialPlayControl(new File(SongProperties.get(oneByOne + 1).getPath()).toURI().toString(), true);
                             MusicSliderControls();
                             MusicSoundSliderControls(); 
                         }
@@ -584,6 +590,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void AllSongsButtonAction(ActionEvent event){
         AllSongsButton.setOnMouseClicked((MouseEvent event1)->{
+            ChangePane.getChildren().removeAll();
             ChangePane.getChildren().clear();
             ChangePane.getChildren().add(songPane);
         });
@@ -615,11 +622,13 @@ public class FXMLDocumentController implements Initializable {
         AlbumButton.setOnMouseClicked((MouseEvent event1)->{
             try {     
                 FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("AlbumFXML.fxml"));
-                Pane pane = (Pane)fXMLLoader.load();
+                albumPane = (Pane)fXMLLoader.load();
 
                 ChangePane.getChildren().removeAll();
                 ChangePane.getChildren().clear();
-                ChangePane.getChildren().add(pane);
+                ChangePane.getChildren().add(albumPane);
+                PlayNext.setDisable(true);
+                PlayPrevious.setDisable(true);
                 AlbumFXMLController albumFXMLController = fXMLLoader.getController();
 
                 albumFXMLController.documentController = this;
@@ -696,31 +705,32 @@ public class FXMLDocumentController implements Initializable {
         PlayNext.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                if(songId != SongProperties.size() - 1){
-                    songId += 1;
-                }else{
-                    songId = 0;
-                }
-                musicPlayer.stop();
-                media = new Media(new File(SongProperties.get(songId).getPath()).toURI().toString());
-                musicPlayer = new MediaPlayer(media);
-                musicPlayer.play();
-                musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
-                status = 1;
-                MusicRepeatButton.setId("MinimizeButton");
-                if(!repeatStatus){
-                    repeatStatus = true;
-                }
-                musicSetOnReady();
-                MusicSliderControls();
-                MusicSoundSliderControls();
-                setLabelName(SongProperties.get(songId).getName());
-                playOneByOne();
-                if(oneByOne != SongProperties.size() - 1){
-                    oneByOne++;
+                if(ChangePane.getChildren().get(0).equals(songPane)){
+                    if(songId != SongProperties.size() - 1){
+                        songId += 1;
+                    }else{
+                        songId = 0;
+                    }
+                    musicPlayer.stop();
+                    media = new Media(new File(SongProperties.get(songId).getPath()).toURI().toString());
+                    musicPlayer = new MediaPlayer(media);
+                    musicPlayer.play();
+                    musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
+                    status = 1;
+                    MusicRepeatButton.setId("MinimizeButton");
+                    if(!repeatStatus){
+                        repeatStatus = true;
+                    }
+                    musicSetOnReady();
+                    MusicSliderControls();
+                    MusicSoundSliderControls();
+                    setLabelName(SongProperties.get(songId).getName());
+                    playOneByOne();
+                    if(oneByOne != SongProperties.size() - 1){
+                        oneByOne++;
+                    }
                 }
             }
-    
         });
     }
     /*

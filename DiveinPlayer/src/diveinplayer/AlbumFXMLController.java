@@ -6,8 +6,12 @@
 package diveinplayer;
 
 import Music.Song;
+import static diveinplayer.FXMLDocumentController.oneByOne;
+import static diveinplayer.FXMLDocumentController.songId;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,16 +41,8 @@ public class AlbumFXMLController implements Initializable {
     @FXML
     public Pane AlbumPane;
     private Song song;
-    private Label albumLabel;
     public FXMLDocumentController documentController;
-
-    public Label getAlbumLabel() {
-        return albumLabel;
-    }
-
-    public void setAlbumLabel(Label albumLabel) {
-        this.albumLabel = albumLabel;
-    }
+    public static List<Song> albumList = new ArrayList<>();
 
     /**
      * Initializes the controller class.
@@ -67,12 +63,21 @@ public class AlbumFXMLController implements Initializable {
         }catch(Exception e){
             
         }
-        documentController.initialPlayControl(new File(song.getPath()).toURI().toString());
+        documentController.initialPlayControl(new File(song.getPath()).toURI().toString(), false);
         documentController.MusicSliderControls();
         documentController.MusicSoundSliderControls();
         documentController.NameLabel.setText(song.getName());
         System.out.println(song.getName());
         System.out.println(song.getPath());
+        
+        for(int i = 0; i < albumList.size(); i++){
+            if(song.getName().equals(SongProperties.get(i).getName())){
+                System.out.println(i);
+                songId = i;
+                oneByOne = i;
+                break;
+            }
+        }
     }
     
     public void addAlbumDataToTable(){
@@ -82,6 +87,7 @@ public class AlbumFXMLController implements Initializable {
                 
             }else{
                 data.add(properties);
+                albumList.add(properties);
             }
         }
         for(Song properties: SongProperties){
@@ -96,44 +102,5 @@ public class AlbumFXMLController implements Initializable {
         System.out.println("Album");   
     }
     
-//    public void initialPlayControl(String filePath){
-//        
-//        switch(status){
-//            case 0:
-//                media = new Media(filePath);
-//                musicPlayer = new MediaPlayer(media);
-//                musicPlayer.play();
-//                musicPlayer.setVolume(0.5);
-//                status = 1;
-//                documentController.MusicRepeatButton.setId("MinimizeButton");
-//                if(!repeatStatus){
-//                    FXMLDocumentController.repeatStatus = true;
-//                }
-//                documentController.musicSetOnReady();
-//                documentController.playOneByOne();
-//                    if(oneByOne != SongProperties.size() - 1){
-//                        oneByOne++;
-//                    }
-//                break;
-//                
-//            case 1:
-//                musicPlayer.stop();
-//                media = new Media(filePath);
-//                musicPlayer = new MediaPlayer(media);
-//                musicPlayer.play();
-//                musicPlayer.setVolume(documentController.MusicVolumeSlider.getValue() / 100);
-//                status = 1;
-//                documentController.MusicRepeatButton.setId("MinimizeButton");
-//                if(!repeatStatus){
-//                    repeatStatus = true;
-//                }
-//                documentController.musicSetOnReady();
-//                documentController.playOneByOne();
-//                    if(oneByOne != SongProperties.size() - 1){
-//                        oneByOne++;
-//                    }
-//                break;
-//        }
-//    }
     
 }
