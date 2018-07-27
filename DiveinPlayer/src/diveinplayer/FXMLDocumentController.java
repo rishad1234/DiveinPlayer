@@ -10,8 +10,11 @@ import static diveinplayer.DiveinPlayer.saveToFiles;
 import static diveinplayer.DiveinPlayer.searchAllFiles;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
@@ -189,7 +192,20 @@ public class FXMLDocumentController implements Initializable {
             }
         });
         
-        ///////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
+        
+        /*
+            THIS CODE INITIALIZES THE PLAYLIST WHEN THE PROGRAM IS 
+            LAUNCHED
+        */
+        try {
+            readFilesForPlayList();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ///////////////////////////////////////////////////////////////////
+        
+        
     }
     
     /*
@@ -629,6 +645,10 @@ public class FXMLDocumentController implements Initializable {
                 ChangePane.getChildren().add(playListPane);
                 PlayListFXMLController playlistFXMLController = fxmlLoader.getController();
                 playlistFXMLController.documentController = this;
+                
+                //readFilesForPlayList();
+                addToPlayListFile();
+                
                 allSongActivated = false;
                 playListActivated = true;
                 albumActivated = false;
@@ -661,7 +681,6 @@ public class FXMLDocumentController implements Initializable {
                 AlbumFXMLController albumFXMLController = fXMLLoader.getController();
 
                 albumFXMLController.documentController = this;
-                
                 allSongActivated = false;
                 playListActivated = false;
                 albumActivated = true;
@@ -682,16 +701,17 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void run() {
                 try {
+                    ///WHEN THE SEARCH IS DOING ITS JOB THE CLOSE BUTTON IS DISABLED
                     closeButton.setDisable(true);
                     reSearch();
                 } catch (IOException ex) {
                     Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                 }finally{
+                    ///AFTER THE SEARCH ITS UNABLED
                     closeButton.setDisable(false);
                 }
             }
         }).start();
-        //minimizeButton.setDisable(false);
     }
     
     /*
@@ -759,6 +779,11 @@ public class FXMLDocumentController implements Initializable {
         });
     }
     
+    /*
+        THIS METHOD WORKS WITH THE DIFFERENT PANES 
+        AND DOES THE NEXT PLAYABLE SONG ACCORDING TO THE 
+        PANE (PLAYLIST PANE, ALBUM PANE, ALLSONG PANE)
+    */
     public void next(List<Song> list){
         if(songId != list.size() - 1){
             songId += 1;
@@ -785,6 +810,13 @@ public class FXMLDocumentController implements Initializable {
         }
         setLabelName(list.get(songId).getName());
     }
+    
+    
+    /*
+        THIS METHOD WORKS WITH THE DIFFERENT PANES 
+        AND DOES THE PREVIOUS PLAYABLE SONG ACCORDING TO THE 
+        PANE (PLAYLIST PANE, ALBUM PANE, ALLSONG PANE)
+    */
     
     public void previous(List<Song> list){
         if(songId > 0){
@@ -813,6 +845,12 @@ public class FXMLDocumentController implements Initializable {
         setLabelName(list.get(songId).getName());
     }
     
+    /*
+        THIS METHOD WORKS WITH THE DIFFERENT PANES 
+        AND DOES ONE BY ONE PLAY SONG ACCORDING TO THE 
+        PANE (PLAYLIST PANE, ALBUM PANE, ALLSONG PANE)
+    */
+    
     public void oneByOneFunction(List<Song> list){
         if(repeatStatus){
             songId++;
@@ -820,6 +858,48 @@ public class FXMLDocumentController implements Initializable {
             initialPlayControl(new File(list.get(oneByOne + 1).getPath()).toURI().toString());
             MusicSliderControls();
             MusicSoundSliderControls(); 
+        }
+    }
+    
+    /*
+        THIS METHOD WRITES THE PLAYLIST TO A FILE 
+        SO THAT IT CAN BE REINITIATED LATER
+    */
+    public void addToPlayListFile() throws IOException{
+        FileOutputStream file = new FileOutputStream("C:\\Windows\\Temp\\PlayList.txt");
+        System.out.println("writing files");
+        ObjectOutputStream writer = new ObjectOutputStream(file);
+        for(Song song : playlist){
+            System.out.println(song);
+            writer.writeObject(song);
+        }
+       writer.close(); 
+       file.close();
+    }
+    
+    
+    /*
+        THIS METHOD READS THE FILE TO A PLAYLIST 
+        SO THAT IT CAN BE INITIATED 
+    */
+    
+    
+    public static void readFilesForPlayList() throws FileNotFoundException, IOException{
+        System.err.println("reading files: ");
+        FileInputStream file = new FileInputStream("C:\\Windows\\Temp\\PlayList.txt");
+        ObjectInputStream reader = new ObjectInputStream(file);
+        while (true) {
+            try { 
+                Song obj = (Song)reader.readObject();
+                playlist.add(obj);
+            } catch (Exception ex) {
+                System.err.println("end of reader file ");
+                break;
+            }
+        }
+        reader.close();
+        for(Song song : playlist){
+            System.out.println(song);
         }
     }
 }
