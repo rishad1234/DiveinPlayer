@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,6 +32,8 @@ public class PlayListFXMLController implements Initializable {
     @FXML
     private TableColumn AlbumNameColumn;
     public FXMLDocumentController documentController;
+    private Button ResetButton;
+    ObservableList<Song> data;
 
     /**
      * Initializes the controller class.
@@ -40,6 +43,9 @@ public class PlayListFXMLController implements Initializable {
         addDataToPlaylistTable();
     }    
 
+    /*
+        THIS METHOD GIVES THE SPECIFIC TABLE DATA TO PLAY THE SONG
+    */
     @FXML
     private void getSelectedCellDataForPLaylist(MouseEvent event) {
         Song song = (Song) AlbumSongTable.getSelectionModel().getSelectedItem();
@@ -67,8 +73,12 @@ public class PlayListFXMLController implements Initializable {
         
     }
     
+    /*
+        THIS METHOD ADDS THE PLAYLIST TO THE TABLE
+    */
+    
     public void addDataToPlaylistTable(){
-        ObservableList<Song> data = FXCollections.observableArrayList();
+        data = FXCollections.observableArrayList();
         for(Song s: playlist){
             data.add(s);
         }
@@ -77,6 +87,18 @@ public class PlayListFXMLController implements Initializable {
         
         AlbumSongTable.setItems(data);
         System.out.println("Playlist"); 
+    }
+    
+    /*
+        THIS METHOD RESETS THE PLAYLIST DATA BY CLEARING THE TEMPORARY FILES
+        ALSO THE TABLE AND THE LIST
+    */
+    public void resetAllPlayListData(MouseEvent event){
+        playlist.clear();
+        new File(("C:\\Windows\\Temp\\PlayList.txt")).delete();
+        data.removeAll();
+        System.out.println("reset button clicked");
+        
     }
     
 }
