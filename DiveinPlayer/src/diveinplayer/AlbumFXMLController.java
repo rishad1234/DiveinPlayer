@@ -70,14 +70,14 @@ public class AlbumFXMLController implements Initializable {
         System.out.println(song.getName());
         System.out.println(song.getPath());
         
-        for(int i = 0; i < albumList.size(); i++){
-            if(song.getName().equals(SongProperties.get(i).getName())){
-                System.out.println(i);
-                songId = i;
-                oneByOne = i;
-                break;
-            }
-        }
+//        for(int i = 0; i < albumList.size(); i++){
+//            if(song.getName().equals(SongProperties.get(i).getName())){
+//                System.out.println(i);
+//                songId = i;
+//                oneByOne = i;
+//                break;
+//            }
+//        }
     }
     
     public void addAlbumDataToTable(){

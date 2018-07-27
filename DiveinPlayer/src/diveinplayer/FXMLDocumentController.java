@@ -592,6 +592,8 @@ public class FXMLDocumentController implements Initializable {
         AllSongsButton.setOnMouseClicked((MouseEvent event1)->{
             ChangePane.getChildren().removeAll();
             ChangePane.getChildren().clear();
+            PlayNext.setDisable(false);
+            PlayPrevious.setDisable(false);
             ChangePane.getChildren().add(songPane);
         });
     }
