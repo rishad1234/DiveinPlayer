@@ -85,13 +85,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button MusicPlayButton;
     @FXML
-    private Button MusicPauseButton;
+    public Button MusicPauseButton;
     @FXML
-    private Button MusicRepeatButton;
+    public Button MusicRepeatButton;
     @FXML
     private Slider MusicSlider;
     @FXML
-    private Slider MusicVolumeSlider;
+    public Slider MusicVolumeSlider;
     @FXML
     private StackPane ChangePane;
     @FXML
@@ -122,14 +122,14 @@ public class FXMLDocumentController implements Initializable {
     private double posY;
     //private Boolean muteStatus = false;
     private Pane songPane;
-    private boolean repeatStatus = true;
+    public static boolean repeatStatus = true;
     
     static Media media;
     public static MediaPlayer musicPlayer;
     static int status = 0;
     Song song;
-    private int songId = -1;
-    private int oneByOne = -1;
+    public static int songId = -1;
+    public static int oneByOne = -1;
     
     public Pane getPane(){
         return ButtonPane;

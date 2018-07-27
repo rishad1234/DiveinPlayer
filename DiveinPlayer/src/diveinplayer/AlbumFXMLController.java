@@ -19,8 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import static search.SongData.SongProperties;
 
 /**
@@ -64,10 +62,14 @@ public class AlbumFXMLController implements Initializable {
     private void getSelectedCellDataForAlbums(MouseEvent event) {
         song =(Song) AlbumSongTable.getSelectionModel().getSelectedItem();
         //System.out.println(FXMLDocumentController.ButtonPane);
-//        FXMLDocumentController.media = new Media(new File(song.getPath()).toURI().toString());
-//        FXMLDocumentController.musicPlayer = new MediaPlayer(FXMLDocumentController.media);
-//        FXMLDocumentController.musicPlayer.play();
-        //System.out.println(song);
+        try{
+            FXMLDocumentController.musicPlayer.stop();
+        }catch(Exception e){
+            
+        }
+        documentController.initialPlayControl(new File(song.getPath()).toURI().toString());
+        documentController.MusicSliderControls();
+        documentController.MusicSoundSliderControls();
         documentController.NameLabel.setText(song.getName());
         System.out.println(song.getName());
         System.out.println(song.getPath());
@@ -93,5 +95,45 @@ public class AlbumFXMLController implements Initializable {
         AlbumSongTable.setItems(data);
         System.out.println("Album");   
     }
+    
+//    public void initialPlayControl(String filePath){
+//        
+//        switch(status){
+//            case 0:
+//                media = new Media(filePath);
+//                musicPlayer = new MediaPlayer(media);
+//                musicPlayer.play();
+//                musicPlayer.setVolume(0.5);
+//                status = 1;
+//                documentController.MusicRepeatButton.setId("MinimizeButton");
+//                if(!repeatStatus){
+//                    FXMLDocumentController.repeatStatus = true;
+//                }
+//                documentController.musicSetOnReady();
+//                documentController.playOneByOne();
+//                    if(oneByOne != SongProperties.size() - 1){
+//                        oneByOne++;
+//                    }
+//                break;
+//                
+//            case 1:
+//                musicPlayer.stop();
+//                media = new Media(filePath);
+//                musicPlayer = new MediaPlayer(media);
+//                musicPlayer.play();
+//                musicPlayer.setVolume(documentController.MusicVolumeSlider.getValue() / 100);
+//                status = 1;
+//                documentController.MusicRepeatButton.setId("MinimizeButton");
+//                if(!repeatStatus){
+//                    repeatStatus = true;
+//                }
+//                documentController.musicSetOnReady();
+//                documentController.playOneByOne();
+//                    if(oneByOne != SongProperties.size() - 1){
+//                        oneByOne++;
+//                    }
+//                break;
+//        }
+//    }
     
 }
