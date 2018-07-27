@@ -5,6 +5,7 @@ package diveinplayer;
 
 import Music.Song;
 import static Video.VideoPlayerFXMLController.mediaPlayer;
+import static diveinplayer.AlbumFXMLController.albumList;
 import static diveinplayer.DiveinPlayer.saveToFiles;
 import static diveinplayer.DiveinPlayer.searchAllFiles;
 import java.io.File;
@@ -123,6 +124,7 @@ public class FXMLDocumentController implements Initializable {
     //private Boolean muteStatus = false;
     private Pane songPane;
     private Pane albumPane;
+    private Pane playListPane;
     public static boolean repeatStatus = true;
     
     static Media media;
@@ -132,6 +134,12 @@ public class FXMLDocumentController implements Initializable {
     public static int songId = -1;
     public static int oneByOne = -1;
     public static List<Song> playlist = new ArrayList<>();
+    
+    
+    Boolean allSongActivated = true;
+    Boolean playListActivated = false;
+    Boolean albumActivated = false;
+    
     
     public Pane getPane(){
         return ButtonPane;
@@ -599,6 +607,9 @@ public class FXMLDocumentController implements Initializable {
             PlayNext.setDisable(false);
             PlayPrevious.setDisable(false);
             ChangePane.getChildren().add(songPane);
+            allSongActivated = true;
+            playListActivated = false;
+            albumActivated = false;
         });
     }
     
@@ -611,12 +622,19 @@ public class FXMLDocumentController implements Initializable {
     private void PlayListButtonAction(ActionEvent event){
         PlayListButton.setOnMouseClicked((MouseEvent event1)->{
             try {
-                Parent root1 = FXMLLoader.load(getClass().getResource("PlayListFXML.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayListFXML.fxml"));
+                playListPane = (Pane) fxmlLoader.load();
+                ChangePane.getChildren().removeAll();
                 ChangePane.getChildren().clear();
-                ChangePane.getChildren().add(root1);
-                for(Song s : playlist){
-                    System.out.println(s);
-                }
+                ChangePane.getChildren().add(playListPane);
+                PlayListFXMLController playlistFXMLController = fxmlLoader.getController();
+                playlistFXMLController.documentController = this;
+                allSongActivated = false;
+                playListActivated = true;
+                albumActivated = false;
+//                for(Song s : playlist){
+//                    System.out.println(s);
+//                }
             } catch (IOException ex) {
                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -636,11 +654,17 @@ public class FXMLDocumentController implements Initializable {
                 ChangePane.getChildren().removeAll();
                 ChangePane.getChildren().clear();
                 ChangePane.getChildren().add(albumPane);
-                PlayNext.setDisable(true);
-                PlayPrevious.setDisable(true);
+                
+                songId = -1;
+                oneByOne = -1;
+                
                 AlbumFXMLController albumFXMLController = fXMLLoader.getController();
 
                 albumFXMLController.documentController = this;
+                
+                allSongActivated = false;
+                playListActivated = false;
+                albumActivated = true;
             } catch (IOException ex) {
                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -718,30 +742,14 @@ public class FXMLDocumentController implements Initializable {
         PlayNext.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                if(ChangePane.getChildren().get(0).equals(songPane)){
-                    if(songId != SongProperties.size() - 1){
-                        songId += 1;
-                    }else{
-                        songId = 0;
-                    }
-                    musicPlayer.stop();
-                    media = new Media(new File(SongProperties.get(songId).getPath()).toURI().toString());
-                    musicPlayer = new MediaPlayer(media);
-                    musicPlayer.play();
-                    musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
-                    status = 1;
-                    MusicRepeatButton.setId("MinimizeButton");
-                    if(!repeatStatus){
-                        repeatStatus = true;
-                    }
-                    musicSetOnReady();
-                    MusicSliderControls();
-                    MusicSoundSliderControls();
-                    setLabelName(SongProperties.get(songId).getName());
-                    playOneByOne();
-                    if(oneByOne != SongProperties.size() - 1){
-                        oneByOne++;
-                    }
+                if(allSongActivated){
+                    next(SongProperties);
+                }
+                if(albumActivated){
+                    next(albumList);
+                }
+                if(playListActivated){
+                    next(playlist);
                 }
             }
         });
@@ -754,32 +762,72 @@ public class FXMLDocumentController implements Initializable {
         PlayPrevious.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                if(songId > 0){
-                    songId -= 1;
-                }else{
-                    songId = SongProperties.size() - 1;
+                if(allSongActivated){
+                    previous(SongProperties);
                 }
-                musicPlayer.stop();
-                media = new Media(new File(SongProperties.get(songId).getPath()).toURI().toString());
-                musicPlayer = new MediaPlayer(media);
-                musicPlayer.play();
-                musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
-                status = 1;
-                MusicRepeatButton.setId("MinimizeButton");
-                if(!repeatStatus){
-                    repeatStatus = true;
+                if(albumActivated){
+                    previous(albumList);
                 }
-                musicSetOnReady();
-                MusicSliderControls();
-                MusicSoundSliderControls();
-                playOneByOne();
-                if(oneByOne > 0){
-                    oneByOne--;
+                if(playListActivated){
+                    previous(playlist);
                 }
-
-                setLabelName(SongProperties.get(songId).getName());
+                //previous(SongProperties);
             }
         });
+    }
+    
+    public void next(List<Song> list){
+        if(songId != list.size() - 1){
+            songId += 1;
+        }else{
+            songId = 0;
+        }
+        musicPlayer.stop();
+        media = new Media(new File(list.get(songId).getPath()).toURI().toString());
+        musicPlayer = new MediaPlayer(media);
+        musicPlayer.play();
+        musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
+        status = 1;
+        MusicRepeatButton.setId("MinimizeButton");
+        if(!repeatStatus){
+            repeatStatus = true;
+        }
+        musicSetOnReady();
+        MusicSliderControls();
+        MusicSoundSliderControls();
+        setLabelName(list.get(songId).getName());
+        playOneByOne();
+        if(oneByOne != list.size() - 1){
+            oneByOne++;
+        }
+        setLabelName(list.get(songId).getName());
+    }
+    
+    public void previous(List<Song> list){
+        if(songId > 0){
+            songId -= 1;
+        }else{
+            songId = list.size() - 1;
+        }
+        musicPlayer.stop();
+        media = new Media(new File(list.get(songId).getPath()).toURI().toString());
+        musicPlayer = new MediaPlayer(media);
+        musicPlayer.play();
+        musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
+        status = 1;
+        MusicRepeatButton.setId("MinimizeButton");
+        if(!repeatStatus){
+            repeatStatus = true;
+        }
+        musicSetOnReady();
+        MusicSliderControls();
+        MusicSoundSliderControls();
+        playOneByOne();
+        if(oneByOne > 0){
+            oneByOne--;
+        }
+
+        setLabelName(list.get(songId).getName());
     }
     
 }

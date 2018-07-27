@@ -66,15 +66,15 @@ public class AlbumFXMLController implements Initializable {
         documentController.NameLabel.setText(song.getName());
         System.out.println(song.getName());
         System.out.println(song.getPath());
-        
-//        for(int i = 0; i < albumList.size(); i++){
-//            if(song.getName().equals(SongProperties.get(i).getName())){
-//                System.out.println(i);
-//                songId = i;
-//                oneByOne = i;
-//                break;
-//            }
-//        }
+ 
+        for(int i = 0; i < albumList.size(); i++){
+            if(song.getName().equals(albumList.get(i).getName())){
+                System.out.println(i);
+                documentController.songId = i;
+                documentController.oneByOne = i;
+                break;
+            }
+        }
     }
     
     public void addAlbumDataToTable(){
@@ -89,6 +89,7 @@ public class AlbumFXMLController implements Initializable {
         }
         for(Song properties: SongProperties){
             if(properties.getAlbum() == null || properties.getAlbum().equals("")){
+                albumList.add(properties);
                 data.add(properties);
             }
         }
