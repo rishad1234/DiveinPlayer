@@ -40,6 +40,7 @@ public class AlbumFXMLController implements Initializable {
     private Song song;
     public FXMLDocumentController documentController;
     public static List<Song> albumList = new ArrayList<>();
+    int i;
 
     /**
      * Initializes the controller class.
@@ -66,8 +67,9 @@ public class AlbumFXMLController implements Initializable {
         documentController.NameLabel.setText(song.getName());
         System.out.println(song.getName());
         System.out.println(song.getPath());
+        
  
-        for(int i = 0; i < albumList.size(); i++){
+        for(i = 0; i < albumList.size(); i++){
             if(song.getName().equals(albumList.get(i).getName())){
                 System.out.println(i);
                 documentController.songId = i;

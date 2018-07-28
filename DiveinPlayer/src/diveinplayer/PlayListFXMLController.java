@@ -34,6 +34,7 @@ public class PlayListFXMLController implements Initializable {
     public FXMLDocumentController documentController;
     private Button ResetButton;
     ObservableList<Song> data;
+    int i;
 
     /**
      * Initializes the controller class.
@@ -61,8 +62,9 @@ public class PlayListFXMLController implements Initializable {
         documentController.NameLabel.setText(song.getName());
         System.out.println(song.getName());
         System.out.println(song.getPath());
+        
  
-        for(int i = 0; i < playlist.size(); i++){
+        for(i = 0; i < playlist.size(); i++){
             if(song.getName().equals(playlist.get(i).getName())){
                 System.out.println(i);
                 documentController.songId = i;

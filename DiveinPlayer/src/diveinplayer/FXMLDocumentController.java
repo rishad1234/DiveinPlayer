@@ -135,6 +135,7 @@ public class FXMLDocumentController implements Initializable {
     public static int songId = -1;
     public static int oneByOne = -1;
     public static List<Song> playlist = new ArrayList<>();
+    int i;
     
     
     Boolean allSongActivated = true;
@@ -358,7 +359,7 @@ public class FXMLDocumentController implements Initializable {
             initialPlayControl(new File(song.getPath()).toURI().toString());  
             MusicSliderControls();
             MusicSoundSliderControls();
-            for(int i = 0; i < SongProperties.size(); i++){
+            for(i = 0; i < SongProperties.size(); i++){
                 if(song.getName().equals(SongProperties.get(i).getName())){
                     System.out.println(i);
                     songId = i;
@@ -626,6 +627,9 @@ public class FXMLDocumentController implements Initializable {
             allSongActivated = true;
             playListActivated = false;
             albumActivated = false;
+            
+            songId = i;
+            oneByOne = i;
         });
     }
     
