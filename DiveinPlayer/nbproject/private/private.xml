@@ -14,6 +14,8 @@
         <group>
             <file>file:/D:/repositories/DiveinPlayer/DiveinPlayer/src/diveinplayer/PlayListFXMLController.java</file>
             <file>file:/D:/repositories/DiveinPlayer/DiveinPlayer/src/diveinplayer/AlbumFXMLController.java</file>
+            <file>file:/D:/repositories/DiveinPlayer/DiveinPlayer/src/diveinplayer/DiveinPlayer.java</file>
+            <file>file:/D:/repositories/DiveinPlayer/DiveinPlayer/src/search/SongData.java</file>
             <file>file:/D:/repositories/DiveinPlayer/DiveinPlayer/src/diveinplayer/FXMLDocumentController.java</file>
         </group>
     </open-files>

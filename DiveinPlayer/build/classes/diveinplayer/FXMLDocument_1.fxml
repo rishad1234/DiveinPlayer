@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -49,6 +50,9 @@
                      <font>
                         <Font size="13.0" />
                      </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="28" />
+                     </graphic>
                   </Button>
                   <Button id="MinimizeButton" fx:id="AllSongsButton" layoutY="117.0" mnemonicParsing="false" onAction="#AllSongsButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
@@ -161,9 +165,9 @@
                            </graphic></Button>
                         <Slider fx:id="MusicSlider" layoutX="390.0" layoutY="63.0" prefHeight="14.0" prefWidth="241.0" stylesheets="@MainCss.css" />
                         <Slider fx:id="MusicVolumeSlider" layoutX="728.0" layoutY="34.0" prefHeight="14.0" prefWidth="150.0" stylesheets="@MainCss.css" />
-                        <Button id="MinimizeButton" layoutX="258.0" layoutY="33.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css">
+                        <Button id="MinimizeButton" layoutX="258.0" layoutY="33.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 30;" stylesheets="@MainCss.css">
                            <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="SORT" size="25.0" />
+                              <MaterialDesignIconView fill="WHITE" glyphName="SHUFFLE_VARIANT" size="25" />
                            </graphic>
                         </Button>
                         <Button id="MinimizeButton" fx:id="MusicRepeatButton" layoutX="310.0" layoutY="33.0" mnemonicParsing="false" onAction="#repeatButtonEvent" prefHeight="33.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 25px;" stylesheets="@MainCss.css">
