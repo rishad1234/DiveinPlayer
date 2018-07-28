@@ -12,6 +12,6 @@
             <TableColumn fx:id="AlbumNameColumn" prefWidth="928.0" text="Name" />
          </columns>
       </TableView>
-      <Button id="MinimizeButton" fx:id="ResetButton" layoutX="890.0" layoutY="5.0" mnemonicParsing="false" onMouseClicked="#resetAllPlayListData" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" text="Reset" textFill="WHITE" />
+      <Button id="MinimizeButton" fx:id="ResetButton" layoutX="888.0" layoutY="5.0" mnemonicParsing="false" onMouseClicked="#resetAllPlayListData" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" text="Reset" textFill="WHITE" />
    </children>
 </Pane>
