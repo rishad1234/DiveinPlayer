@@ -164,13 +164,13 @@ public class DiveinPlayer extends Application {
                 Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
-            try {
-                searchAllFiles();
-                saveToFiles("C:\\Windows\\Temp\\SongData.txt");
-                readFiles();
-            } catch (IOException ex) {
-                Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
-            }   
+//            try {
+//                searchAllFiles();
+//                saveToFiles("C:\\Windows\\Temp\\SongData.txt");
+//                readFiles();
+//            } catch (IOException ex) {
+//                Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
+//            }   
         }
     }
     
