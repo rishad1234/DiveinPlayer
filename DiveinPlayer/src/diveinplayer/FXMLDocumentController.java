@@ -715,6 +715,7 @@ public class FXMLDocumentController implements Initializable {
                 }
             }
         }).start();
+        NameLabel.setText("restart after searching");
     }
     
     /*
@@ -737,6 +738,7 @@ public class FXMLDocumentController implements Initializable {
             FileChannel src = new FileInputStream(new File("C:\\Windows\\Temp\\Tempdata.txt")).getChannel();
             FileChannel dest = new FileOutputStream(new File("C:\\Windows\\Temp\\SongData.txt")).getChannel();
             dest.transferFrom(src, 0, src.size());
+            
         }
     }
     
@@ -887,20 +889,28 @@ public class FXMLDocumentController implements Initializable {
     */
     
     
-    public static void readFilesForPlayList() throws FileNotFoundException, IOException{
-        System.err.println("reading files: ");
-        FileInputStream file = new FileInputStream("C:\\Windows\\Temp\\PlayList.txt");
-        ObjectInputStream reader = new ObjectInputStream(file);
-        while (true) {
-            try { 
-                Song obj = (Song)reader.readObject();
-                playlist.add(obj);
-            } catch (Exception ex) {
-                System.err.println("end of reader file ");
-                break;
+    public static void readFilesForPlayList()throws IOException{
+        ObjectInputStream reader = null;
+        try{
+            System.err.println("reading files: ");
+            FileInputStream file = new FileInputStream("C:\\Windows\\Temp\\PlayList.txt");
+            reader = new ObjectInputStream(file);
+            while (true) {
+                try { 
+                    Song obj = (Song)reader.readObject();
+                    playlist.add(obj);
+                } catch (Exception ex) {
+                    System.err.println("end of reader file ");
+                    break;
+                }
+            }   
+        }catch(Exception e){
+            
+        }finally{
+            if(reader != null){
+                reader.close();
             }
         }
-        reader.close();
         for(Song song : playlist){
             System.out.println(song);
         }
