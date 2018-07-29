@@ -164,6 +164,9 @@ public class DiveinPlayer extends Application {
                 Logger.getLogger(DiveinPlayer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
+            /*
+                THIS IS IMPORTANT DO NOT REMOVE IT
+            */
 //            try {
 //                searchAllFiles();
 //                saveToFiles("C:\\Windows\\Temp\\SongData.txt");
