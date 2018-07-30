@@ -929,6 +929,11 @@ public class FXMLDocumentController implements Initializable {
             System.out.println(song);
         }
     }
+    
+    /*
+        THIS METHOD SHUFFLES THE SONG FILES AND
+        CREATES A NEW LIST
+    */
     public void shuffleData(){
         for(Song song : SongProperties){
             ShuffleSongs.add(song);
@@ -940,6 +945,11 @@ public class FXMLDocumentController implements Initializable {
             System.out.println(song);
         }
     }
+    
+    /*
+        THIS METHOD PERFORMS THE SHUFFLE ACTION
+        AND CONTROLS THE SHUFFLE
+    */
     
     public void ShuffleActionPerformed(MouseEvent event){
         if(shuffleStatus){
