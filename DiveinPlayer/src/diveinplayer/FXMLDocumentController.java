@@ -10,7 +10,6 @@ import static diveinplayer.DiveinPlayer.saveToFiles;
 import static diveinplayer.DiveinPlayer.searchAllFiles;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,6 +17,7 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -118,6 +118,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Pane ButtonPane;
     public FXMLDocumentController documentController;
+    @FXML
+    public Button ShuffleButton;
     
     
     private double posX;
@@ -127,6 +129,7 @@ public class FXMLDocumentController implements Initializable {
     private Pane albumPane;
     private Pane playListPane;
     public static boolean repeatStatus = true;
+    public static boolean shuffleStatus = false;
     
     static Media media;
     public static MediaPlayer musicPlayer;
@@ -136,6 +139,7 @@ public class FXMLDocumentController implements Initializable {
     public static int oneByOne = -1;
     public static List<Song> playlist = new ArrayList<>();
     int i;
+    public List<Song> ShuffleSongs = new ArrayList<>();
     
     
     Boolean allSongActivated = true;
@@ -171,6 +175,7 @@ public class FXMLDocumentController implements Initializable {
             DiveinPlayer.getStage().setY(event.getScreenY() - posY);
         });
         addDataToTables();
+        shuffleData();
         
         //////////////////////////////////////////////////////////
         /*
@@ -448,6 +453,9 @@ public class FXMLDocumentController implements Initializable {
                         }
                         if(playListActivated){
                             oneByOneFunction(playlist);
+                        }
+                        if(shuffleStatus){
+                            oneByOneFunction(ShuffleSongs);
                         }
                     }catch(Exception e){
 
@@ -759,6 +767,9 @@ public class FXMLDocumentController implements Initializable {
                 if(playListActivated){
                     next(playlist);
                 }
+                if(shuffleStatus){
+                    next(ShuffleSongs);
+                }
             }
         });
     }
@@ -778,6 +789,9 @@ public class FXMLDocumentController implements Initializable {
                 }
                 if(playListActivated){
                     previous(playlist);
+                }
+                if(shuffleStatus){
+                    previous(ShuffleSongs);
                 }
                 //previous(SongProperties);
             }
@@ -914,5 +928,36 @@ public class FXMLDocumentController implements Initializable {
         for(Song song : playlist){
             System.out.println(song);
         }
+    }
+    public void shuffleData(){
+        for(Song song : SongProperties){
+            ShuffleSongs.add(song);
+        }
+        
+        Collections.shuffle(ShuffleSongs);
+        System.err.println("Shuffled song: ");
+        for(Song song : ShuffleSongs){
+            System.out.println(song);
+        }
+    }
+    
+    public void ShuffleActionPerformed(MouseEvent event){
+        if(shuffleStatus){
+            shuffleStatus = false;
+            PlayNext.setDisable(false);
+            PlayPrevious.setDisable(false);
+            ShuffleButton.setId("");
+            System.out.println(shuffleStatus);
+        }else{
+            shuffleStatus = true;
+            ShuffleButton.setId("focusedButton");
+            PlayNext.setDisable(true);
+            PlayPrevious.setDisable(true);
+            initialPlayControl(new File(ShuffleSongs.get(0).getPath()).toURI().toString());
+            setLabelName(ShuffleSongs.get(0).getName());
+            musicSetOnReady();
+            MusicSliderControls();
+            MusicSoundSliderControls();
+       }
     }
 }

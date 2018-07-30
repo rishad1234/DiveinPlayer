@@ -165,7 +165,7 @@
                            </graphic></Button>
                         <Slider fx:id="MusicSlider" layoutX="390.0" layoutY="63.0" prefHeight="14.0" prefWidth="241.0" stylesheets="@MainCss.css" />
                         <Slider fx:id="MusicVolumeSlider" layoutX="728.0" layoutY="34.0" prefHeight="14.0" prefWidth="150.0" stylesheets="@MainCss.css" />
-                        <Button id="MinimizeButton" layoutX="258.0" layoutY="33.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 30;" stylesheets="@MainCss.css">
+                        <Button id="MinimizeButton" fx:id="ShuffleButton" layoutX="258.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#ShuffleActionPerformed" prefHeight="33.0" prefWidth="37.0" style="-fx-background-color: #404040; -fx-background-radius: 30;" stylesheets="@MainCss.css">
                            <graphic>
                               <MaterialDesignIconView fill="WHITE" glyphName="SHUFFLE_VARIANT" size="25" />
                            </graphic>
