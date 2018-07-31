@@ -85,11 +85,6 @@
                               <MenuItem fx:id="Theme3MenuBarButton" mnemonicParsing="false" onAction="#changeThemeToTheme3" text="Theme 3" />
                         </items>
                       </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="About" />
-                        </items>
-                      </Menu>
                     </menus>
                   </MenuBar>
                   <Label layoutX="38.0" layoutY="4.0" text="Divein Player" textFill="WHITE">
