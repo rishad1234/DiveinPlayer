@@ -238,6 +238,8 @@ public class FXMLDocumentController implements Initializable {
     }
     /*
         this methods add data to the song table and also to the song pane
+    
+        requires a list that have all the song listed
     */
     public void addDataToTables(){
         ObservableList<Song> data = FXCollections.observableArrayList();
@@ -251,6 +253,8 @@ public class FXMLDocumentController implements Initializable {
         songTable.setItems(data);
         songPane =(Pane) ChangePane.getChildren().get(0);
     }
+    
+    
     /*
     this method handles the new video player fxml file and opens
     the video player
@@ -346,6 +350,7 @@ public class FXMLDocumentController implements Initializable {
     
     /*
         this method handles the mouse event occured on the table cells
+        and play the songs one by one 
     */
     
     @FXML
@@ -385,6 +390,9 @@ public class FXMLDocumentController implements Initializable {
     /*
         this method make decision to play the song and also 
         prevent double music play
+    
+        requires a filepath to play the song.
+        like new File(filepath).toURI().toString();
     */
     public void initialPlayControl(String filePath){
         

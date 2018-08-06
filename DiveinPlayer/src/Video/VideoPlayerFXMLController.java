@@ -64,7 +64,10 @@ public class VideoPlayerFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
     }  
-    
+    /*
+        this method gives us the filechooser to choose the  video file we want to play
+        and also controls the sliders.
+    */
     @FXML
     public void ChooseButtonAction(ActionEvent event){
         
@@ -144,6 +147,13 @@ public class VideoPlayerFXMLController implements Initializable {
 
         }
     }
+    /*
+        this method make decision to play the video and also 
+        prevent double video play
+    
+        requires a filepath to play the song.
+        like new File(filepath).toURI().toString();
+    */
     public void initialPlayControl(String filePath) throws Exception{
         
         switch(status){
@@ -179,15 +189,24 @@ public class VideoPlayerFXMLController implements Initializable {
                 break;
         }
     }
+    /*
+        only playes the video
+    */
     @FXML
     public void PlayVideo(){
         mediaPlayer.play();
         mediaPlayer.setRate(1);
     }
+    /*
+        pauses the video
+    */
     @FXML
     public void PauseVideo(){
         mediaPlayer.pause();
     }
+    /*
+        stops the video
+    */
     @FXML
     public void StopVideo(){
         mediaPlayer.stop();

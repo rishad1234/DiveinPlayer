@@ -50,7 +50,9 @@ public class DiveinPlayer extends Application {
     public static Stage getStage() {
         return stage;
     }
-    
+    /*
+        this method sets the initial stage of the program
+    */
     public void AudioPlayerStage(Stage stage) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument_1.fxml"));
         Scene scene = new Scene(root);

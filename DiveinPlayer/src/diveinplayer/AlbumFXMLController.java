@@ -51,7 +51,11 @@ public class AlbumFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         addAlbumDataToTable();
     }    
-
+    
+    /*
+        when a user clicked a row of the table this method
+        returns the object associated with the row
+    */
     @FXML
     private void getSelectedCellDataForAlbums(MouseEvent event) {
         song =(Song) AlbumSongTable.getSelectionModel().getSelectedItem();
@@ -78,7 +82,12 @@ public class AlbumFXMLController implements Initializable {
             }
         }
     }
+    /*
+        this method searches all the albums from the default playlist and add
+        them to the album list one by one
     
+        requires a list "Song properties" where all the Songs are listed
+    */
     public void addAlbumDataToTable(){
         ObservableList<Song> data = FXCollections.observableArrayList();
         for(Song properties: SongProperties){

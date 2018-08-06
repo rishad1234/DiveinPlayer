@@ -79,7 +79,9 @@ public class SongData {
             }
         }
     }
-    
+    /*
+        this method givew us the metadata of the songs and add it to the list
+    */
     public static void properties(String path){
         try {
             InputStream input = new FileInputStream(new File(path));
