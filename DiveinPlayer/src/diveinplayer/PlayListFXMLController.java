@@ -28,9 +28,9 @@ import javafx.scene.input.MouseEvent;
 public class PlayListFXMLController implements Initializable {
 
     @FXML
-    private TableView AlbumSongTable;
+    private TableView PlayListSongTable;
     @FXML
-    private TableColumn AlbumNameColumn;
+    private TableColumn PlayListNameColumn;
     public FXMLDocumentController documentController;
     private Button ResetButton;
     ObservableList<Song> data;
@@ -49,7 +49,7 @@ public class PlayListFXMLController implements Initializable {
     */
     @FXML
     private void getSelectedCellDataForPLaylist(MouseEvent event) {
-        Song song = (Song) AlbumSongTable.getSelectionModel().getSelectedItem();
+        Song song = (Song) PlayListSongTable.getSelectionModel().getSelectedItem();
         //System.out.println(FXMLDocumentController.ButtonPane);
         try{
             FXMLDocumentController.musicPlayer.stop();
@@ -85,9 +85,9 @@ public class PlayListFXMLController implements Initializable {
             data.add(s);
         }
 
-        AlbumNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        PlayListNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         
-        AlbumSongTable.setItems(data);
+        PlayListSongTable.setItems(data);
         System.out.println("Playlist"); 
     }
     
@@ -99,6 +99,7 @@ public class PlayListFXMLController implements Initializable {
         playlist.clear();
         new File(("C:\\Windows\\Temp\\PlayList.txt")).delete();
         data.removeAll();
+        addDataToPlaylistTable();
         System.out.println("reset button clicked");
         
     }
