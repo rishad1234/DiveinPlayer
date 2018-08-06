@@ -18,7 +18,7 @@
    <center>
       <StackPane fx:id="videoStackPane" prefHeight="293.0" prefWidth="509.0" BorderPane.alignment="CENTER">
          <children>
-            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" StackPane.alignment="CENTER">
+            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" onDragDropped="#dragDroppedAction" onDragOver="#handleDragOver" StackPane.alignment="CENTER">
                <viewport>
                   <Rectangle2D />
                </viewport>

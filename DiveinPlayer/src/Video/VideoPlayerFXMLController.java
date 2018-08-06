@@ -8,6 +8,7 @@ package Video;
 import static diveinplayer.FXMLDocumentController.musicPlayer;
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -22,7 +23,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -102,47 +105,7 @@ public class VideoPlayerFXMLController implements Initializable {
         
         
         try{
-            initialPlayControl(filePath);
-
-            mediaPlayer.setOnReady(new Runnable() {
-                @Override
-                public void run() {
-                    SeekSlider.setMin(mediaPlayer.getStartTime().toSeconds());
-                    SeekSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
-                }
-            });
-
-            VolumeSlider.setValue(mediaPlayer.getVolume() * 100);
-            VolumeSlider.valueProperty().addListener(new InvalidationListener() {
-                @Override
-                public void invalidated(Observable observable) {
-                    mediaPlayer.setVolume(VolumeSlider.getValue() / 100);
-                }
-            });
-
-            mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>(){
-                @Override
-                public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
-                    SeekSlider.setValue(newValue.toSeconds());
-                }
-            });
-            SeekSlider.setOnMouseDragged(new EventHandler<MouseEvent>(){
-                @Override
-                public void handle(MouseEvent event) {
-                    mediaPlayer.seek(Duration.seconds(SeekSlider.getValue()));
-                }
-            });
-
-            /*
-                controls the volume of the video with the seekSlider
-            */
-            SeekSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
-                @Override
-                public void handle(MouseEvent event) {
-                    mediaPlayer.seek(Duration.seconds(SeekSlider.getValue()));
-                }
-
-            });
+            mediaPlayerControl(filePath);
         }catch(Exception e){
 
         }
@@ -209,7 +172,94 @@ public class VideoPlayerFXMLController implements Initializable {
     */
     @FXML
     public void StopVideo(){
-        mediaPlayer.stop();
-        
+        mediaPlayer.stop();  
     } 
+    
+    /*
+        this method ensures that a file is going to be dropped in the media view
+    */
+    
+    @FXML
+    public void handleDragOver(DragEvent event){
+        if(event.getDragboard().hasFiles()){
+            event.acceptTransferModes(TransferMode.ANY);
+        }
+        //event.acceptTransferModes(TransferMode.ANY);
+    }
+    /*
+        this method handes the dropped file and play the video if it is mp4 format
+    */
+    @FXML
+    public void dragDroppedAction(DragEvent event){
+        List<File> paths = event.getDragboard().getFiles();
+        if(paths.get(0).toURI().toString().endsWith(".mp4")){
+            if(musicPlayer != null){
+                musicPlayer.stop();
+            }
+            if(mediaPlayer != null){
+                mediaPlayer.stop();
+                try{
+                    mediaPlayerControl(paths.get(0).toURI().toString());
+                }catch(Exception e){
+                    System.out.println("drop exception if");
+                }
+                
+            }else{
+                try{
+                    mediaPlayerControl(paths.get(0).toURI().toString());
+                }catch(Exception e){
+                    System.out.println("drop exception if");
+                }
+            }
+        }
+    }
+    
+    /*
+        this method plays the video file and controls the silders and volume of 
+        the video player
+    */
+    
+    public void mediaPlayerControl(String filePath) throws Exception{
+        initialPlayControl(filePath);
+
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                SeekSlider.setMin(mediaPlayer.getStartTime().toSeconds());
+                SeekSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
+            }
+        });
+
+        VolumeSlider.setValue(mediaPlayer.getVolume() * 100);
+        VolumeSlider.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                mediaPlayer.setVolume(VolumeSlider.getValue() / 100);
+            }
+        });
+
+        mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>(){
+            @Override
+            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+                SeekSlider.setValue(newValue.toSeconds());
+            }
+        });
+        SeekSlider.setOnMouseDragged(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                mediaPlayer.seek(Duration.seconds(SeekSlider.getValue()));
+            }
+        });
+
+        /*
+            controls the volume of the video with the seekSlider
+        */
+        SeekSlider.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                mediaPlayer.seek(Duration.seconds(SeekSlider.getValue()));
+            }
+
+        });
+    }
 }
