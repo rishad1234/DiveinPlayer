@@ -220,7 +220,10 @@ public class FXMLDocumentController implements Initializable {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
         ///////////////////////////////////////////////////////////////////
-
+        
+        /*
+            this method initializes the rectangles
+        */
         dshape();
     }
     
@@ -264,9 +267,6 @@ public class FXMLDocumentController implements Initializable {
         songPane =(Pane) ChangePane.getChildren().get(0);
         
         visualPane.getChildren().add(hbox);
-//        visualPane.setVisible(true);
-//        hbox.setVisible(true);
-//        dshape();
     }
     
     
@@ -430,6 +430,7 @@ public class FXMLDocumentController implements Initializable {
                     oneByOne++;
                 }
                 bands = musicPlayer.getAudioSpectrumNumBands();
+                reInitiateReactangles();
                 spectrumPropertyControl();
                 break;
                 
@@ -452,12 +453,10 @@ public class FXMLDocumentController implements Initializable {
                     oneByOne++;
                 }
                 bands = musicPlayer.getAudioSpectrumNumBands();
+                reInitiateReactangles();
                 spectrumPropertyControl();
                 break;
         }
-//        bands = musicPlayer.getAudioSpectrumNumBands();
-//        dshape();
-        //hbox.getChildren().addAll(Arrays.asList(rects));
     }
     /*
         this method is built to set the label value to whatever i want
@@ -845,6 +844,11 @@ public class FXMLDocumentController implements Initializable {
         musicPlayer.play();
         musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
         status = 1;
+        
+        bands = musicPlayer.getAudioSpectrumNumBands();
+        reInitiateReactangles();
+        spectrumPropertyControl();
+        
         MusicRepeatButton.setId("MinimizeButton");
         if(!repeatStatus){
             repeatStatus = true;
@@ -879,10 +883,16 @@ public class FXMLDocumentController implements Initializable {
         musicPlayer.play();
         musicPlayer.setVolume(MusicVolumeSlider.getValue() / 100);
         status = 1;
+        
+        bands = musicPlayer.getAudioSpectrumNumBands();
+        reInitiateReactangles();
+        spectrumPropertyControl();
+        
         MusicRepeatButton.setId("MinimizeButton");
         if(!repeatStatus){
             repeatStatus = true;
         }
+        
         musicSetOnReady();
         MusicSliderControls();
         MusicSoundSliderControls();
@@ -1001,6 +1011,10 @@ public class FXMLDocumentController implements Initializable {
        }
     }
     
+    /*
+        this method allows us to make the rectangles and give them their
+        initial positions and values
+    */
     public void dshape() {
         
         int x = 1;
@@ -1008,13 +1022,8 @@ public class FXMLDocumentController implements Initializable {
             rects[counter] = new Rectangle();
             rects[counter].setX(x*(counter+1));
             rects[counter].setFill(Color.WHITE);
-            //hbox.getChildren().add(rects[i]);
-            
         }
-
-//        double bandwidth = visualPane.getWidth()/rects.length;
-//        double s = bandwidth;
-//        System.out.println(bandwidth + " fdfef");
+        
         for(int j = 0; j < rects.length; j++){
             rects[j].setWidth(7);
             rects[j].setHeight(2);
@@ -1022,36 +1031,48 @@ public class FXMLDocumentController implements Initializable {
         
         hbox.getChildren().addAll(Arrays.asList(rects));
         
-        
-        for(Node node : visualPane.getChildren()){
-            System.out.println("panes:");
-            System.out.println(node.toString());
-        }
-        for(Node n : hbox.getChildren()){
-            System.out.println("all rectangles:");
-            System.out.println(n.toString());
-        }
-//        for(Rectangle r : rects){
-//            System.out.println(r.toString());
+//        
+//        for(Node node : visualPane.getChildren()){
+//            System.out.println("panes:");
+//            System.out.println(node.toString());
 //        }
+//        for(Node n : hbox.getChildren()){
+//            System.out.println("all rectangles:");
+//            System.out.println(n.toString());
+//        }
+////        for(Rectangle r : rects){
+////            System.out.println(r.toString());
+////        }
     } 
     
     
-    
+    /*
+        this method is made to handle the audioSpectrum action to reinitialize the
+        rectangle heights
+    */
     public void spectrumPropertyControl(){
         try{
-//            dshape();
             musicPlayer.setAudioSpectrumListener((double timestamp, double duration, float[] magnitudes, float[] phases) -> {
                 for (int counter = 0; counter < rects.length; counter++) {
                     double h = magnitudes[counter] + 60;
                     if (h>2) {
                         rects[counter].setHeight(h);
-                        //System.out.println(h);
                     }
                 }
             });    
         }catch(Exception e){
             
+        }
+    }
+    
+    /*
+        this method reinitials the values of rectangles to inital value
+        after one cycle
+    */
+    public void reInitiateReactangles(){
+        for(int j = 0; j < rects.length; j++){
+            rects[j].setWidth(7);
+            rects[j].setHeight(2);
         }
     }
 }
