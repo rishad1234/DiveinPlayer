@@ -140,6 +140,7 @@
                      </children></Pane>
                   <Pane fx:id="ButtonPane" layoutY="502.0" prefHeight="100.0" prefWidth="1000.0">
                      <children>
+                        <Pane fx:id="visualPane" layoutX="29.0" layoutY="27.0" prefHeight="69.0" prefWidth="210.0" />
                         <Button id="MinimizeButton" fx:id="MusicPlayButton" layoutX="453.0" layoutY="4.0" mnemonicParsing="false" onAction="#PlayButtonEvent" prefHeight="49.0" prefWidth="52.0" style="-fx-background-radius: 30px; -fx-background-color: #404040;" stylesheets="@MainCss.css">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="PLAY" size="29.0" />
@@ -175,7 +176,7 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="MICROPHONE_SLASH" size="25.0" />
                            </graphic>
                         </Button>
-                        <Label fx:id="NameLabel" layoutX="28.0" layoutY="31.0" prefHeight="17.0" prefWidth="210.0" textAlignment="RIGHT" textFill="WHITE">
+                        <Label fx:id="NameLabel" layoutX="30.0" layoutY="5.0" prefHeight="17.0" prefWidth="210.0" textAlignment="RIGHT" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI" size="16.0" />
                            </font>

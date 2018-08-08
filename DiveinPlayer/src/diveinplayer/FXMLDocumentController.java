@@ -17,6 +17,7 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -34,6 +35,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -47,10 +49,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioSpectrumListener;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
@@ -120,8 +126,12 @@ public class FXMLDocumentController implements Initializable {
     public FXMLDocumentController documentController;
     @FXML
     public Button ShuffleButton;
+    @FXML
+    public Pane visualPane;
+    HBox hbox = new HBox();
     
-    
+    int bands;
+    final Rectangle[] rects = new Rectangle[30];
     private double posX;
     private double posY;
     //private Boolean muteStatus = false;
@@ -210,8 +220,8 @@ public class FXMLDocumentController implements Initializable {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
         ///////////////////////////////////////////////////////////////////
-        
-        
+
+        dshape();
     }
     
     /*
@@ -252,6 +262,11 @@ public class FXMLDocumentController implements Initializable {
         
         songTable.setItems(data);
         songPane =(Pane) ChangePane.getChildren().get(0);
+        
+        visualPane.getChildren().add(hbox);
+//        visualPane.setVisible(true);
+//        hbox.setVisible(true);
+//        dshape();
     }
     
     
@@ -414,6 +429,8 @@ public class FXMLDocumentController implements Initializable {
                 if(oneByOne != SongProperties.size() - 1){
                     oneByOne++;
                 }
+                bands = musicPlayer.getAudioSpectrumNumBands();
+                spectrumPropertyControl();
                 break;
                 
             case 1:
@@ -434,8 +451,13 @@ public class FXMLDocumentController implements Initializable {
                 if(oneByOne != SongProperties.size() - 1){
                     oneByOne++;
                 }
+                bands = musicPlayer.getAudioSpectrumNumBands();
+                spectrumPropertyControl();
                 break;
         }
+//        bands = musicPlayer.getAudioSpectrumNumBands();
+//        dshape();
+        //hbox.getChildren().addAll(Arrays.asList(rects));
     }
     /*
         this method is built to set the label value to whatever i want
@@ -977,5 +999,59 @@ public class FXMLDocumentController implements Initializable {
             MusicSliderControls();
             MusicSoundSliderControls();
        }
+    }
+    
+    public void dshape() {
+        
+        int x = 1;
+        for(int counter = 0; counter<rects.length; counter++){
+            rects[counter] = new Rectangle();
+            rects[counter].setX(x*(counter+1));
+            rects[counter].setFill(Color.WHITE);
+            //hbox.getChildren().add(rects[i]);
+            
+        }
+
+//        double bandwidth = visualPane.getWidth()/rects.length;
+//        double s = bandwidth;
+//        System.out.println(bandwidth + " fdfef");
+        for(int j = 0; j < rects.length; j++){
+            rects[j].setWidth(7);
+            rects[j].setHeight(2);
+        }
+        
+        hbox.getChildren().addAll(Arrays.asList(rects));
+        
+        
+        for(Node node : visualPane.getChildren()){
+            System.out.println("panes:");
+            System.out.println(node.toString());
+        }
+        for(Node n : hbox.getChildren()){
+            System.out.println("all rectangles:");
+            System.out.println(n.toString());
+        }
+//        for(Rectangle r : rects){
+//            System.out.println(r.toString());
+//        }
+    } 
+    
+    
+    
+    public void spectrumPropertyControl(){
+        try{
+//            dshape();
+            musicPlayer.setAudioSpectrumListener((double timestamp, double duration, float[] magnitudes, float[] phases) -> {
+                for (int counter = 0; counter < rects.length; counter++) {
+                    double h = magnitudes[counter] + 60;
+                    if (h>2) {
+                        rects[counter].setHeight(h);
+                        //System.out.println(h);
+                    }
+                }
+            });    
+        }catch(Exception e){
+            
+        }
     }
 }
