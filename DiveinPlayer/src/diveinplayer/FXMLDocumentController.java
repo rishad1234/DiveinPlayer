@@ -148,7 +148,7 @@ public class FXMLDocumentController implements Initializable {
     public static int songId = -1;
     public static int oneByOne = -1;
     public static List<Song> playlist = new ArrayList<>();
-    int i;
+    int songPosition;
     public List<Song> ShuffleSongs = new ArrayList<>();
     
     
@@ -384,11 +384,11 @@ public class FXMLDocumentController implements Initializable {
             initialPlayControl(new File(song.getPath()).toURI().toString());  
             MusicSliderControls();
             MusicSoundSliderControls();
-            for(i = 0; i < SongProperties.size(); i++){
-                if(song.getName().equals(SongProperties.get(i).getName())){
-                    System.out.println(i);
-                    songId = i;
-                    oneByOne = i;
+            for(songPosition = 0; songPosition < SongProperties.size(); songPosition++){
+                if(song.getName().equals(SongProperties.get(songPosition).getName())){
+                    System.out.println(songPosition);
+                    songId = songPosition;
+                    oneByOne = songPosition;
                     break;
                 }
             }
@@ -665,8 +665,8 @@ public class FXMLDocumentController implements Initializable {
             playListActivated = false;
             albumActivated = false;
             
-            songId = i;
-            oneByOne = i;
+            songId = songPosition;
+            oneByOne = songPosition;
         });
     }
     
@@ -1054,9 +1054,9 @@ public class FXMLDocumentController implements Initializable {
         try{
             musicPlayer.setAudioSpectrumListener((double timestamp, double duration, float[] magnitudes, float[] phases) -> {
                 for (int counter = 0; counter < rects.length; counter++) {
-                    double h = magnitudes[counter] + 60;
-                    if (h>2) {
-                        rects[counter].setHeight(h);
+                    double height = magnitudes[counter] + 60;
+                    if (height > 2) {
+                        rects[counter].setHeight(height);
                     }
                 }
             });    

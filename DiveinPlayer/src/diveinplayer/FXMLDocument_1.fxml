@@ -30,7 +30,7 @@
          <children>
             <Pane prefHeight="561.0" prefWidth="972.0">
                <children>
-                  <Button id="MinimizeButton" fx:id="AlbumButton" layoutY="219.0" mnemonicParsing="false" onAction="#AlbumButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="AlbumButton" layoutY="166.0" mnemonicParsing="false" onAction="#AlbumButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -38,15 +38,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="DOT_CIRCLE_ALT" size="29.0" />
                      </graphic>
                   </Button>
-                  <Button id="MinimizeButton" fx:id="VisualizerButton" layoutY="66.0" mnemonicParsing="false" onAction="#VisualizerButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="HEARTBEAT" size="29.0" />
-                     </graphic>
-                  </Button>
-                  <Button id="MinimizeButton" fx:id="SearchButton" layoutY="270.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="SearchButton" layoutY="217.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -54,7 +46,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="28" />
                      </graphic>
                   </Button>
-                  <Button id="MinimizeButton" fx:id="AllSongsButton" layoutY="117.0" mnemonicParsing="false" onAction="#AllSongsButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="AllSongsButton" layoutY="64.0" mnemonicParsing="false" onAction="#AllSongsButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -62,7 +54,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="ALIGN_JUSTIFY" size="29.0" />
                      </graphic>
                   </Button>
-                  <Button id="MinimizeButton" fx:id="PlayListButton" layoutY="168.0" mnemonicParsing="false" onAction="#PlayListButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                  <Button id="MinimizeButton" fx:id="PlayListButton" layoutY="115.0" mnemonicParsing="false" onAction="#PlayListButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
