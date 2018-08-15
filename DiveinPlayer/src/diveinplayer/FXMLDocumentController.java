@@ -6,6 +6,7 @@ package diveinplayer;
 import Music.Song;
 import static Video.VideoPlayerFXMLController.mediaPlayer;
 import static diveinplayer.AlbumFXMLController.albumList;
+import static diveinplayer.DiveinPlayer.readFiles;
 import static diveinplayer.DiveinPlayer.saveToFiles;
 import static diveinplayer.DiveinPlayer.searchAllFiles;
 import java.io.File;
@@ -150,6 +151,7 @@ public class FXMLDocumentController implements Initializable {
     public static List<Song> playlist = new ArrayList<>();
     int songPosition;
     public List<Song> ShuffleSongs = new ArrayList<>();
+    public ObservableList<Song> data;
     
     
     Boolean allSongActivated = true;
@@ -255,7 +257,7 @@ public class FXMLDocumentController implements Initializable {
         requires a list that have all the song listed
     */
     public void addDataToTables(){
-        ObservableList<Song> data = FXCollections.observableArrayList();
+        data = FXCollections.observableArrayList();
         for(Song properties: SongProperties){
             data.add(properties);
         }
@@ -752,7 +754,18 @@ public class FXMLDocumentController implements Initializable {
                 }
             }
         }).start();
-        NameLabel.setText("restart after searching");
+//        NameLabel.setText("restart after searching");
+//        new File(("C:\\Windows\\Temp\\SongData.txt")).delete();
+//        data.removeAll();
+//        data = FXCollections.observableArrayList();
+//        for(Song properties: SongProperties){
+//            data.add(properties);
+//        }
+//        
+//        NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+//        AlbumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
+//        
+//        songTable.setItems(data);
     }
     
     /*
@@ -775,8 +788,32 @@ public class FXMLDocumentController implements Initializable {
             FileChannel src = new FileInputStream(new File("C:\\Windows\\Temp\\Tempdata.txt")).getChannel();
             FileChannel dest = new FileOutputStream(new File("C:\\Windows\\Temp\\SongData.txt")).getChannel();
             dest.transferFrom(src, 0, src.size());
-            
+            reAddDataToTables();
         }
+    }
+    /*
+    THIS METHOD ADD THE DATA TO THE DEFAULT TABLE AFTER READING ALL THE SONGS
+    FROM THE FILE
+    */
+    public void reAddDataToTables(){
+        try {
+            readFiles();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        data.removeAll();
+        data = FXCollections.observableArrayList();
+        System.out.println("dhukse");
+
+        for(Song properties: SongProperties){
+            data.add(properties);
+            System.out.println("dhukse : " + properties);
+        }
+
+        NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        AlbumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
+
+        songTable.setItems(data);
     }
     
     /*
