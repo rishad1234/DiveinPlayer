@@ -777,7 +777,7 @@ public class FXMLDocumentController implements Initializable {
     */
     public void reSearch() throws IOException{
         if(new File("C:\\Windows\\Temp\\SongData.txt").exists()){
-            System.err.println("lolololol");
+            System.err.println("Searching...");
             File file = new File("C:\\Windows\\Temp\\SongData.txt");
             file.delete();
         }
