@@ -41,6 +41,9 @@ public class PlayListFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //WHEN THE PLAYLIST BUTTON GETS CLICKED
+        //THIS INITIALIZED THE TABLE WITH SONGS
+        //ACCORDING TO ALBUMS
         addDataToPlaylistTable();
     }    
 

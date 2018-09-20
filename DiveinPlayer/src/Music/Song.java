@@ -3,7 +3,12 @@ package Music;
 
 import java.io.Serializable;
 
+/*
+    This class represents the all the song that can be found in the pc,
+        the class was made serializable so that we can keep track of 
+        the playlist files i runtime 
 
+*/
 public class Song implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;

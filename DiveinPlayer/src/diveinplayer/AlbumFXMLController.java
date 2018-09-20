@@ -30,7 +30,7 @@ import static search.SongData.SongProperties;
 public class AlbumFXMLController implements Initializable {
 
     @FXML
-    private TableView<Song> AlbumSongTable;
+    private TableView<Song> AlbumSongTable; //STORES THE SONGS ACCORDING TO ALBUMS
     @FXML
     private TableColumn AlbumNameColumn;
     @FXML
@@ -38,9 +38,9 @@ public class AlbumFXMLController implements Initializable {
     @FXML
     public Pane AlbumPane;
     private Song song;
-    public FXMLDocumentController documentController;
+    public FXMLDocumentController documentController; //THE CONTROLLER IS USED FOR DOING ALL THE PLAY PAUSE FUNCTIONS TO THE ALBUM TABLE
     public static List<Song> albumList = new ArrayList<>();
-    int i;
+    int i; //CREATED JUST FOR TRACING THE SONGS TO PLAY NEXT AND PREV
 
     /**
      * Initializes the controller class.

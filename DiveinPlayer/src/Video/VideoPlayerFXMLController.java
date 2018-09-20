@@ -40,6 +40,11 @@ import javafx.util.Duration;
  */
 public class VideoPlayerFXMLController implements Initializable {
     
+    /*
+        all these variables were initaited by the xml file
+        SOAME VARIABLES ARE UNUSED BECAUSE THEY ARE INITIATED FOR FUTURE WORK 
+        PURPOSE
+    */
     @FXML
     private MenuItem chooseFileButton;
     @FXML

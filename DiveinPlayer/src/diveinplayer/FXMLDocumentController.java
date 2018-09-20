@@ -36,7 +36,6 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -53,7 +52,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.AudioSpectrumListener;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -302,7 +300,7 @@ public class FXMLDocumentController implements Initializable {
             }
         });
     }catch(Exception e){
-        System.out.println("fuck");
+        System.out.println("");
     }
 }
     
@@ -469,6 +467,8 @@ public class FXMLDocumentController implements Initializable {
     
     /*
         this method deals with the automatic play system
+    
+        WORKS ACCRODING TO WHICH PANE IS ACTIVATED
     */
     public void playOneByOne(){
         try{
@@ -557,6 +557,9 @@ public class FXMLDocumentController implements Initializable {
     
     /*
         repeat button event
+        
+        IF REPEAT BUTTON IS ACTIVATED THEN IT WILL SET THE CYCLE COUNT TO 
+        INDEFINITE ELSE ONE
     */
     @FXML
     public void repeatButtonEvent(ActionEvent event){
@@ -803,11 +806,11 @@ public class FXMLDocumentController implements Initializable {
         }
         data.removeAll();
         data = FXCollections.observableArrayList();
-        System.out.println("dhukse");
+        System.out.println("");
 
         for(Song properties: SongProperties){
             data.add(properties);
-            System.out.println("dhukse : " + properties);
+            System.out.println("" + properties);
         }
 
         NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -818,6 +821,8 @@ public class FXMLDocumentController implements Initializable {
     
     /*
         this method handles the next button 
+    
+        WORKS ACCRODING TO WHICH PANE IS ACTIVATED
     */
     @FXML
     public void PlayNextAction(ActionEvent event){
@@ -841,6 +846,8 @@ public class FXMLDocumentController implements Initializable {
     }
     /*
         this method handles the previous button 
+        
+        WORKS ACCRODING TO WHICH PANE IS ACTIVATED
     */
     @FXML
     public void PlayPreviousAction(ActionEvent event){
@@ -868,6 +875,8 @@ public class FXMLDocumentController implements Initializable {
         THIS METHOD WORKS WITH THE DIFFERENT PANES 
         AND DOES THE NEXT PLAYABLE SONG ACCORDING TO THE 
         PANE (PLAYLIST PANE, ALBUM PANE, ALLSONG PANE)
+        
+        - ACQUIRE A LIST THAT HAVE SONG PATHS IN IT
     */
     public void next(List<Song> list){
         if(songId != list.size() - 1){
@@ -906,6 +915,8 @@ public class FXMLDocumentController implements Initializable {
         THIS METHOD WORKS WITH THE DIFFERENT PANES 
         AND DOES THE PREVIOUS PLAYABLE SONG ACCORDING TO THE 
         PANE (PLAYLIST PANE, ALBUM PANE, ALLSONG PANE)
+    
+        - ACQUIRE A LIST THAT HAVE SONG PATHS IN IT
     */
     
     public void previous(List<Song> list){
@@ -945,6 +956,8 @@ public class FXMLDocumentController implements Initializable {
         THIS METHOD WORKS WITH THE DIFFERENT PANES 
         AND DOES ONE BY ONE PLAY SONG ACCORDING TO THE 
         PANE (PLAYLIST PANE, ALBUM PANE, ALLSONG PANE)
+        
+        - ACQUIRE A LIST THAT HAVE SONG PATHS IN IT
     */
     
     public void oneByOneFunction(List<Song> list){

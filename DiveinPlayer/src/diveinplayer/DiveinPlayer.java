@@ -167,7 +167,8 @@ public class DiveinPlayer extends Application {
             }
         }else{
             /*
-                THIS IS IMPORTANT DO NOT REMOVE IT
+                THIS IS IMPORTANT DO NOT REMOVE IT 
+                MAY NEED FOR DEBUGGING
             */
 //            try {
 //                searchAllFiles();

@@ -30,22 +30,6 @@
          <children>
             <Pane prefHeight="561.0" prefWidth="972.0">
                <children>
-                  <Button id="MinimizeButton" fx:id="AlbumButton" layoutY="166.0" mnemonicParsing="false" onAction="#AlbumButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="DOT_CIRCLE_ALT" size="29.0" />
-                     </graphic>
-                  </Button>
-                  <Button id="MinimizeButton" fx:id="SearchButton" layoutY="217.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="28" />
-                     </graphic>
-                  </Button>
                   <Button id="MinimizeButton" fx:id="AllSongsButton" layoutY="64.0" mnemonicParsing="false" onAction="#AllSongsButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
@@ -176,6 +160,22 @@
                      </children>
                   </Pane>
                   <ToolBar fx:id="toolBar" layoutX="115.0" layoutY="-2.0" prefHeight="31.0" prefWidth="790.0" style="-fx-opacity: 0;" />
+                  <Button id="MinimizeButton" fx:id="AlbumButton" layoutX="-1.0" layoutY="166.0" mnemonicParsing="false" onAction="#AlbumButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="DOT_CIRCLE_ALT" size="29.0" />
+                     </graphic>
+                  </Button>
+                  <Button id="MinimizeButton" fx:id="SearchButton" layoutY="217.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="49.0" prefWidth="57.0" style="-fx-background-radius: 0px;" stylesheets="@MainCss.css" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="28" />
+                     </graphic>
+                  </Button>
                </children>
             </Pane>
          </children>

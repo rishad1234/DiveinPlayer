@@ -10,6 +10,8 @@ and open the template in the editor.
 
 /*
     these are for the theme system
+    
+    FOR EACH SELECTION THE THEME WILL BE CHANGED ACCORDING TO THESE IDs
 */
 #MainPane{
     -fx-background-image: url("/resources/default.jpg");
@@ -59,6 +61,9 @@ and open the template in the editor.
     -fx-border-width: 2px;
 }
 
+/*
+    IF ANY BUTTON HAS BEEN CLICKED THIS ID IS REPONSIBLE FOR THE DESIGN OF THE BUTTON
+*/
 #focusedButton{
     -fx-opacity: 0.5;
     -fx-border-color: white;
